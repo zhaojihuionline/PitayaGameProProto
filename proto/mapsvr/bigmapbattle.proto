@@ -11,13 +11,15 @@ message BattleRequest {
 
 // FighterInfo 单个战斗方（攻方/守方）的战斗结果信息。
 message FighterInfo {
-  string  player_id = 1;  // 玩家 ID（怪物/NPC 可约定为系统标识）
-  int32   x = 2;          // 战斗发生时该战斗方所在的地图 X 坐标
-  int32   y = 3;          // 战斗发生时该战斗方所在的地图 Y 坐标
-  int32   soldier_count = 4; // 开战前总兵力（初始士兵总数）
-  int32   death_count = 5;   // 本场战斗阵亡兵力
-  int32   live_count = 6;    // 本场战斗结束后存活兵力
-  map<int32, int32> troop_kill_count_map = 7; // 击杀统计：key=兵种(或兵种+等级约定)，value=击杀数量
+  string  player_id     = 1; // 玩家 ID（怪物/NPC 可约定为系统标识）
+  int32   x             = 2; // 战斗发生时该战斗方所在的地图 X 坐标
+  int32   y             = 3; // 战斗发生时该战斗方所在的地图 Y 坐标
+  int32   soldier_count = 4; // 部队总数（参战人数）
+  int32   survived      = 5; // 生还
+  int32   light_wound   = 6; // 轻伤
+  int32   wounded       = 7; // 受伤（医院可收治）
+  int32   heavy_wound   = 8; // 重伤
+  map<int32, int32> troop_kill_count_map = 9; // 击杀统计：key=兵种(或兵种+等级约定)，value=击杀数量
 }
 
 message BattleResponse {

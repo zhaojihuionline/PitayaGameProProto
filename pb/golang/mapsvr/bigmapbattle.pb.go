@@ -64,10 +64,12 @@ type FighterInfo struct {
 	PlayerId          string                 `protobuf:"bytes,1,opt,name=player_id,json=playerId,proto3" json:"player_id,omitempty"`                                                                                                            // 玩家 ID（怪物/NPC 可约定为系统标识）
 	X                 int32                  `protobuf:"varint,2,opt,name=x,proto3" json:"x,omitempty"`                                                                                                                                         // 战斗发生时该战斗方所在的地图 X 坐标
 	Y                 int32                  `protobuf:"varint,3,opt,name=y,proto3" json:"y,omitempty"`                                                                                                                                         // 战斗发生时该战斗方所在的地图 Y 坐标
-	SoldierCount      int32                  `protobuf:"varint,4,opt,name=soldier_count,json=soldierCount,proto3" json:"soldier_count,omitempty"`                                                                                               // 开战前总兵力（初始士兵总数）
-	DeathCount        int32                  `protobuf:"varint,5,opt,name=death_count,json=deathCount,proto3" json:"death_count,omitempty"`                                                                                                     // 本场战斗阵亡兵力
-	LiveCount         int32                  `protobuf:"varint,6,opt,name=live_count,json=liveCount,proto3" json:"live_count,omitempty"`                                                                                                        // 本场战斗结束后存活兵力
-	TroopKillCountMap map[int32]int32        `protobuf:"bytes,7,rep,name=troop_kill_count_map,json=troopKillCountMap,proto3" json:"troop_kill_count_map,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // 击杀统计：key=兵种(或兵种+等级约定)，value=击杀数量
+	SoldierCount      int32                  `protobuf:"varint,4,opt,name=soldier_count,json=soldierCount,proto3" json:"soldier_count,omitempty"`                                                                                               // 部队总数（参战人数）
+	Survived          int32                  `protobuf:"varint,5,opt,name=survived,proto3" json:"survived,omitempty"`                                                                                                                           // 生还
+	LightWound        int32                  `protobuf:"varint,6,opt,name=light_wound,json=lightWound,proto3" json:"light_wound,omitempty"`                                                                                                     // 轻伤
+	Wounded           int32                  `protobuf:"varint,7,opt,name=wounded,proto3" json:"wounded,omitempty"`                                                                                                                             // 受伤（医院可收治）
+	HeavyWound        int32                  `protobuf:"varint,8,opt,name=heavy_wound,json=heavyWound,proto3" json:"heavy_wound,omitempty"`                                                                                                     // 重伤
+	TroopKillCountMap map[int32]int32        `protobuf:"bytes,9,rep,name=troop_kill_count_map,json=troopKillCountMap,proto3" json:"troop_kill_count_map,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"` // 击杀统计：key=兵种(或兵种+等级约定)，value=击杀数量
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -130,16 +132,30 @@ func (x *FighterInfo) GetSoldierCount() int32 {
 	return 0
 }
 
-func (x *FighterInfo) GetDeathCount() int32 {
+func (x *FighterInfo) GetSurvived() int32 {
 	if x != nil {
-		return x.DeathCount
+		return x.Survived
 	}
 	return 0
 }
 
-func (x *FighterInfo) GetLiveCount() int32 {
+func (x *FighterInfo) GetLightWound() int32 {
 	if x != nil {
-		return x.LiveCount
+		return x.LightWound
+	}
+	return 0
+}
+
+func (x *FighterInfo) GetWounded() int32 {
+	if x != nil {
+		return x.Wounded
+	}
+	return 0
+}
+
+func (x *FighterInfo) GetHeavyWound() int32 {
+	if x != nil {
+		return x.HeavyWound
 	}
 	return 0
 }
@@ -216,17 +232,19 @@ var File_mapsvr_bigmapbattle_proto protoreflect.FileDescriptor
 const file_mapsvr_bigmapbattle_proto_rawDesc = "" +
 	"\n" +
 	"\x19mapsvr/bigmapbattle.proto\x12\x06mapsvr\x1a\x18common/types/types.proto\"\x0f\n" +
-	"\rBattleRequest\"\xce\x02\n" +
+	"\rBattleRequest\"\x86\x03\n" +
 	"\vFighterInfo\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\tR\bplayerId\x12\f\n" +
 	"\x01x\x18\x02 \x01(\x05R\x01x\x12\f\n" +
 	"\x01y\x18\x03 \x01(\x05R\x01y\x12#\n" +
-	"\rsoldier_count\x18\x04 \x01(\x05R\fsoldierCount\x12\x1f\n" +
-	"\vdeath_count\x18\x05 \x01(\x05R\n" +
-	"deathCount\x12\x1d\n" +
-	"\n" +
-	"live_count\x18\x06 \x01(\x05R\tliveCount\x12[\n" +
-	"\x14troop_kill_count_map\x18\a \x03(\v2*.mapsvr.FighterInfo.TroopKillCountMapEntryR\x11troopKillCountMap\x1aD\n" +
+	"\rsoldier_count\x18\x04 \x01(\x05R\fsoldierCount\x12\x1a\n" +
+	"\bsurvived\x18\x05 \x01(\x05R\bsurvived\x12\x1f\n" +
+	"\vlight_wound\x18\x06 \x01(\x05R\n" +
+	"lightWound\x12\x18\n" +
+	"\awounded\x18\a \x01(\x05R\awounded\x12\x1f\n" +
+	"\vheavy_wound\x18\b \x01(\x05R\n" +
+	"heavyWound\x12[\n" +
+	"\x14troop_kill_count_map\x18\t \x03(\v2*.mapsvr.FighterInfo.TroopKillCountMapEntryR\x11troopKillCountMap\x1aD\n" +
 	"\x16TroopKillCountMapEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x01\"\x99\x01\n" +
