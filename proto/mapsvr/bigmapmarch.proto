@@ -5,6 +5,7 @@ option go_package = "pitaya-game/protos/protobuf/pb/golang/mapsvr";
 
 import "common/types/types.proto";
 import "mapsvr/bigmap.proto";
+import "mapsvr/bigmapbattle.proto";
 
 // ======================== 枚举 ========================
 
@@ -251,8 +252,10 @@ message AllMarchSyncPush {
 // 推送路由: bigmap.bigmapmarch.battleresultnotify
 // 推送范围: 攻防双方玩家
 message BattleResultNotify {
-  int64 march_id = 1;  // 触发战斗的行军 ID
-  bool  is_win   = 2;  // 攻击方是否胜利
+  int64 march_id       = 1; // 触发战斗的行军 ID
+  bool  is_win         = 2; // 攻击方是否胜利
+  FighterInfo attacker = 3; // 攻方战报详情
+  FighterInfo defencer = 4; // 防方战报详情
 }
 
 // GatherResultNotify 采集结果通知
