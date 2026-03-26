@@ -12,8 +12,8 @@ message BattleRequest {
 // FighterInfo 单个战斗方（攻方/守方）的战斗结果信息。
 message FighterInfo {
   string  player_id     = 1; // 玩家 ID（怪物/NPC 可约定为系统标识）
-  int32   x             = 2; // 战斗发生时该战斗方所在的地图 X 坐标
-  int32   y             = 3; // 战斗发生时该战斗方所在的地图 Y 坐标
+  int32   x             = 2; // 该战斗方所属位置的地图 X 坐标（攻方为出发城池，守方为目标位置）
+  int32   y             = 3; // 该战斗方所属位置的地图 Y 坐标（攻方为出发城池，守方为目标位置）
   int32   soldier_count = 4; // 部队总数（参战人数）
   int32   survived      = 5; // 生还
   int32   light_wound   = 6; // 轻伤
@@ -24,6 +24,7 @@ message FighterInfo {
 
 message BattleResponse {
   types.CommonResp resp = 1;
-  FighterInfo attacker = 2;
-  FighterInfo defencer = 3;
+  bool is_win = 2; // 攻击方是否胜利
+  FighterInfo attacker = 3; // 攻方战报详情
+  FighterInfo defencer = 4; // 防方战报详情
 }
