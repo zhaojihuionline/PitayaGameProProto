@@ -5,8 +5,20 @@ option go_package = "pitaya-game/protos/protobuf/pb/golang/mapsvr";
 
 import "common/types/types.proto";
 
-message BattleRequest {
+// TroopInfo 单个兵种部队信息
+message TroopInfo {
+  int32 type = 1;                    // 兵种类型: 1=步兵/盾兵, 2=骑兵, 3=弓兵
+  map<int32, int32> lv_count = 2;    // 士兵等级 -> 数量
+}
 
+// TroopQueueInfo 部队队列（按出战顺序排列）
+message TroopQueueInfo {
+  repeated TroopInfo troops = 1;
+}
+
+message BattleRequest {
+  TroopQueueInfo attacker = 1; // 进攻方部队
+  TroopQueueInfo defender = 2; // 防守方部队
 }
 
 // FighterInfo 单个战斗方（攻方/守方）的战斗结果信息。
