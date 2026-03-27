@@ -225,7 +225,7 @@ type GetBuildingInfoResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
 	BuildId       int64                  `protobuf:"varint,2,opt,name=build_id,json=buildId,proto3" json:"build_id,omitempty"`
-	BuildInfo     string                 `protobuf:"bytes,3,opt,name=build_info,json=buildInfo,proto3" json:"build_info,omitempty"` //建筑详情 json格式
+	Building      *BuildingData          `protobuf:"bytes,3,opt,name=building,proto3" json:"building,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -274,11 +274,11 @@ func (x *GetBuildingInfoResponse) GetBuildId() int64 {
 	return 0
 }
 
-func (x *GetBuildingInfoResponse) GetBuildInfo() string {
+func (x *GetBuildingInfoResponse) GetBuilding() *BuildingData {
 	if x != nil {
-		return x.BuildInfo
+		return x.Building
 	}
-	return ""
+	return nil
 }
 
 // 获取我的所有建筑请求
@@ -1116,12 +1116,11 @@ const file_gamesvr_builds_proto_rawDesc = "" +
 	" \x01(\v2\x11.types.QuaternionR\brotation\x12\x19\n" +
 	"\bext_info\x18\x1e \x01(\tR\aextInfo\"3\n" +
 	"\x16GetBuildingInfoRequest\x12\x19\n" +
-	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"z\n" +
+	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"\x8e\x01\n" +
 	"\x17GetBuildingInfoResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x12\x19\n" +
-	"\bbuild_id\x18\x02 \x01(\x03R\abuildId\x12\x1d\n" +
-	"\n" +
-	"build_info\x18\x03 \x01(\tR\tbuildInfo\"\x17\n" +
+	"\bbuild_id\x18\x02 \x01(\x03R\abuildId\x121\n" +
+	"\bbuilding\x18\x03 \x01(\v2\x15.gamesvr.BuildingDataR\bbuilding\"\x17\n" +
 	"\x15GetMyBuildingsRequest\"t\n" +
 	"\x16GetMyBuildingsResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x123\n" +
@@ -1212,28 +1211,29 @@ var file_gamesvr_builds_proto_depIdxs = []int32{
 	0,  // 1: gamesvr.BuildingData.time_work:type_name -> gamesvr.TimeWork
 	21, // 2: gamesvr.BuildingData.rotation:type_name -> types.Quaternion
 	22, // 3: gamesvr.GetBuildingInfoResponse.resp:type_name -> types.CommonResp
-	22, // 4: gamesvr.GetMyBuildingsResponse.resp:type_name -> types.CommonResp
-	1,  // 5: gamesvr.GetMyBuildingsResponse.buildings:type_name -> gamesvr.BuildingData
-	20, // 6: gamesvr.ConstructBuildingRequest.position:type_name -> types.Vector2
-	21, // 7: gamesvr.ConstructBuildingRequest.rotation:type_name -> types.Quaternion
-	22, // 8: gamesvr.ConstructBuildingResponse.resp:type_name -> types.CommonResp
-	1,  // 9: gamesvr.ConstructBuildingResponse.building_data:type_name -> gamesvr.BuildingData
-	22, // 10: gamesvr.UpgradeBuildingResponse.resp:type_name -> types.CommonResp
-	0,  // 11: gamesvr.UpgradeBuildingResponse.time_work:type_name -> gamesvr.TimeWork
-	20, // 12: gamesvr.UpdateBuildingRequest.new_position:type_name -> types.Vector2
-	21, // 13: gamesvr.UpdateBuildingRequest.rotation:type_name -> types.Quaternion
-	22, // 14: gamesvr.UpdateBuildingResponse.resp:type_name -> types.CommonResp
-	22, // 15: gamesvr.GatherBuildingResponse.resp:type_name -> types.CommonResp
-	23, // 16: gamesvr.GatherBuildingResponse.item_reward:type_name -> types.ItemReward
-	0,  // 17: gamesvr.GatherBuildingResponse.time_work:type_name -> gamesvr.TimeWork
-	22, // 18: gamesvr.WorkBuildingTurboResponse.resp:type_name -> types.CommonResp
-	0,  // 19: gamesvr.WorkBuildingTurboResponse.time_work:type_name -> gamesvr.TimeWork
-	22, // 20: gamesvr.DestroyBuildingResponse.resp:type_name -> types.CommonResp
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	1,  // 4: gamesvr.GetBuildingInfoResponse.building:type_name -> gamesvr.BuildingData
+	22, // 5: gamesvr.GetMyBuildingsResponse.resp:type_name -> types.CommonResp
+	1,  // 6: gamesvr.GetMyBuildingsResponse.buildings:type_name -> gamesvr.BuildingData
+	20, // 7: gamesvr.ConstructBuildingRequest.position:type_name -> types.Vector2
+	21, // 8: gamesvr.ConstructBuildingRequest.rotation:type_name -> types.Quaternion
+	22, // 9: gamesvr.ConstructBuildingResponse.resp:type_name -> types.CommonResp
+	1,  // 10: gamesvr.ConstructBuildingResponse.building_data:type_name -> gamesvr.BuildingData
+	22, // 11: gamesvr.UpgradeBuildingResponse.resp:type_name -> types.CommonResp
+	0,  // 12: gamesvr.UpgradeBuildingResponse.time_work:type_name -> gamesvr.TimeWork
+	20, // 13: gamesvr.UpdateBuildingRequest.new_position:type_name -> types.Vector2
+	21, // 14: gamesvr.UpdateBuildingRequest.rotation:type_name -> types.Quaternion
+	22, // 15: gamesvr.UpdateBuildingResponse.resp:type_name -> types.CommonResp
+	22, // 16: gamesvr.GatherBuildingResponse.resp:type_name -> types.CommonResp
+	23, // 17: gamesvr.GatherBuildingResponse.item_reward:type_name -> types.ItemReward
+	0,  // 18: gamesvr.GatherBuildingResponse.time_work:type_name -> gamesvr.TimeWork
+	22, // 19: gamesvr.WorkBuildingTurboResponse.resp:type_name -> types.CommonResp
+	0,  // 20: gamesvr.WorkBuildingTurboResponse.time_work:type_name -> gamesvr.TimeWork
+	22, // 21: gamesvr.DestroyBuildingResponse.resp:type_name -> types.CommonResp
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_gamesvr_builds_proto_init() }
