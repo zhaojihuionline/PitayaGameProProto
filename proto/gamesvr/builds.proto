@@ -46,7 +46,7 @@ message GetBuildingInfoRequest {
 message GetBuildingInfoResponse {
   types.CommonResp resp = 1;
   int64 build_id = 2;
-  string build_info=3;  //建筑详情 json格式
+  BuildingData building=3;
 }
 
 // ========== 获取我的所有建筑 ==========
