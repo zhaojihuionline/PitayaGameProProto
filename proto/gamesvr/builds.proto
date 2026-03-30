@@ -29,10 +29,10 @@ message BuildingData {
 
   types.Vector2 position = 4;       // 建筑坐标位置
 
-  TimeWork time_work = 5;           // 时间工作数据
+  optional TimeWork time_work = 5;           // 时间工作数据
   int32 level=6;                    //等级
   types.Quaternion rotation = 10;   // 建筑旋转
-  string ext_info=30;             // 建筑扩展信息 json格式
+  optional string ext_info=30;             // 建筑扩展信息 json格式
 }
 
 // ========== 获取建筑信息 ==========
@@ -98,7 +98,7 @@ message UpgradeBuildingResponse {
   types.CommonResp resp = 1;
   int32 build_config_id = 2;         // 新等级的建筑配置表ID
 
-  TimeWork time_work = 5;           // 时间工作数据
+  optional TimeWork time_work = 5;           // 时间工作数据
 
 }
 
@@ -129,7 +129,7 @@ message GatherBuildingResponse {
   types.CommonResp resp = 1;
   repeated types.ItemReward item_reward=2; //收割的资源
 
-  TimeWork time_work = 5;           // 时间工作数据
+  optional TimeWork time_work = 5;           // 时间工作数据
 
 }
 
@@ -148,7 +148,7 @@ message WorkBuildingKoRequest {
 // 建筑加速、立即完成响应
 message WorkBuildingTurboResponse {
   types.CommonResp resp = 1;
-  TimeWork time_work = 5;           // 时间工作数据
+  optional TimeWork time_work = 5;           // 时间工作数据
 }
 
 // ========== 建筑删除(测试用) ==========
