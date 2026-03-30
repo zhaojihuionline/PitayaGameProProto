@@ -1,0 +1,121 @@
+syntax = "proto3";
+
+package gamesvr;
+
+option go_package = "pitaya-game/protos/protobuf/pb/golang/gamesvr;gamesvrpb";
+option csharp_namespace = "PitayaGame.GameSvr";
+
+import "common/types/types.proto";
+
+// ============================================================================
+// 兵营系统协议定义
+// 微服务名称：gamesvr.mercenary
+// 包括：
+// ============================================================================
+
+// ========== 数据结构 ==========
+
+
+message MercenaryTimeWork {
+  int32 work_type = 50;                 //工作类型 0 空闲 1 训练 2 升级
+  int64 work_begin_time=51;      //开始时间
+  int64 work_end_time = 52;       // 完成时间
+  int32 num=53; //数量
+}
+
+// 雇佣兵数据
+message MercenaryData {
+  int64 mercenary_id = 1;               // 建筑ID（实例ID）
+  int32 mercenary_config_id = 2;        // 建筑配置表ID（对应Builds表的ID）
+  int32 level=3;                    //等级
+  int32 num=4; //数量
+
+  MercenaryTimeWork time_work = 5;           // 时间工作数据
+
+}
+
+
+// ========== 获取我的雇佣兵 ==========
+
+// 获取我的所有请求
+message GetMyMercenaryRequest {
+  // 无需参数，从 Session 获取 user_id
+}
+
+// 获取我的所有响应
+message GetMyMercenaryResponse {
+  types.CommonResp resp = 1;
+  repeated MercenaryData mercenary = 2;
+}
+
+
+// ========== 雇佣兵训练 ==========
+
+// 雇佣兵训练请求
+message TrainingMercenaryRequest {
+  int32 mercenary_config_id = 1;  // 建筑配置表ID，user_id 从 Session 获取
+  int32 num = 2;  // 数量
+  int32 type = 3;  // 方式 0 消耗时间 1 立即完成
+}
+
+// 雇佣兵训练响应
+message TrainingMercenaryResponse {
+  types.CommonResp resp = 1;
+  MercenaryData mercenary_data = 2;
+}
+
+// ========== 雇佣兵升级 ==========
+
+// 升级请求
+message UpgradeMercenaryRequest {
+  int64 mercenary_id = 1;
+  int32 num = 2;  // 数量
+  int32 type = 3;  // 方式 0 消耗时间 1 立即完成
+}
+
+
+// 升级响应
+message UpgradeMercenaryResponse {
+  types.CommonResp resp = 1;
+  MercenaryData mercenary_data = 2;
+}
+
+
+// ========== 雇佣兵加速 立即完成 取消 ==========
+
+// 加速
+message WorkTurboMercenaryRequest {
+   int64 mercenary_id = 1;
+}
+
+message WorkTurboMercenaryResponse {
+  types.CommonResp resp = 1;
+  MercenaryData mercenary_data = 2;
+}
+
+// 立即完成
+message WorkKoMercenaryRequest {
+   int64 mercenary_id = 1;
+}
+
+//取消
+message WorkCancelMercenaryRequest {
+   int64 mercenary_id = 1;
+}
+
+message WorkCancelMercenaryResponse {
+  types.CommonResp resp = 1;
+}
+
+
+// ========== 删除(测试用) ==========
+
+// 删除请求 测试用
+message DestroyMercenaryRequest {
+  int64 mercenary_id = 1;
+}
+
+// 删除响应
+message DestroyMercenaryResponse {
+  types.CommonResp resp = 1;
+}
