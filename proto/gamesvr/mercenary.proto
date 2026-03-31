@@ -20,6 +20,7 @@ message MercenaryTimeWork {
   int32 work_type = 50;                 //工作类型 0 空闲 1 训练 2 升级
   int64 work_begin_time=51;      //开始时间
   int64 work_end_time = 52;       // 完成时间
+  int64 server_time=60; //服务器时间
   int32 num=53; //数量
 }
 
@@ -119,3 +120,4 @@ message DestroyMercenaryRequest {
 message DestroyMercenaryResponse {
   types.CommonResp resp = 1;
 }
+
