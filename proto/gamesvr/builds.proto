@@ -9,29 +9,35 @@ import "common/types/types.proto";
 
 // ============================================================================
 // 建筑服务协议定义
-// 微服务名称：gamesvr
-// 包括：建筑管理、建造、升级、移动、摧毁
+// 微服务名称：gamesvr.builds
+// 包括：建造、升级、更新、采集
 // ============================================================================
 
 // ========== 数据结构 ==========
+
+
+message TimeWork {
+  int32 work_type = 50;                 //工作类型 0 空闲 1 升级 2 生产
+  int64 work_begin_time=51;      //开始时间
+  int64 work_end_time = 52;       // 完成时间
+}
 
 // 建筑数据
 message BuildingData {
   int64 build_id = 1;               // 建筑ID（实例ID）
   int32 build_config_id = 2;        // 建筑配置表ID（对应Builds表的ID）
-  int32 level = 3;                  // 当前等级
+
   types.Vector2 position = 4;       // 建筑坐标位置
-  int32 building_type = 5;          // 建筑类型（枚举）
-  string build_name = 6;            // 建筑名称
-  int64 upgrade_end_time = 7;       // 升级完成时间（0表示未升级）
-  int64 created_at = 8;             // 创建时间
-  int64 updated_at = 9;             // 更新时间
+
+  optional TimeWork time_work = 5;           // 时间工作数据
+  int32 level=6;                    //等级
   types.Quaternion rotation = 10;   // 建筑旋转
+  optional string ext_info=30;             // 建筑扩展信息 json格式
 }
 
 // ========== 获取建筑信息 ==========
 
-// 获取建筑信息请求
+// 获取自己建筑信息请求
 message GetBuildingInfoRequest {
   int64 build_id = 1;
 }
@@ -39,7 +45,8 @@ message GetBuildingInfoRequest {
 // 获取建筑信息响应
 message GetBuildingInfoResponse {
   types.CommonResp resp = 1;
-  BuildingData building_data = 2;
+  int64 build_id = 2;
+  BuildingData building=3;
 }
 
 // ========== 获取我的所有建筑 ==========
@@ -47,7 +54,6 @@ message GetBuildingInfoResponse {
 // 获取我的所有建筑请求
 message GetMyBuildingsRequest {
   // 无需参数，从 Session 获取 user_id
-  int32 building_type = 1;  // 可选：按建筑类型筛选（0表示全部）
 }
 
 // 获取我的所有建筑响应
@@ -55,6 +61,12 @@ message GetMyBuildingsResponse {
   types.CommonResp resp = 1;
   repeated BuildingData buildings = 2;
 }
+
+// 获取指定用户user_id所有建筑请求
+message GetUserBuildingsRequest {
+  string user_id=2; //可选 如果空字符串就表示取自己
+}
+
 
 // ========== 建筑建造 ==========
 
@@ -68,7 +80,6 @@ message ConstructBuildingRequest {
 // 建筑建造响应
 message ConstructBuildingResponse {
   types.CommonResp resp = 1;
-  int64 build_id = 2;          // 新建造的建筑ID
   BuildingData building_data = 3;  // 完整建筑数据
 }
 
@@ -80,37 +91,78 @@ message UpgradeBuildingRequest {
   bool instant_upgrade = 2;    // 是否立即完成（消耗道具或钻石）
 }
 
+
+
 // 建筑升级响应
 message UpgradeBuildingResponse {
   types.CommonResp resp = 1;
-  int32 new_level = 2;         // 新等级
-  int64 upgrade_end_time = 3;  // 升级完成时间（0表示已完成）
+  int32 build_config_id = 2;         // 新等级的建筑配置表ID
+
+  optional TimeWork time_work = 5;           // 时间工作数据
+
 }
 
-// ========== 建筑移动 ==========
+// ========== 建筑更新 ==========
 
-// 建筑移动请求
-message MoveBuildingRequest {
+// 建筑更新请求
+message UpdateBuildingRequest {
   int64 build_id = 1;
   types.Vector2 new_position = 2;  // 新坐标位置
   types.Quaternion rotation = 3;  // 建筑旋转（可选，不传则保持原旋转）
+  string ext_info=4; //建筑扩展信息 json格式
 }
 
-// 建筑移动响应
-message MoveBuildingResponse {
+// 建筑更新响应
+message UpdateBuildingResponse {
   types.CommonResp resp = 1;
 }
 
-// ========== 摧毁建筑 ==========
+// ========== 建筑资源收割 ==========
 
-// 摧毁建筑请求
+// 建筑资源收割请求
+message GatherBuildingRequest {
+  int64 build_id = 1;
+}
+
+// 建筑资源收割响应
+message GatherBuildingResponse {
+  types.CommonResp resp = 1;
+  repeated types.ItemReward item_reward=2; //收割的资源
+
+  optional TimeWork time_work = 5;           // 时间工作数据
+
+}
+
+// ========== 建筑加速 ==========
+
+// 建筑加速（创建、生产）请求
+message WorkBuildingTurboRequest {
+  int64 build_id = 1;
+}
+
+// 建筑立即完成（创建、生产）请求
+message WorkBuildingKoRequest {
+  int64 build_id = 1;
+}
+
+// 建筑加速、立即完成响应
+message WorkBuildingTurboResponse {
+  types.CommonResp resp = 1;
+  optional TimeWork time_work = 5;           // 时间工作数据
+}
+
+// ========== 建筑删除(测试用) ==========
+
+// 建筑删除请求 测试用
 message DestroyBuildingRequest {
   int64 build_id = 1;
 }
 
-// 摧毁建筑响应
+// 建筑删除响应
 message DestroyBuildingResponse {
   types.CommonResp resp = 1;
-  repeated types.ItemReward rewards = 2;  // 返还的资源（如有）
 }
+
+
+
 
