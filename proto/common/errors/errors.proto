@@ -106,7 +106,9 @@ enum ErrorCode {
   ERR_BUILDING_POSITION_OCCUPIED = 5005 [(error_message) = "位置已被占用", (error_message_en) = "Position already occupied"];
   ERR_BUILDING_CONFIG_NOT_FOUND = 5006 [(error_message) = "建筑配置不存在", (error_message_en) = "Building config not found"];
   ERR_BUILDING_LEVEL_CONFIG_NOT_FOUND = 5007 [(error_message) = "建筑等级配置不存在", (error_message_en) = "Building level config not found"];
-  
+  ERR_BUILDING_CONDITION_NOT_MET = 5008 [(error_message) = "建造/升级条件不满足", (error_message_en) = "Building/upgrade condition not met"];
+  ERR_BUILDING_LEVEL_NOT_FOUND = 5009 [(error_message) = "建筑等级不存在", (error_message_en) = "Building level not found"];
+
   // 军队错误 (5100-5199)
   ERR_ARMY_NOT_FOUND = 5100 [(error_message) = "军队不存在", (error_message_en) = "Army not found"];
   ERR_ARMY_FULL = 5101 [(error_message) = "军队已满", (error_message_en) = "Army full"];

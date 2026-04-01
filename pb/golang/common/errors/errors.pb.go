@@ -82,6 +82,8 @@ const (
 	ErrorCode_ERR_BUILDING_POSITION_OCCUPIED      ErrorCode = 5005
 	ErrorCode_ERR_BUILDING_CONFIG_NOT_FOUND       ErrorCode = 5006
 	ErrorCode_ERR_BUILDING_LEVEL_CONFIG_NOT_FOUND ErrorCode = 5007
+	ErrorCode_ERR_BUILDING_CONDITION_NOT_MET      ErrorCode = 5008
+	ErrorCode_ERR_BUILDING_LEVEL_NOT_FOUND        ErrorCode = 5009
 	// 军队错误 (5100-5199)
 	ErrorCode_ERR_ARMY_NOT_FOUND     ErrorCode = 5100
 	ErrorCode_ERR_ARMY_FULL          ErrorCode = 5101
@@ -167,6 +169,8 @@ var (
 		5005:  "ERR_BUILDING_POSITION_OCCUPIED",
 		5006:  "ERR_BUILDING_CONFIG_NOT_FOUND",
 		5007:  "ERR_BUILDING_LEVEL_CONFIG_NOT_FOUND",
+		5008:  "ERR_BUILDING_CONDITION_NOT_MET",
+		5009:  "ERR_BUILDING_LEVEL_NOT_FOUND",
 		5100:  "ERR_ARMY_NOT_FOUND",
 		5101:  "ERR_ARMY_FULL",
 		5102:  "ERR_ARMY_LIMIT_REACHED",
@@ -242,6 +246,8 @@ var (
 		"ERR_BUILDING_POSITION_OCCUPIED":        5005,
 		"ERR_BUILDING_CONFIG_NOT_FOUND":         5006,
 		"ERR_BUILDING_LEVEL_CONFIG_NOT_FOUND":   5007,
+		"ERR_BUILDING_CONDITION_NOT_MET":        5008,
+		"ERR_BUILDING_LEVEL_NOT_FOUND":          5009,
 		"ERR_ARMY_NOT_FOUND":                    5100,
 		"ERR_ARMY_FULL":                         5101,
 		"ERR_ARMY_LIMIT_REACHED":                5102,
@@ -330,7 +336,7 @@ var File_common_errors_errors_proto protoreflect.FileDescriptor
 
 const file_common_errors_errors_proto_rawDesc = "" +
 	"\n" +
-	"\x1acommon/errors/errors.proto\x12\x06errors\x1a google/protobuf/descriptor.proto*\xcf*\n" +
+	"\x1acommon/errors/errors.proto\x12\x06errors\x1a google/protobuf/descriptor.proto*\x96,\n" +
 	"\tErrorCode\x12(\n" +
 	"\aSUCCESS\x10\x00\x1a\x1b\x8a\xb5\x18\f操作成功\x92\xb5\x18\aSuccess\x123\n" +
 	"\vERR_UNKNOWN\x10\xe8\a\x1a!\x8a\xb5\x18\f未知错误\x92\xb5\x18\rUnknown error\x12=\n" +
@@ -377,7 +383,9 @@ const file_common_errors_errors_proto_rawDesc = "" +
 	"\x16ERR_BUILDING_UPGRADING\x10\x8c'\x1a2\x8a\xb5\x18\x15建筑正在升级中\x92\xb5\x18\x15Building is upgrading\x12X\n" +
 	"\x1eERR_BUILDING_POSITION_OCCUPIED\x10\x8d'\x1a3\x8a\xb5\x18\x12位置已被占用\x92\xb5\x18\x19Position already occupied\x12Z\n" +
 	"\x1dERR_BUILDING_CONFIG_NOT_FOUND\x10\x8e'\x1a6\x8a\xb5\x18\x15建筑配置不存在\x92\xb5\x18\x19Building config not found\x12l\n" +
-	"#ERR_BUILDING_LEVEL_CONFIG_NOT_FOUND\x10\x8f'\x1aB\x8a\xb5\x18\x1b建筑等级配置不存在\x92\xb5\x18\x1fBuilding level config not found\x12>\n" +
+	"#ERR_BUILDING_LEVEL_CONFIG_NOT_FOUND\x10\x8f'\x1aB\x8a\xb5\x18\x1b建筑等级配置不存在\x92\xb5\x18\x1fBuilding level config not found\x12k\n" +
+	"\x1eERR_BUILDING_CONDITION_NOT_MET\x10\x90'\x1aF\x8a\xb5\x18\x1c建造/升级条件不满足\x92\xb5\x18\"Building/upgrade condition not met\x12X\n" +
+	"\x1cERR_BUILDING_LEVEL_NOT_FOUND\x10\x91'\x1a5\x8a\xb5\x18\x15建筑等级不存在\x92\xb5\x18\x18Building level not found\x12>\n" +
 	"\x12ERR_ARMY_NOT_FOUND\x10\xec'\x1a%\x8a\xb5\x18\x0f军队不存在\x92\xb5\x18\x0eArmy not found\x121\n" +
 	"\rERR_ARMY_FULL\x10\xed'\x1a\x1d\x8a\xb5\x18\f军队已满\x92\xb5\x18\tArmy full\x12O\n" +
 	"\x16ERR_ARMY_LIMIT_REACHED\x10\xee'\x1a2\x8a\xb5\x18\x18军队数量已达上限\x92\xb5\x18\x12Army limit reached\x12@\n" +
