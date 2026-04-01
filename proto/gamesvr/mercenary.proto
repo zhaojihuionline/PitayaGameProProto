@@ -34,6 +34,13 @@ message MercenaryBaseData {
 message MercenaryData {
   MercenaryBaseData info=1; //基础信息
   optional MercenaryTimeWork time_work = 5;           // 时间工作数据
+  int64 mercenary_id = 1;               // 建筑ID（实例ID）
+  int32 mercenary_config_id = 2;        // 建筑配置表ID（对应Builds表的ID）
+  int32 level=3;                    //等级
+  int32 num=4; //数量
+
+  optional MercenaryTimeWork time_work = 5;           // 训练 升级
+
 }
 
 
@@ -55,10 +62,16 @@ message GetMyMercenaryResponse {
 
 // 雇佣兵训练请求
 message TrainingMercenaryRequest {
-  int32 mercenary_config_id = 1;  // 建筑配置表ID，user_id 从 Session 获取
+  int32 mercenary_config_id = 1;  // 配置表ID
   int32 num = 2;  // 数量
-  int32 type = 3;  // 方式 0 消耗时间 1 立即完成
 }
+
+// 雇佣兵训练立即完成请求
+message TrainingMercenaryKoRequest {
+  int32 mercenary_config_id = 1;  // 配置表ID
+  int32 num = 2;  // 数量
+}
+
 
 // 雇佣兵训练响应
 message TrainingMercenaryResponse {
@@ -72,7 +85,12 @@ message TrainingMercenaryResponse {
 message UpgradeMercenaryRequest {
   int64 mercenary_id = 1;
   int32 num = 2;  // 数量
-  int32 type = 3;  // 方式 0 消耗时间 1 立即完成
+}
+
+// 升级请求立即完成
+message UpgradeMercenaryKoRequest {
+  int64 mercenary_id = 1;
+  int32 num = 2;  // 数量
 }
 
 
