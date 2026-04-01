@@ -33,14 +33,7 @@ message MercenaryBaseData {
 // 雇佣兵数据
 message MercenaryData {
   MercenaryBaseData info=1; //基础信息
-  optional MercenaryTimeWork time_work = 5;           // 时间工作数据
-  int64 mercenary_id = 1;               // 建筑ID（实例ID）
-  int32 mercenary_config_id = 2;        // 建筑配置表ID（对应Builds表的ID）
-  int32 level=3;                    //等级
-  int32 num=4; //数量
-
   optional MercenaryTimeWork time_work = 5;           // 训练 升级
-
 }
 
 
@@ -62,14 +55,12 @@ message GetMyMercenaryResponse {
 
 // 雇佣兵训练请求
 message TrainingMercenaryRequest {
-  int32 mercenary_config_id = 1;  // 配置表ID
-  int32 num = 2;  // 数量
+    MercenaryBaseData mercenary=1;
 }
 
 // 雇佣兵训练立即完成请求
 message TrainingMercenaryKoRequest {
-  int32 mercenary_config_id = 1;  // 配置表ID
-  int32 num = 2;  // 数量
+    MercenaryBaseData mercenary=1;
 }
 
 
@@ -83,14 +74,12 @@ message TrainingMercenaryResponse {
 
 // 升级请求
 message UpgradeMercenaryRequest {
-  int64 mercenary_id = 1;
-  int32 num = 2;  // 数量
+    MercenaryBaseData mercenary=1;
 }
 
 // 升级请求立即完成
 message UpgradeMercenaryKoRequest {
-  int64 mercenary_id = 1;
-  int32 num = 2;  // 数量
+    MercenaryBaseData mercenary=1;
 }
 
 
@@ -105,7 +94,7 @@ message UpgradeMercenaryResponse {
 
 // 加速
 message WorkTurboMercenaryRequest {
-   int64 mercenary_id = 1;
+   int64 mercenary_config_id = 1;
 }
 
 message WorkTurboMercenaryResponse {
@@ -115,12 +104,12 @@ message WorkTurboMercenaryResponse {
 
 // 立即完成
 message WorkKoMercenaryRequest {
-   int64 mercenary_id = 1;
+   int32 mercenary_config_id = 1;
 }
 
 //取消
 message WorkCancelMercenaryRequest {
-   int64 mercenary_id = 1;
+   int32 mercenary_config_id = 1;
 }
 
 message WorkCancelMercenaryResponse {
@@ -143,11 +132,11 @@ message ToWarMercenaryResponse {
 
 // 删除请求 测试用
 message DestroyMercenaryRequest {
-  int64 mercenary_id = 1;
+  int32 mercenary_config_id = 1;
+  int32 num=2;
 }
 
 // 删除响应
 message DestroyMercenaryResponse {
   types.CommonResp resp = 1;
 }
-
