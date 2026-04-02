@@ -88,10 +88,10 @@ type BuildingData struct {
 	BuildId       int64                  `protobuf:"varint,1,opt,name=build_id,json=buildId,proto3" json:"build_id,omitempty"`                     // 建筑ID（实例ID）
 	BuildConfigId int32                  `protobuf:"varint,2,opt,name=build_config_id,json=buildConfigId,proto3" json:"build_config_id,omitempty"` // 建筑配置表ID（对应Builds表的ID）
 	Position      *types.Vector2         `protobuf:"bytes,4,opt,name=position,proto3" json:"position,omitempty"`                                   // 建筑坐标位置
-	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3" json:"time_work,omitempty"`                   // 时间工作数据
+	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3,oneof" json:"time_work,omitempty"`             // 时间工作数据
 	Level         int32                  `protobuf:"varint,6,opt,name=level,proto3" json:"level,omitempty"`                                        //等级
 	Rotation      *types.Quaternion      `protobuf:"bytes,10,opt,name=rotation,proto3" json:"rotation,omitempty"`                                  // 建筑旋转
-	ExtInfo       string                 `protobuf:"bytes,30,opt,name=ext_info,json=extInfo,proto3" json:"ext_info,omitempty"`                     // 建筑扩展信息 json格式
+	ExtInfo       *string                `protobuf:"bytes,30,opt,name=ext_info,json=extInfo,proto3,oneof" json:"ext_info,omitempty"`               // 建筑扩展信息 json格式
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -169,8 +169,8 @@ func (x *BuildingData) GetRotation() *types.Quaternion {
 }
 
 func (x *BuildingData) GetExtInfo() string {
-	if x != nil {
-		return x.ExtInfo
+	if x != nil && x.ExtInfo != nil {
+		return *x.ExtInfo
 	}
 	return ""
 }
@@ -588,7 +588,7 @@ type UpgradeBuildingResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
 	BuildConfigId int32                  `protobuf:"varint,2,opt,name=build_config_id,json=buildConfigId,proto3" json:"build_config_id,omitempty"` // 新等级的建筑配置表ID
-	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3" json:"time_work,omitempty"`                   // 时间工作数据
+	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3,oneof" json:"time_work,omitempty"`             // 时间工作数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -808,7 +808,7 @@ type GatherBuildingResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
 	ItemReward    []*types.ItemReward    `protobuf:"bytes,2,rep,name=item_reward,json=itemReward,proto3" json:"item_reward,omitempty"` //收割的资源
-	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3" json:"time_work,omitempty"`       // 时间工作数据
+	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3,oneof" json:"time_work,omitempty"` // 时间工作数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -958,7 +958,7 @@ func (x *WorkBuildingKoRequest) GetBuildId() int64 {
 type WorkBuildingTurboResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
-	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3" json:"time_work,omitempty"` // 时间工作数据
+	TimeWork      *TimeWork              `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3,oneof" json:"time_work,omitempty"` // 时间工作数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1105,16 +1105,19 @@ const file_gamesvr_builds_proto_rawDesc = "" +
 	"\bTimeWork\x12\x1b\n" +
 	"\twork_type\x182 \x01(\x05R\bworkType\x12&\n" +
 	"\x0fwork_begin_time\x183 \x01(\x03R\rworkBeginTime\x12\"\n" +
-	"\rwork_end_time\x184 \x01(\x03R\vworkEndTime\"\x8d\x02\n" +
+	"\rwork_end_time\x184 \x01(\x03R\vworkEndTime\"\xb2\x02\n" +
 	"\fBuildingData\x12\x19\n" +
 	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\x12&\n" +
 	"\x0fbuild_config_id\x18\x02 \x01(\x05R\rbuildConfigId\x12*\n" +
-	"\bposition\x18\x04 \x01(\v2\x0e.types.Vector2R\bposition\x12.\n" +
-	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkR\btimeWork\x12\x14\n" +
+	"\bposition\x18\x04 \x01(\v2\x0e.types.Vector2R\bposition\x123\n" +
+	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkH\x00R\btimeWork\x88\x01\x01\x12\x14\n" +
 	"\x05level\x18\x06 \x01(\x05R\x05level\x12-\n" +
 	"\brotation\x18\n" +
-	" \x01(\v2\x11.types.QuaternionR\brotation\x12\x19\n" +
-	"\bext_info\x18\x1e \x01(\tR\aextInfo\"3\n" +
+	" \x01(\v2\x11.types.QuaternionR\brotation\x12\x1e\n" +
+	"\bext_info\x18\x1e \x01(\tH\x01R\aextInfo\x88\x01\x01B\f\n" +
+	"\n" +
+	"_time_workB\v\n" +
+	"\t_ext_info\"3\n" +
 	"\x16GetBuildingInfoRequest\x12\x19\n" +
 	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"\x8e\x01\n" +
 	"\x17GetBuildingInfoResponse\x12%\n" +
@@ -1136,11 +1139,13 @@ const file_gamesvr_builds_proto_rawDesc = "" +
 	"\rbuilding_data\x18\x03 \x01(\v2\x15.gamesvr.BuildingDataR\fbuildingData\"\\\n" +
 	"\x16UpgradeBuildingRequest\x12\x19\n" +
 	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\x12'\n" +
-	"\x0finstant_upgrade\x18\x02 \x01(\bR\x0einstantUpgrade\"\x98\x01\n" +
+	"\x0finstant_upgrade\x18\x02 \x01(\bR\x0einstantUpgrade\"\xab\x01\n" +
 	"\x17UpgradeBuildingResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x12&\n" +
-	"\x0fbuild_config_id\x18\x02 \x01(\x05R\rbuildConfigId\x12.\n" +
-	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkR\btimeWork\"\xaf\x01\n" +
+	"\x0fbuild_config_id\x18\x02 \x01(\x05R\rbuildConfigId\x123\n" +
+	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkH\x00R\btimeWork\x88\x01\x01B\f\n" +
+	"\n" +
+	"_time_work\"\xaf\x01\n" +
 	"\x15UpdateBuildingRequest\x12\x19\n" +
 	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\x121\n" +
 	"\fnew_position\x18\x02 \x01(\v2\x0e.types.Vector2R\vnewPosition\x12-\n" +
@@ -1149,19 +1154,23 @@ const file_gamesvr_builds_proto_rawDesc = "" +
 	"\x16UpdateBuildingResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"2\n" +
 	"\x15GatherBuildingRequest\x12\x19\n" +
-	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"\xa3\x01\n" +
+	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"\xb6\x01\n" +
 	"\x16GatherBuildingResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x122\n" +
 	"\vitem_reward\x18\x02 \x03(\v2\x11.types.ItemRewardR\n" +
-	"itemReward\x12.\n" +
-	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkR\btimeWork\"5\n" +
+	"itemReward\x123\n" +
+	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkH\x00R\btimeWork\x88\x01\x01B\f\n" +
+	"\n" +
+	"_time_work\"5\n" +
 	"\x18WorkBuildingTurboRequest\x12\x19\n" +
 	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"2\n" +
 	"\x15WorkBuildingKoRequest\x12\x19\n" +
-	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"r\n" +
+	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"\x85\x01\n" +
 	"\x19WorkBuildingTurboResponse\x12%\n" +
-	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x12.\n" +
-	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkR\btimeWork\"3\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x123\n" +
+	"\ttime_work\x18\x05 \x01(\v2\x11.gamesvr.TimeWorkH\x00R\btimeWork\x88\x01\x01B\f\n" +
+	"\n" +
+	"_time_work\"3\n" +
 	"\x16DestroyBuildingRequest\x12\x19\n" +
 	"\bbuild_id\x18\x01 \x01(\x03R\abuildId\"@\n" +
 	"\x17DestroyBuildingResponse\x12%\n" +
@@ -1241,6 +1250,10 @@ func file_gamesvr_builds_proto_init() {
 	if File_gamesvr_builds_proto != nil {
 		return
 	}
+	file_gamesvr_builds_proto_msgTypes[1].OneofWrappers = []any{}
+	file_gamesvr_builds_proto_msgTypes[10].OneofWrappers = []any{}
+	file_gamesvr_builds_proto_msgTypes[14].OneofWrappers = []any{}
+	file_gamesvr_builds_proto_msgTypes[17].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

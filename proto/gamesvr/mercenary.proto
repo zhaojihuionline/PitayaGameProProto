@@ -47,7 +47,8 @@ message GetMyMercenaryRequest {
 // 获取我的所有响应
 message GetMyMercenaryResponse {
   types.CommonResp resp = 1;
-  repeated MercenaryData mercenary = 2;
+  int64 server_time=2;  //服务器时间
+  repeated MercenaryData mercenary = 3;
 }
 
 
