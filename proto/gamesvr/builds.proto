@@ -60,6 +60,7 @@ message GetMyBuildingsRequest {
 message GetMyBuildingsResponse {
   types.CommonResp resp = 1;
   repeated BuildingData buildings = 2;
+  int64 server_time=30;  //服务器时间
 }
 
 // 获取指定用户user_id所有建筑请求
@@ -128,9 +129,7 @@ message GatherBuildingRequest {
 message GatherBuildingResponse {
   types.CommonResp resp = 1;
   repeated types.ItemReward item_reward=2; //收割的资源
-
   optional TimeWork time_work = 5;           // 时间工作数据
-
 }
 
 // ========== 建筑加速 ==========

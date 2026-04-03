@@ -47,8 +47,8 @@ message GetMyMercenaryRequest {
 // 获取我的所有响应
 message GetMyMercenaryResponse {
   types.CommonResp resp = 1;
-  int64 server_time=2;  //服务器时间
   repeated MercenaryData mercenary = 3;
+  int64 server_time=30;  //服务器时间  
 }
 
 
@@ -125,6 +125,11 @@ message ToWarMercenaryRequest {
 
 message ToWarMercenaryResponse {
   types.CommonResp resp = 1;
+}
+
+// 训练/升级完成后，转成正式
+message ToFormalMercenaryRequest {
+  int32 mercenary_config_id = 1; //配置表ID
 }
 
 

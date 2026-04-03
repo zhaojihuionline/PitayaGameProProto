@@ -899,6 +899,51 @@ func (x *ToWarMercenaryResponse) GetResp() *types.CommonResp {
 	return nil
 }
 
+// 训练/升级完成后，转成正式
+type ToFormalMercenaryRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	MercenaryConfigId int32                  `protobuf:"varint,1,opt,name=mercenary_config_id,json=mercenaryConfigId,proto3" json:"mercenary_config_id,omitempty"` //配置表ID
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ToFormalMercenaryRequest) Reset() {
+	*x = ToFormalMercenaryRequest{}
+	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToFormalMercenaryRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToFormalMercenaryRequest) ProtoMessage() {}
+
+func (x *ToFormalMercenaryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToFormalMercenaryRequest.ProtoReflect.Descriptor instead.
+func (*ToFormalMercenaryRequest) Descriptor() ([]byte, []int) {
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ToFormalMercenaryRequest) GetMercenaryConfigId() int32 {
+	if x != nil {
+		return x.MercenaryConfigId
+	}
+	return 0
+}
+
 // 删除请求 测试用
 type DestroyMercenaryRequest struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
@@ -910,7 +955,7 @@ type DestroyMercenaryRequest struct {
 
 func (x *DestroyMercenaryRequest) Reset() {
 	*x = DestroyMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +967,7 @@ func (x *DestroyMercenaryRequest) String() string {
 func (*DestroyMercenaryRequest) ProtoMessage() {}
 
 func (x *DestroyMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,7 +980,7 @@ func (x *DestroyMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DestroyMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*DestroyMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{18}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *DestroyMercenaryRequest) GetMercenaryConfigId() int32 {
@@ -962,7 +1007,7 @@ type DestroyMercenaryResponse struct {
 
 func (x *DestroyMercenaryResponse) Reset() {
 	*x = DestroyMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -974,7 +1019,7 @@ func (x *DestroyMercenaryResponse) String() string {
 func (*DestroyMercenaryResponse) ProtoMessage() {}
 
 func (x *DestroyMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -987,7 +1032,7 @@ func (x *DestroyMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DestroyMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*DestroyMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{19}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DestroyMercenaryResponse) GetResp() *types.CommonResp {
@@ -1049,7 +1094,9 @@ const file_gamesvr_mercenary_proto_rawDesc = "" +
 	"\x15ToWarMercenaryRequest\x128\n" +
 	"\tmercenary\x18\x01 \x03(\v2\x1a.gamesvr.MercenaryBaseDataR\tmercenary\"?\n" +
 	"\x16ToWarMercenaryResponse\x12%\n" +
-	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"[\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"J\n" +
+	"\x18ToFormalMercenaryRequest\x12.\n" +
+	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\"[\n" +
 	"\x17DestroyMercenaryRequest\x12.\n" +
 	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\x12\x10\n" +
 	"\x03num\x18\x02 \x01(\x05R\x03num\"A\n" +
@@ -1068,7 +1115,7 @@ func file_gamesvr_mercenary_proto_rawDescGZIP() []byte {
 	return file_gamesvr_mercenary_proto_rawDescData
 }
 
-var file_gamesvr_mercenary_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_gamesvr_mercenary_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
 var file_gamesvr_mercenary_proto_goTypes = []any{
 	(*MercenaryTimeWork)(nil),           // 0: gamesvr.MercenaryTimeWork
 	(*MercenaryBaseData)(nil),           // 1: gamesvr.MercenaryBaseData
@@ -1088,29 +1135,30 @@ var file_gamesvr_mercenary_proto_goTypes = []any{
 	(*WorkCancelMercenaryResponse)(nil), // 15: gamesvr.WorkCancelMercenaryResponse
 	(*ToWarMercenaryRequest)(nil),       // 16: gamesvr.ToWarMercenaryRequest
 	(*ToWarMercenaryResponse)(nil),      // 17: gamesvr.ToWarMercenaryResponse
-	(*DestroyMercenaryRequest)(nil),     // 18: gamesvr.DestroyMercenaryRequest
-	(*DestroyMercenaryResponse)(nil),    // 19: gamesvr.DestroyMercenaryResponse
-	(*types.CommonResp)(nil),            // 20: types.CommonResp
+	(*ToFormalMercenaryRequest)(nil),    // 18: gamesvr.ToFormalMercenaryRequest
+	(*DestroyMercenaryRequest)(nil),     // 19: gamesvr.DestroyMercenaryRequest
+	(*DestroyMercenaryResponse)(nil),    // 20: gamesvr.DestroyMercenaryResponse
+	(*types.CommonResp)(nil),            // 21: types.CommonResp
 }
 var file_gamesvr_mercenary_proto_depIdxs = []int32{
 	1,  // 0: gamesvr.MercenaryData.info:type_name -> gamesvr.MercenaryBaseData
 	0,  // 1: gamesvr.MercenaryData.time_work:type_name -> gamesvr.MercenaryTimeWork
-	20, // 2: gamesvr.GetMyMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 2: gamesvr.GetMyMercenaryResponse.resp:type_name -> types.CommonResp
 	2,  // 3: gamesvr.GetMyMercenaryResponse.mercenary:type_name -> gamesvr.MercenaryData
 	1,  // 4: gamesvr.TrainingMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
 	1,  // 5: gamesvr.TrainingMercenaryKoRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	20, // 6: gamesvr.TrainingMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 6: gamesvr.TrainingMercenaryResponse.resp:type_name -> types.CommonResp
 	2,  // 7: gamesvr.TrainingMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
 	1,  // 8: gamesvr.UpgradeMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
 	1,  // 9: gamesvr.UpgradeMercenaryKoRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	20, // 10: gamesvr.UpgradeMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 10: gamesvr.UpgradeMercenaryResponse.resp:type_name -> types.CommonResp
 	2,  // 11: gamesvr.UpgradeMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
-	20, // 12: gamesvr.WorkTurboMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 12: gamesvr.WorkTurboMercenaryResponse.resp:type_name -> types.CommonResp
 	2,  // 13: gamesvr.WorkTurboMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
-	20, // 14: gamesvr.WorkCancelMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 14: gamesvr.WorkCancelMercenaryResponse.resp:type_name -> types.CommonResp
 	1,  // 15: gamesvr.ToWarMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	20, // 16: gamesvr.ToWarMercenaryResponse.resp:type_name -> types.CommonResp
-	20, // 17: gamesvr.DestroyMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 16: gamesvr.ToWarMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // 17: gamesvr.DestroyMercenaryResponse.resp:type_name -> types.CommonResp
 	18, // [18:18] is the sub-list for method output_type
 	18, // [18:18] is the sub-list for method input_type
 	18, // [18:18] is the sub-list for extension type_name
@@ -1130,7 +1178,7 @@ func file_gamesvr_mercenary_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gamesvr_mercenary_proto_rawDesc), len(file_gamesvr_mercenary_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
