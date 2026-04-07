@@ -13,31 +13,31 @@ option csharp_namespace = "PitayaGame.Gateway";
 
 // ========== 握手 ==========
 
-// 握手请求
-message HandshakeRequest {
-  string client_version = 1;  // 客户端版本
-  string platform = 2;        // 平台：ios/android/pc/web
-  string device_id = 3;       // 设备ID
-}
+// // 握手请求
+// message HandshakeRequest {
+//   string client_version = 1;  // 客户端版本
+//   string platform = 2;        // 平台：ios/android/pc/web
+//   string device_id = 3;       // 设备ID
+// }
 
-// 握手响应
-message HandshakeResponse {
-  int32 code = 1;
-  string message = 2;
-  int64 server_time = 3;      // 服务器时间（Unix时间戳）
-  int32 heartbeat_interval = 4; // 心跳间隔（秒）
-}
+// // 握手响应
+// message HandshakeResponse {
+//   int32 code = 1;
+//   string message = 2;
+//   int64 server_time = 3;      // 服务器时间（Unix 毫秒时间戳）
+//   int32 heartbeat_interval = 4; // 心跳间隔（秒）
+// }
 
 // ========== 心跳 ==========
 
 // 心跳请求
 message HeartbeatRequest {
-  int64 client_time = 1;      // 客户端时间
+  int64 client_time = 1;      // 客户端时间（Unix 毫秒时间戳，与 server_time 单位一致）
 }
 
 // 心跳响应
 message HeartbeatResponse {
-  int64 server_time = 1;      // 服务器时间
+  int64 server_time = 1;      // 服务器时间（Unix 毫秒时间戳）
 }
 
 // ========== 踢出 ==========
