@@ -17,7 +17,7 @@ import "common/types/types.proto";
 
 
 message MercenaryTimeWork {
-  int32 work_type = 50;                 //工作类型 1 训练 2 升级  3 治疗
+  int32 work_type = 50;                 //工作类型 1 训练 2 晋升  3 轻伤 4 重伤
   int64 work_begin_time=51;      //开始时间
   int64 work_end_time = 52;       // 完成时间
   int32 num=53; //数量
@@ -25,8 +25,10 @@ message MercenaryTimeWork {
 
 message MercenaryTypeNum {
   int32 num=1; //数量
-  int32 type=2; //类型 0= 正常 1 训练 2 升级 3 伤一级 4 伤二级
+  int32 type=2; //类型 0= 正常 1 训练 2 晋升（直接解锁最高级） 3 轻伤 4 重伤
 }
+
+
 
 //雇佣兵数据
 message MercenaryBaseData {
@@ -38,7 +40,7 @@ message MercenaryBaseData {
 // 雇佣兵数据
 message MercenaryData {
   MercenaryBaseData info=1; //基础信息
-  optional MercenaryTimeWork time_work = 5;           // 训练 升级 治疗
+  optional MercenaryTimeWork time_work = 5;
 }
 
 
@@ -53,7 +55,18 @@ message GetMyMercenaryRequest {
 message GetMyMercenaryResponse {
   types.CommonResp resp = 1;
   repeated MercenaryData mercenary = 3;
-  int64 server_time=30;  //服务器时间  
+  int64 server_time=30;  //服务器时间
+}
+
+//获取单个兵种的数据
+message GetMercenaryInfoRequest {
+  int32 mercenary_config_id = 1;        // 配置表ID
+}
+
+message GetMercenaryInfoResponse {
+  types.CommonResp resp = 1;
+  MercenaryData mercenary = 3;
+  int64 server_time=30;  //服务器时间
 }
 
 
@@ -61,38 +74,40 @@ message GetMyMercenaryResponse {
 
 // 雇佣兵训练请求
 message TrainingMercenaryRequest {
-    MercenaryBaseData mercenary=1;
+    int32 mercenary_config_id = 1;        // 配置表ID
+    int64 num=2; //数量
 }
 
 // 雇佣兵训练立即完成请求
 message TrainingMercenaryKoRequest {
-    MercenaryBaseData mercenary=1;
+    int32 mercenary_config_id = 1;
 }
 
 
 // 雇佣兵训练响应
 message TrainingMercenaryResponse {
   types.CommonResp resp = 1;
-  MercenaryData mercenary_data = 2;
+  MercenaryTimeWork work_time=2;
 }
 
-// ========== 雇佣兵升级 ==========
+// ========== 雇佣兵晋升 ==========
 
-// 升级（晋升）请求
+// 晋升请求
 message UpgradeMercenaryRequest {
-    MercenaryBaseData mercenary=1;
+    int32 mercenary_config_id = 1;        // 配置表ID
+    int64 num=2; //数量
 }
 
-// 升级请求立即完成
+// 晋升请求立即完成
 message UpgradeMercenaryKoRequest {
-    MercenaryBaseData mercenary=1;
+    int32 mercenary_config_id = 1;        // 配置表ID
 }
 
 
-// 升级响应
+// 晋升响应
 message UpgradeMercenaryResponse {
   types.CommonResp resp = 1;
-  MercenaryData mercenary_data = 2;
+  MercenaryTimeWork work_time=2;
 }
 
 
@@ -105,7 +120,7 @@ message WorkTurboMercenaryRequest {
 
 message WorkTurboMercenaryResponse {
   types.CommonResp resp = 1;
-  MercenaryData mercenary_data = 2;
+  MercenaryTimeWork work_time=2;
 }
 
 // 立即完成
@@ -120,13 +135,15 @@ message WorkCancelMercenaryRequest {
 
 message WorkCancelMercenaryResponse {
   types.CommonResp resp = 1;
+  MercenaryData mercenary = 3;
+  int64 server_time=30;  //服务器时间
 }
 
 // ========== 出征 ==========
 
 message ToWarMercenaryRemoteRequest {
   string user_id=1;//哪个玩家
-  repeated MercenaryBaseData mercenary=2; // 派出的兵种/数量 类型都是0  
+  repeated MercenaryBaseData mercenary=2; // 派出的兵种/数量 类型都是0
 }
 
 message ToWarMercenaryResponse {
@@ -160,5 +177,16 @@ message DestroyMercenaryRequest {
 
 // 删除响应
 message DestroyMercenaryResponse {
+  types.CommonResp resp = 1;
+}
+
+//增加
+message NewMercenaryRequest {
+  int32 mercenary_config_id = 1;
+  int32 num=2;
+}
+
+// 增加响应
+message NewMercenaryResponse {
   types.CommonResp resp = 1;
 }
