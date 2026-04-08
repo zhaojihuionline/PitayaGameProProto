@@ -5,6 +5,7 @@ option go_package = "pitaya-game/protos/protobuf/pb/golang/mapsvr";
 
 import "common/types/types.proto";
 import "mapsvr/bigmap.proto";
+import "mapsvr/bigmapbattle.proto";
 
 // ======================== 枚举 ========================
 
@@ -94,6 +95,8 @@ message RallyMemberInfo {
   string player_id = 1;                // 成员玩家 ID
   map<int32, TroopLevels> troops = 2;  // 该成员派出的兵种
   repeated int64 hero_ids = 3;         // 该成员派出的英雄
+  bool arrived = 4;                    // 是否已到达集结点
+  int64 march_id = 5;                  // 集结行军ID（行军中有值，到达后为0）
 }
 
 // RallyInfo 集结完整信息，用于联盟内广播和玩家进入地图同步
@@ -109,6 +112,7 @@ message RallyInfo {
   int64       launch_at     = 9;  // 预计发起时间戳（秒）= create_at + wait_duration
   RallyState  state         = 10; // 当前集结状态
   repeated RallyMemberInfo members = 11; // 已加入的成员列表
+  Position    rally_pos     = 12; // 集结点坐标（发起者主城位置）
 }
 
 // ======================== 请求/响应（客户端 -> 服务端） ========================
@@ -251,8 +255,10 @@ message AllMarchSyncPush {
 // 推送路由: bigmap.bigmapmarch.battleresultnotify
 // 推送范围: 攻防双方玩家
 message BattleResultNotify {
-  int64 march_id = 1;  // 触发战斗的行军 ID
-  bool  is_win   = 2;  // 攻击方是否胜利
+  int64 march_id       = 1; // 触发战斗的行军 ID
+  bool  is_win         = 2; // 攻击方是否胜利
+  FighterInfo attacker = 3; // 攻方战报详情
+  FighterInfo defencer = 4; // 防方战报详情
 }
 
 // GatherResultNotify 采集结果通知

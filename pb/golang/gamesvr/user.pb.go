@@ -30,13 +30,14 @@ type UserBasicInfo struct {
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 	Level         int32                  `protobuf:"varint,3,opt,name=level,proto3" json:"level,omitempty"`
 	Exp           int64                  `protobuf:"varint,4,opt,name=exp,proto3" json:"exp,omitempty"`
-	CreateTime    int64                  `protobuf:"varint,5,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"` // 创建时间戳（秒）
-	Coin          int64                  `protobuf:"varint,6,opt,name=coin,proto3" json:"coin,omitempty"`                               // 金币
-	Diamond       int64                  `protobuf:"varint,7,opt,name=diamond,proto3" json:"diamond,omitempty"`                         // 钻石
-	Wood          int64                  `protobuf:"varint,8,opt,name=wood,proto3" json:"wood,omitempty"`                               // 木材
-	Stone         int64                  `protobuf:"varint,9,opt,name=stone,proto3" json:"stone,omitempty"`                             // 石头
-	Meat          int64                  `protobuf:"varint,10,opt,name=meat,proto3" json:"meat,omitempty"`                              // 肉
-	VipLevel      int32                  `protobuf:"varint,11,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`      // VIP等级
+	CreateTime    int64                  `protobuf:"varint,5,opt,name=create_time,json=createTime,proto3" json:"create_time,omitempty"`          // 创建时间戳（秒）
+	Coin          int64                  `protobuf:"varint,6,opt,name=coin,proto3" json:"coin,omitempty"`                                        // 金币
+	Diamond       int64                  `protobuf:"varint,7,opt,name=diamond,proto3" json:"diamond,omitempty"`                                  // 钻石
+	Wood          int64                  `protobuf:"varint,8,opt,name=wood,proto3" json:"wood,omitempty"`                                        // 木材
+	Stone         int64                  `protobuf:"varint,9,opt,name=stone,proto3" json:"stone,omitempty"`                                      // 石头
+	Meat          int64                  `protobuf:"varint,10,opt,name=meat,proto3" json:"meat,omitempty"`                                       // 肉
+	VipLevel      int32                  `protobuf:"varint,11,opt,name=vip_level,json=vipLevel,proto3" json:"vip_level,omitempty"`               // VIP等级
+	CharacterName string                 `protobuf:"bytes,12,opt,name=character_name,json=characterName,proto3" json:"character_name,omitempty"` // 角色名称
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -148,6 +149,13 @@ func (x *UserBasicInfo) GetVipLevel() int32 {
 	return 0
 }
 
+func (x *UserBasicInfo) GetCharacterName() string {
+	if x != nil {
+		return x.CharacterName
+	}
+	return ""
+}
+
 // 获取用户信息请求
 type GetUserInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -238,11 +246,110 @@ func (x *GetUserInfoResponse) GetUserInfo() *UserBasicInfo {
 	return nil
 }
 
+// 获取用户信息请求 - 服务内部 Remote RPC 专用
+// 由其他服务（如 MapSvr）通过 Remote RPC 调用，必须显式传入 user_id
+type GetUserInfoRemoteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserInfoRemoteRequest) Reset() {
+	*x = GetUserInfoRemoteRequest{}
+	mi := &file_gamesvr_user_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserInfoRemoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserInfoRemoteRequest) ProtoMessage() {}
+
+func (x *GetUserInfoRemoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_user_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserInfoRemoteRequest.ProtoReflect.Descriptor instead.
+func (*GetUserInfoRemoteRequest) Descriptor() ([]byte, []int) {
+	return file_gamesvr_user_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetUserInfoRemoteRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+// 获取用户信息响应 - 服务内部 Remote RPC 专用
+type GetUserInfoRemoteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
+	UserInfo      *UserBasicInfo         `protobuf:"bytes,2,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserInfoRemoteResponse) Reset() {
+	*x = GetUserInfoRemoteResponse{}
+	mi := &file_gamesvr_user_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserInfoRemoteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserInfoRemoteResponse) ProtoMessage() {}
+
+func (x *GetUserInfoRemoteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_user_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserInfoRemoteResponse.ProtoReflect.Descriptor instead.
+func (*GetUserInfoRemoteResponse) Descriptor() ([]byte, []int) {
+	return file_gamesvr_user_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetUserInfoRemoteResponse) GetResp() *types.CommonResp {
+	if x != nil {
+		return x.Resp
+	}
+	return nil
+}
+
+func (x *GetUserInfoRemoteResponse) GetUserInfo() *UserBasicInfo {
+	if x != nil {
+		return x.UserInfo
+	}
+	return nil
+}
+
 var File_gamesvr_user_proto protoreflect.FileDescriptor
 
 const file_gamesvr_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12gamesvr/user.proto\x12\agamesvr\x1a\x18common/types/types.proto\x1a\x18common/enums/enums.proto\"\x96\x02\n" +
+	"\x12gamesvr/user.proto\x12\agamesvr\x1a\x18common/types/types.proto\x1a\x18common/enums/enums.proto\"\xbd\x02\n" +
 	"\rUserBasicInfo\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
@@ -256,9 +363,15 @@ const file_gamesvr_user_proto_rawDesc = "" +
 	"\x05stone\x18\t \x01(\x03R\x05stone\x12\x12\n" +
 	"\x04meat\x18\n" +
 	" \x01(\x03R\x04meat\x12\x1b\n" +
-	"\tvip_level\x18\v \x01(\x05R\bvipLevel\"\x14\n" +
+	"\tvip_level\x18\v \x01(\x05R\bvipLevel\x12%\n" +
+	"\x0echaracter_name\x18\f \x01(\tR\rcharacterName\"\x14\n" +
 	"\x12GetUserInfoRequest\"q\n" +
 	"\x13GetUserInfoResponse\x12%\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x123\n" +
+	"\tuser_info\x18\x02 \x01(\v2\x16.gamesvr.UserBasicInfoR\buserInfo\"3\n" +
+	"\x18GetUserInfoRemoteRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"w\n" +
+	"\x19GetUserInfoRemoteResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x123\n" +
 	"\tuser_info\x18\x02 \x01(\v2\x16.gamesvr.UserBasicInfoR\buserInfoBNZ7pitaya-game/protos/protobuf/pb/golang/gamesvr;gamesvrpb\xaa\x02\x12PitayaGame.GameSvrb\x06proto3"
 
@@ -274,21 +387,25 @@ func file_gamesvr_user_proto_rawDescGZIP() []byte {
 	return file_gamesvr_user_proto_rawDescData
 }
 
-var file_gamesvr_user_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_gamesvr_user_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_gamesvr_user_proto_goTypes = []any{
-	(*UserBasicInfo)(nil),       // 0: gamesvr.UserBasicInfo
-	(*GetUserInfoRequest)(nil),  // 1: gamesvr.GetUserInfoRequest
-	(*GetUserInfoResponse)(nil), // 2: gamesvr.GetUserInfoResponse
-	(*types.CommonResp)(nil),    // 3: types.CommonResp
+	(*UserBasicInfo)(nil),             // 0: gamesvr.UserBasicInfo
+	(*GetUserInfoRequest)(nil),        // 1: gamesvr.GetUserInfoRequest
+	(*GetUserInfoResponse)(nil),       // 2: gamesvr.GetUserInfoResponse
+	(*GetUserInfoRemoteRequest)(nil),  // 3: gamesvr.GetUserInfoRemoteRequest
+	(*GetUserInfoRemoteResponse)(nil), // 4: gamesvr.GetUserInfoRemoteResponse
+	(*types.CommonResp)(nil),          // 5: types.CommonResp
 }
 var file_gamesvr_user_proto_depIdxs = []int32{
-	3, // 0: gamesvr.GetUserInfoResponse.resp:type_name -> types.CommonResp
+	5, // 0: gamesvr.GetUserInfoResponse.resp:type_name -> types.CommonResp
 	0, // 1: gamesvr.GetUserInfoResponse.user_info:type_name -> gamesvr.UserBasicInfo
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 2: gamesvr.GetUserInfoRemoteResponse.resp:type_name -> types.CommonResp
+	0, // 3: gamesvr.GetUserInfoRemoteResponse.user_info:type_name -> gamesvr.UserBasicInfo
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_gamesvr_user_proto_init() }
@@ -302,7 +419,7 @@ func file_gamesvr_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gamesvr_user_proto_rawDesc), len(file_gamesvr_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

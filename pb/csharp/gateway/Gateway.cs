@@ -459,7 +459,7 @@ namespace PitayaGame.Gateway {
     public const int ServerTimeFieldNumber = 3;
     private long serverTime_;
     /// <summary>
-    /// 服务器时间（Unix时间戳）
+    /// 服务器时间（Unix 毫秒时间戳）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -750,7 +750,7 @@ namespace PitayaGame.Gateway {
     public const int ClientTimeFieldNumber = 1;
     private long clientTime_;
     /// <summary>
-    /// 客户端时间
+    /// 客户端时间（Unix 毫秒时间戳，与 server_time 单位一致）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -954,7 +954,7 @@ namespace PitayaGame.Gateway {
     public const int ServerTimeFieldNumber = 1;
     private long serverTime_;
     /// <summary>
-    /// 服务器时间
+    /// 服务器时间（Unix 毫秒时间戳）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]

@@ -25,95 +25,462 @@ namespace Mapsvr {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChltYXBzdnIvYmlnbWFwYmF0dGxlLnByb3RvEgZtYXBzdnIaGGNvbW1vbi90",
-            "eXBlcy90eXBlcy5wcm90bxoaY29tbW9uL2Vycm9ycy9lcnJvcnMucHJvdG8i",
-            "DwoNQmF0dGxlUmVxdWVzdCL6AQoLRmlnaHRlckluZm8SEQoJcGxheWVyX2lk",
-            "GAEgASgJEgkKAXgYAiABKAUSCQoBeRgDIAEoBRIVCg1zb2xkaWVyX2NvdW50",
-            "GAQgASgFEhMKC2RlYXRoX2NvdW50GAUgASgFEhIKCmxpdmVfY291bnQYBiAB",
-            "KAUSSAoUdHJvb3Bfa2lsbF9jb3VudF9tYXAYByADKAsyKi5tYXBzdnIuRmln",
-            "aHRlckluZm8uVHJvb3BLaWxsQ291bnRNYXBFbnRyeRo4ChZUcm9vcEtpbGxD",
-            "b3VudE1hcEVudHJ5EgsKA2tleRgBIAEoBRINCgV2YWx1ZRgCIAEoBToCOAEi",
-            "fwoOQmF0dGxlUmVzcG9uc2USHwoEcmVzcBgBIAEoCzIRLnR5cGVzLkNvbW1v",
-            "blJlc3ASJQoIYXR0YWNrZXIYAiABKAsyEy5tYXBzdnIuRmlnaHRlckluZm8S",
-            "JQoIZGVmZW5jZXIYAyABKAsyEy5tYXBzdnIuRmlnaHRlckluZm8ifQoLVHJv",
-            "b3BMZXZlbHMSOgoMbGV2ZWxfY291bnRzGAEgAygLMiQubWFwc3ZyLlRyb29w",
-            "TGV2ZWxzLkxldmVsQ291bnRzRW50cnkaMgoQTGV2ZWxDb3VudHNFbnRyeRIL",
-            "CgNrZXkYASABKAUSDQoFdmFsdWUYAiABKAU6AjgBIsQBChFTdGFydE1hcmNo",
-            "UmVxdWVzdBIJCgF4GAEgASgFEgkKAXkYAiABKAUSDgoGZnJvbV94GAMgASgF",
-            "Eg4KBmZyb21feRgEIAEoBRI1CgZ0cm9vcHMYBSADKAsyJS5tYXBzdnIuU3Rh",
-            "cnRNYXJjaFJlcXVlc3QuVHJvb3BzRW50cnkaQgoLVHJvb3BzRW50cnkSCwoD",
-            "a2V5GAEgASgFEiIKBXZhbHVlGAIgASgLMhMubWFwc3ZyLlRyb29wTGV2ZWxz",
-            "OgI4ASJNChJTdGFydE1hcmNoUmVzcG9uc2USHwoEcmVzcBgBIAEoCzIRLnR5",
-            "cGVzLkNvbW1vblJlc3ASFgoObWFyY2hfZHVyYXRpb24YAiABKAUicQoRTWFy",
-            "Y2hCYXR0bGVOb3RpZnkSDgoGaXNfd2luGAEgASgIEiUKCGF0dGFja2VyGAIg",
-            "ASgLMhMubWFwc3ZyLkZpZ2h0ZXJJbmZvEiUKCGRlZmVuY2VyGAMgASgLMhMu",
-            "bWFwc3ZyLkZpZ2h0ZXJJbmZvItABCglNYXJjaEluZm8SEAoIbWFyY2hfaWQY",
-            "ASABKAMSEQoJcGxheWVyX2lkGAIgASgJEgwKBHRvX3gYAyABKAUSDAoEdG9f",
-            "eRgEIAEoBRIOCgZmcm9tX3gYBSABKAUSDgoGZnJvbV95GAYgASgFEhYKDm1h",
-            "cmNoX2R1cmF0aW9uGAcgASgFEhAKCHN0YXJ0X2F0GAggASgDEhEKCWFycml2",
-            "ZV9hdBgJIAEoAxIlCgptYXJjaF90eXBlGAogASgOMhEubWFwc3ZyLk1hcmNo",
-            "VHlwZSI0Cg5NYXJjaEFkZE5vdGlmeRIiCgdtYXJjaGVzGAEgAygLMhEubWFw",
-            "c3ZyLk1hcmNoSW5mbyIlChFNYXJjaFJlbW92ZU5vdGlmeRIQCghtYXJjaF9p",
-            "ZBgBIAEoAyIyCgxBbGxNYXJjaFB1c2gSIgoHbWFyY2hlcxgBIAMoCzIRLm1h",
-            "cHN2ci5NYXJjaEluZm8qTgoJVHJvb3BUeXBlEhoKFlRST09QX1RZUEVfVU5T",
-            "UEVDSUZJRUQQABIMCghJTkZBTlRSWRABEgsKB0NBVkFMUlkQAhIKCgZBUkNI",
-            "RVIQAypNCglNYXJjaFR5cGUSGgoWTUFSQ0hfVFlQRV9VTlNQRUNJRklFRBAA",
-            "Eg8KC01hcmNoVHlwZUdvEAESEwoPTWFyY2hUeXBlUmV0dXJuEAJCLloscGl0",
-            "YXlhLWdhbWUvcHJvdG9zL3Byb3RvYnVmL3BiL2dvbGFuZy9tYXBzdnJiBnBy",
-            "b3RvMw=="));
+            "eXBlcy90eXBlcy5wcm90byJ7CglUcm9vcEluZm8SDAoEdHlwZRgBIAEoBRIw",
+            "Cghsdl9jb3VudBgCIAMoCzIeLm1hcHN2ci5Ucm9vcEluZm8uTHZDb3VudEVu",
+            "dHJ5Gi4KDEx2Q291bnRFbnRyeRILCgNrZXkYASABKAUSDQoFdmFsdWUYAiAB",
+            "KAU6AjgBIjMKDlRyb29wUXVldWVJbmZvEiEKBnRyb29wcxgBIAMoCzIRLm1h",
+            "cHN2ci5Ucm9vcEluZm8iYwoNQmF0dGxlUmVxdWVzdBIoCghhdHRhY2tlchgB",
+            "IAEoCzIWLm1hcHN2ci5Ucm9vcFF1ZXVlSW5mbxIoCghkZWZlbmRlchgCIAEo",
+            "CzIWLm1hcHN2ci5Ucm9vcFF1ZXVlSW5mbyLTAgoLRmlnaHRlckluZm8SEQoJ",
+            "cGxheWVyX2lkGAEgASgJEg0KBWxldmVsGAIgASgFEhYKDmNoYXJhY3Rlcl9u",
+            "YW1lGAMgASgJEgkKAXgYBCABKAUSCQoBeRgFIAEoBRIVCg1zb2xkaWVyX2Nv",
+            "dW50GAYgASgFEhAKCHN1cnZpdmVkGAcgASgFEhMKC2xpZ2h0X3dvdW5kGAgg",
+            "ASgFEg8KB3dvdW5kZWQYCSABKAUSEwoLaGVhdnlfd291bmQYCiABKAUSSAoU",
+            "dHJvb3Bfa2lsbF9jb3VudF9tYXAYCyADKAsyKi5tYXBzdnIuRmlnaHRlcklu",
+            "Zm8uVHJvb3BLaWxsQ291bnRNYXBFbnRyeRIMCgR0aW1lGAwgASgDGjgKFlRy",
+            "b29wS2lsbENvdW50TWFwRW50cnkSCwoDa2V5GAEgASgFEg0KBXZhbHVlGAIg",
+            "ASgFOgI4ASKPAQoOQmF0dGxlUmVzcG9uc2USHwoEcmVzcBgBIAEoCzIRLnR5",
+            "cGVzLkNvbW1vblJlc3ASDgoGaXNfd2luGAIgASgIEiUKCGF0dGFja2VyGAMg",
+            "ASgLMhMubWFwc3ZyLkZpZ2h0ZXJJbmZvEiUKCGRlZmVuY2VyGAQgASgLMhMu",
+            "bWFwc3ZyLkZpZ2h0ZXJJbmZvQi5aLHBpdGF5YS1nYW1lL3Byb3Rvcy9wcm90",
+            "b2J1Zi9wYi9nb2xhbmcvbWFwc3ZyYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::PitayaGame.Types.TypesReflection.Descriptor, global::PitayaGame.Errors.ErrorsReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Mapsvr.TroopType), typeof(global::Mapsvr.MarchType), }, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.BattleRequest), global::Mapsvr.BattleRequest.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.FighterInfo), global::Mapsvr.FighterInfo.Parser, new[]{ "PlayerId", "X", "Y", "SoldierCount", "DeathCount", "LiveCount", "TroopKillCountMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.BattleResponse), global::Mapsvr.BattleResponse.Parser, new[]{ "Resp", "Attacker", "Defencer" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.TroopLevels), global::Mapsvr.TroopLevels.Parser, new[]{ "LevelCounts" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.StartMarchRequest), global::Mapsvr.StartMarchRequest.Parser, new[]{ "X", "Y", "FromX", "FromY", "Troops" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.StartMarchResponse), global::Mapsvr.StartMarchResponse.Parser, new[]{ "Resp", "MarchDuration" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.MarchBattleNotify), global::Mapsvr.MarchBattleNotify.Parser, new[]{ "IsWin", "Attacker", "Defencer" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.MarchInfo), global::Mapsvr.MarchInfo.Parser, new[]{ "MarchId", "PlayerId", "ToX", "ToY", "FromX", "FromY", "MarchDuration", "StartAt", "ArriveAt", "MarchType" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.MarchAddNotify), global::Mapsvr.MarchAddNotify.Parser, new[]{ "Marches" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.MarchRemoveNotify), global::Mapsvr.MarchRemoveNotify.Parser, new[]{ "MarchId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.AllMarchPush), global::Mapsvr.AllMarchPush.Parser, new[]{ "Marches" }, null, null, null, null)
+          new pbr::FileDescriptor[] { global::PitayaGame.Types.TypesReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.TroopInfo), global::Mapsvr.TroopInfo.Parser, new[]{ "Type", "LvCount" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.TroopQueueInfo), global::Mapsvr.TroopQueueInfo.Parser, new[]{ "Troops" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.BattleRequest), global::Mapsvr.BattleRequest.Parser, new[]{ "Attacker", "Defender" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.FighterInfo), global::Mapsvr.FighterInfo.Parser, new[]{ "PlayerId", "Level", "CharacterName", "X", "Y", "SoldierCount", "Survived", "LightWound", "Wounded", "HeavyWound", "TroopKillCountMap", "Time" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, }),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Mapsvr.BattleResponse), global::Mapsvr.BattleResponse.Parser, new[]{ "Resp", "IsWin", "Attacker", "Defencer" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
-  #region Enums
-  public enum TroopType {
-    [pbr::OriginalName("TROOP_TYPE_UNSPECIFIED")] Unspecified = 0,
+  #region Messages
+  /// <summary>
+  /// TroopInfo 单个兵种部队信息
+  /// </summary>
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class TroopInfo : pb::IMessage<TroopInfo>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TroopInfo> _parser = new pb::MessageParser<TroopInfo>(() => new TroopInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TroopInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[0]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TroopInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TroopInfo(TroopInfo other) : this() {
+      type_ = other.type_;
+      lvCount_ = other.lvCount_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TroopInfo Clone() {
+      return new TroopInfo(this);
+    }
+
+    /// <summary>Field number for the "type" field.</summary>
+    public const int TypeFieldNumber = 1;
+    private int type_;
     /// <summary>
-    /// 步兵
+    /// 兵种类型: 1=步兵/盾兵, 2=骑兵, 3=弓兵
     /// </summary>
-    [pbr::OriginalName("INFANTRY")] Infantry = 1,
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "lv_count" field.</summary>
+    public const int LvCountFieldNumber = 2;
+    private static readonly pbc::MapField<int, int>.Codec _map_lvCount_codec
+        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8, 0), pb::FieldCodec.ForInt32(16, 0), 18);
+    private readonly pbc::MapField<int, int> lvCount_ = new pbc::MapField<int, int>();
     /// <summary>
-    /// 骑兵
+    /// 士兵等级 -> 数量
     /// </summary>
-    [pbr::OriginalName("CAVALRY")] Cavalry = 2,
-    /// <summary>
-    /// 弓兵
-    /// </summary>
-    [pbr::OriginalName("ARCHER")] Archer = 3,
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::MapField<int, int> LvCount {
+      get { return lvCount_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TroopInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TroopInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Type != other.Type) return false;
+      if (!LvCount.Equals(other.LvCount)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Type != 0) hash ^= Type.GetHashCode();
+      hash ^= LvCount.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Type);
+      }
+      lvCount_.WriteTo(output, _map_lvCount_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Type);
+      }
+      lvCount_.WriteTo(ref output, _map_lvCount_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      size += lvCount_.CalculateSize(_map_lvCount_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TroopInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Type != 0) {
+        Type = other.Type;
+      }
+      lvCount_.MergeFrom(other.lvCount_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 8: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            lvCount_.AddEntriesFrom(input, _map_lvCount_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 8: {
+            Type = input.ReadInt32();
+            break;
+          }
+          case 18: {
+            lvCount_.AddEntriesFrom(ref input, _map_lvCount_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
   /// <summary>
-  ///未来需要扩展
+  /// TroopQueueInfo 部队队列（按出战顺序排列）
   /// </summary>
-  public enum MarchType {
-    [pbr::OriginalName("MARCH_TYPE_UNSPECIFIED")] Unspecified = 0,
-    /// <summary>
-    /// 出征
-    /// </summary>
-    [pbr::OriginalName("MarchTypeGo")] Go = 1,
-    /// <summary>
-    /// 回城 
-    /// </summary>
-    [pbr::OriginalName("MarchTypeReturn")] Return = 2,
+  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
+  public sealed partial class TroopQueueInfo : pb::IMessage<TroopQueueInfo>
+  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      , pb::IBufferMessage
+  #endif
+  {
+    private static readonly pb::MessageParser<TroopQueueInfo> _parser = new pb::MessageParser<TroopQueueInfo>(() => new TroopQueueInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pb::MessageParser<TroopQueueInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[1]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TroopQueueInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TroopQueueInfo(TroopQueueInfo other) : this() {
+      troops_ = other.troops_.Clone();
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public TroopQueueInfo Clone() {
+      return new TroopQueueInfo(this);
+    }
+
+    /// <summary>Field number for the "troops" field.</summary>
+    public const int TroopsFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::Mapsvr.TroopInfo> _repeated_troops_codec
+        = pb::FieldCodec.ForMessage(10, global::Mapsvr.TroopInfo.Parser);
+    private readonly pbc::RepeatedField<global::Mapsvr.TroopInfo> troops_ = new pbc::RepeatedField<global::Mapsvr.TroopInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public pbc::RepeatedField<global::Mapsvr.TroopInfo> Troops {
+      get { return troops_; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override bool Equals(object other) {
+      return Equals(other as TroopQueueInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool Equals(TroopQueueInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!troops_.Equals(other.troops_)) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= troops_.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void WriteTo(pb::CodedOutputStream output) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      output.WriteRawMessage(this);
+    #else
+      troops_.WriteTo(output, _repeated_troops_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      troops_.WriteTo(ref output, _repeated_troops_codec);
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(ref output);
+      }
+    }
+    #endif
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CalculateSize() {
+      int size = 0;
+      size += troops_.CalculateSize(_repeated_troops_codec);
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(TroopQueueInfo other) {
+      if (other == null) {
+        return;
+      }
+      troops_.Add(other.troops_);
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public void MergeFrom(pb::CodedInputStream input) {
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+      input.ReadRawMessage(this);
+    #else
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            troops_.AddEntriesFrom(input, _repeated_troops_codec);
+            break;
+          }
+        }
+      }
+    #endif
+    }
+
+    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+      if ((tag & 7) == 4) {
+        // Abort on any end group tag.
+        return;
+      }
+      switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
+            break;
+          case 10: {
+            troops_.AddEntriesFrom(ref input, _repeated_troops_codec);
+            break;
+          }
+        }
+      }
+    }
+    #endif
+
   }
 
-  #endregion
-
-  #region Messages
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class BattleRequest : pb::IMessage<BattleRequest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
@@ -129,7 +496,7 @@ namespace Mapsvr {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -149,6 +516,8 @@ namespace Mapsvr {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BattleRequest(BattleRequest other) : this() {
+      attacker_ = other.attacker_ != null ? other.attacker_.Clone() : null;
+      defender_ = other.defender_ != null ? other.defender_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -156,6 +525,36 @@ namespace Mapsvr {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BattleRequest Clone() {
       return new BattleRequest(this);
+    }
+
+    /// <summary>Field number for the "attacker" field.</summary>
+    public const int AttackerFieldNumber = 1;
+    private global::Mapsvr.TroopQueueInfo attacker_;
+    /// <summary>
+    /// 进攻方部队
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Mapsvr.TroopQueueInfo Attacker {
+      get { return attacker_; }
+      set {
+        attacker_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "defender" field.</summary>
+    public const int DefenderFieldNumber = 2;
+    private global::Mapsvr.TroopQueueInfo defender_;
+    /// <summary>
+    /// 防守方部队
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Mapsvr.TroopQueueInfo Defender {
+      get { return defender_; }
+      set {
+        defender_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -173,6 +572,8 @@ namespace Mapsvr {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(Attacker, other.Attacker)) return false;
+      if (!object.Equals(Defender, other.Defender)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -180,6 +581,8 @@ namespace Mapsvr {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (attacker_ != null) hash ^= Attacker.GetHashCode();
+      if (defender_ != null) hash ^= Defender.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -198,6 +601,14 @@ namespace Mapsvr {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (attacker_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Attacker);
+      }
+      if (defender_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Defender);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -208,6 +619,14 @@ namespace Mapsvr {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (attacker_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Attacker);
+      }
+      if (defender_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Defender);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -218,6 +637,12 @@ namespace Mapsvr {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (attacker_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Attacker);
+      }
+      if (defender_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Defender);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -229,6 +654,18 @@ namespace Mapsvr {
     public void MergeFrom(BattleRequest other) {
       if (other == null) {
         return;
+      }
+      if (other.attacker_ != null) {
+        if (attacker_ == null) {
+          Attacker = new global::Mapsvr.TroopQueueInfo();
+        }
+        Attacker.MergeFrom(other.Attacker);
+      }
+      if (other.defender_ != null) {
+        if (defender_ == null) {
+          Defender = new global::Mapsvr.TroopQueueInfo();
+        }
+        Defender.MergeFrom(other.Defender);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -249,6 +686,20 @@ namespace Mapsvr {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            if (attacker_ == null) {
+              Attacker = new global::Mapsvr.TroopQueueInfo();
+            }
+            input.ReadMessage(Attacker);
+            break;
+          }
+          case 18: {
+            if (defender_ == null) {
+              Defender = new global::Mapsvr.TroopQueueInfo();
+            }
+            input.ReadMessage(Defender);
+            break;
+          }
         }
       }
     #endif
@@ -268,6 +719,20 @@ namespace Mapsvr {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 10: {
+            if (attacker_ == null) {
+              Attacker = new global::Mapsvr.TroopQueueInfo();
+            }
+            input.ReadMessage(Attacker);
+            break;
+          }
+          case 18: {
+            if (defender_ == null) {
+              Defender = new global::Mapsvr.TroopQueueInfo();
+            }
+            input.ReadMessage(Defender);
+            break;
+          }
         }
       }
     }
@@ -276,7 +741,7 @@ namespace Mapsvr {
   }
 
   /// <summary>
-  /// 
+  /// FighterInfo 单个战斗方（攻方/守方）的战斗结果信息。
   /// </summary>
   [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
   public sealed partial class FighterInfo : pb::IMessage<FighterInfo>
@@ -293,7 +758,7 @@ namespace Mapsvr {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -314,12 +779,17 @@ namespace Mapsvr {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public FighterInfo(FighterInfo other) : this() {
       playerId_ = other.playerId_;
+      level_ = other.level_;
+      characterName_ = other.characterName_;
       x_ = other.x_;
       y_ = other.y_;
       soldierCount_ = other.soldierCount_;
-      deathCount_ = other.deathCount_;
-      liveCount_ = other.liveCount_;
+      survived_ = other.survived_;
+      lightWound_ = other.lightWound_;
+      wounded_ = other.wounded_;
+      heavyWound_ = other.heavyWound_;
       troopKillCountMap_ = other.troopKillCountMap_.Clone();
+      time_ = other.time_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -333,7 +803,7 @@ namespace Mapsvr {
     public const int PlayerIdFieldNumber = 1;
     private string playerId_ = "";
     /// <summary>
-    ///name ?
+    /// 玩家 ID（怪物/NPC 可约定为系统标识）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -344,11 +814,41 @@ namespace Mapsvr {
       }
     }
 
+    /// <summary>Field number for the "level" field.</summary>
+    public const int LevelFieldNumber = 2;
+    private int level_;
+    /// <summary>
+    /// 等级（玩家/怪物）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Level {
+      get { return level_; }
+      set {
+        level_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "character_name" field.</summary>
+    public const int CharacterNameFieldNumber = 3;
+    private string characterName_ = "";
+    /// <summary>
+    /// 名称（玩家/怪物）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string CharacterName {
+      get { return characterName_; }
+      set {
+        characterName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "x" field.</summary>
-    public const int XFieldNumber = 2;
+    public const int XFieldNumber = 4;
     private int x_;
     /// <summary>
-    /// X坐标
+    /// 该战斗方所属位置的地图 X 坐标（攻方为出发城池，守方为目标位置）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -360,10 +860,10 @@ namespace Mapsvr {
     }
 
     /// <summary>Field number for the "y" field.</summary>
-    public const int YFieldNumber = 3;
+    public const int YFieldNumber = 5;
     private int y_;
     /// <summary>
-    /// Y坐标
+    /// 该战斗方所属位置的地图 Y 坐标（攻方为出发城池，守方为目标位置）
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -375,8 +875,11 @@ namespace Mapsvr {
     }
 
     /// <summary>Field number for the "soldier_count" field.</summary>
-    public const int SoldierCountFieldNumber = 4;
+    public const int SoldierCountFieldNumber = 6;
     private int soldierCount_;
+    /// <summary>
+    /// 部队总数（参战人数）
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int SoldierCount {
@@ -386,42 +889,93 @@ namespace Mapsvr {
       }
     }
 
-    /// <summary>Field number for the "death_count" field.</summary>
-    public const int DeathCountFieldNumber = 5;
-    private int deathCount_;
+    /// <summary>Field number for the "survived" field.</summary>
+    public const int SurvivedFieldNumber = 7;
+    private int survived_;
+    /// <summary>
+    /// 生还
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int DeathCount {
-      get { return deathCount_; }
+    public int Survived {
+      get { return survived_; }
       set {
-        deathCount_ = value;
+        survived_ = value;
       }
     }
 
-    /// <summary>Field number for the "live_count" field.</summary>
-    public const int LiveCountFieldNumber = 6;
-    private int liveCount_;
+    /// <summary>Field number for the "light_wound" field.</summary>
+    public const int LightWoundFieldNumber = 8;
+    private int lightWound_;
+    /// <summary>
+    /// 轻伤
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int LiveCount {
-      get { return liveCount_; }
+    public int LightWound {
+      get { return lightWound_; }
       set {
-        liveCount_ = value;
+        lightWound_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "wounded" field.</summary>
+    public const int WoundedFieldNumber = 9;
+    private int wounded_;
+    /// <summary>
+    /// 受伤（医院可收治）
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int Wounded {
+      get { return wounded_; }
+      set {
+        wounded_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "heavy_wound" field.</summary>
+    public const int HeavyWoundFieldNumber = 10;
+    private int heavyWound_;
+    /// <summary>
+    /// 重伤
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int HeavyWound {
+      get { return heavyWound_; }
+      set {
+        heavyWound_ = value;
       }
     }
 
     /// <summary>Field number for the "troop_kill_count_map" field.</summary>
-    public const int TroopKillCountMapFieldNumber = 7;
+    public const int TroopKillCountMapFieldNumber = 11;
     private static readonly pbc::MapField<int, int>.Codec _map_troopKillCountMap_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8, 0), pb::FieldCodec.ForInt32(16, 0), 58);
+        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8, 0), pb::FieldCodec.ForInt32(16, 0), 90);
     private readonly pbc::MapField<int, int> troopKillCountMap_ = new pbc::MapField<int, int>();
     /// <summary>
-    ///  
+    /// 击杀统计：key=兵种(或兵种+等级约定)，value=击杀数量
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public pbc::MapField<int, int> TroopKillCountMap {
       get { return troopKillCountMap_; }
+    }
+
+    /// <summary>Field number for the "time" field.</summary>
+    public const int TimeFieldNumber = 12;
+    private long time_;
+    /// <summary>
+    /// 时间
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long Time {
+      get { return time_; }
+      set {
+        time_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -440,12 +994,17 @@ namespace Mapsvr {
         return true;
       }
       if (PlayerId != other.PlayerId) return false;
+      if (Level != other.Level) return false;
+      if (CharacterName != other.CharacterName) return false;
       if (X != other.X) return false;
       if (Y != other.Y) return false;
       if (SoldierCount != other.SoldierCount) return false;
-      if (DeathCount != other.DeathCount) return false;
-      if (LiveCount != other.LiveCount) return false;
+      if (Survived != other.Survived) return false;
+      if (LightWound != other.LightWound) return false;
+      if (Wounded != other.Wounded) return false;
+      if (HeavyWound != other.HeavyWound) return false;
       if (!TroopKillCountMap.Equals(other.TroopKillCountMap)) return false;
+      if (Time != other.Time) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -454,12 +1013,17 @@ namespace Mapsvr {
     public override int GetHashCode() {
       int hash = 1;
       if (PlayerId.Length != 0) hash ^= PlayerId.GetHashCode();
+      if (Level != 0) hash ^= Level.GetHashCode();
+      if (CharacterName.Length != 0) hash ^= CharacterName.GetHashCode();
       if (X != 0) hash ^= X.GetHashCode();
       if (Y != 0) hash ^= Y.GetHashCode();
       if (SoldierCount != 0) hash ^= SoldierCount.GetHashCode();
-      if (DeathCount != 0) hash ^= DeathCount.GetHashCode();
-      if (LiveCount != 0) hash ^= LiveCount.GetHashCode();
+      if (Survived != 0) hash ^= Survived.GetHashCode();
+      if (LightWound != 0) hash ^= LightWound.GetHashCode();
+      if (Wounded != 0) hash ^= Wounded.GetHashCode();
+      if (HeavyWound != 0) hash ^= HeavyWound.GetHashCode();
       hash ^= TroopKillCountMap.GetHashCode();
+      if (Time != 0L) hash ^= Time.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -482,27 +1046,47 @@ namespace Mapsvr {
         output.WriteRawTag(10);
         output.WriteString(PlayerId);
       }
-      if (X != 0) {
+      if (Level != 0) {
         output.WriteRawTag(16);
+        output.WriteInt32(Level);
+      }
+      if (CharacterName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(CharacterName);
+      }
+      if (X != 0) {
+        output.WriteRawTag(32);
         output.WriteInt32(X);
       }
       if (Y != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(40);
         output.WriteInt32(Y);
       }
       if (SoldierCount != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(48);
         output.WriteInt32(SoldierCount);
       }
-      if (DeathCount != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(DeathCount);
+      if (Survived != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Survived);
       }
-      if (LiveCount != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(LiveCount);
+      if (LightWound != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(LightWound);
+      }
+      if (Wounded != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Wounded);
+      }
+      if (HeavyWound != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(HeavyWound);
       }
       troopKillCountMap_.WriteTo(output, _map_troopKillCountMap_codec);
+      if (Time != 0L) {
+        output.WriteRawTag(96);
+        output.WriteInt64(Time);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -517,27 +1101,47 @@ namespace Mapsvr {
         output.WriteRawTag(10);
         output.WriteString(PlayerId);
       }
-      if (X != 0) {
+      if (Level != 0) {
         output.WriteRawTag(16);
+        output.WriteInt32(Level);
+      }
+      if (CharacterName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(CharacterName);
+      }
+      if (X != 0) {
+        output.WriteRawTag(32);
         output.WriteInt32(X);
       }
       if (Y != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(40);
         output.WriteInt32(Y);
       }
       if (SoldierCount != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(48);
         output.WriteInt32(SoldierCount);
       }
-      if (DeathCount != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(DeathCount);
+      if (Survived != 0) {
+        output.WriteRawTag(56);
+        output.WriteInt32(Survived);
       }
-      if (LiveCount != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(LiveCount);
+      if (LightWound != 0) {
+        output.WriteRawTag(64);
+        output.WriteInt32(LightWound);
+      }
+      if (Wounded != 0) {
+        output.WriteRawTag(72);
+        output.WriteInt32(Wounded);
+      }
+      if (HeavyWound != 0) {
+        output.WriteRawTag(80);
+        output.WriteInt32(HeavyWound);
       }
       troopKillCountMap_.WriteTo(ref output, _map_troopKillCountMap_codec);
+      if (Time != 0L) {
+        output.WriteRawTag(96);
+        output.WriteInt64(Time);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -551,6 +1155,12 @@ namespace Mapsvr {
       if (PlayerId.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerId);
       }
+      if (Level != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Level);
+      }
+      if (CharacterName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CharacterName);
+      }
       if (X != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
       }
@@ -560,13 +1170,22 @@ namespace Mapsvr {
       if (SoldierCount != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(SoldierCount);
       }
-      if (DeathCount != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(DeathCount);
+      if (Survived != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Survived);
       }
-      if (LiveCount != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LiveCount);
+      if (LightWound != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(LightWound);
+      }
+      if (Wounded != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Wounded);
+      }
+      if (HeavyWound != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(HeavyWound);
       }
       size += troopKillCountMap_.CalculateSize(_map_troopKillCountMap_codec);
+      if (Time != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Time);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -582,6 +1201,12 @@ namespace Mapsvr {
       if (other.PlayerId.Length != 0) {
         PlayerId = other.PlayerId;
       }
+      if (other.Level != 0) {
+        Level = other.Level;
+      }
+      if (other.CharacterName.Length != 0) {
+        CharacterName = other.CharacterName;
+      }
       if (other.X != 0) {
         X = other.X;
       }
@@ -591,13 +1216,22 @@ namespace Mapsvr {
       if (other.SoldierCount != 0) {
         SoldierCount = other.SoldierCount;
       }
-      if (other.DeathCount != 0) {
-        DeathCount = other.DeathCount;
+      if (other.Survived != 0) {
+        Survived = other.Survived;
       }
-      if (other.LiveCount != 0) {
-        LiveCount = other.LiveCount;
+      if (other.LightWound != 0) {
+        LightWound = other.LightWound;
+      }
+      if (other.Wounded != 0) {
+        Wounded = other.Wounded;
+      }
+      if (other.HeavyWound != 0) {
+        HeavyWound = other.HeavyWound;
       }
       troopKillCountMap_.MergeFrom(other.troopKillCountMap_);
+      if (other.Time != 0L) {
+        Time = other.Time;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -622,27 +1256,47 @@ namespace Mapsvr {
             break;
           }
           case 16: {
-            X = input.ReadInt32();
+            Level = input.ReadInt32();
             break;
           }
-          case 24: {
-            Y = input.ReadInt32();
+          case 26: {
+            CharacterName = input.ReadString();
             break;
           }
           case 32: {
-            SoldierCount = input.ReadInt32();
+            X = input.ReadInt32();
             break;
           }
           case 40: {
-            DeathCount = input.ReadInt32();
+            Y = input.ReadInt32();
             break;
           }
           case 48: {
-            LiveCount = input.ReadInt32();
+            SoldierCount = input.ReadInt32();
             break;
           }
-          case 58: {
+          case 56: {
+            Survived = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            LightWound = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            Wounded = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            HeavyWound = input.ReadInt32();
+            break;
+          }
+          case 90: {
             troopKillCountMap_.AddEntriesFrom(input, _map_troopKillCountMap_codec);
+            break;
+          }
+          case 96: {
+            Time = input.ReadInt64();
             break;
           }
         }
@@ -669,27 +1323,47 @@ namespace Mapsvr {
             break;
           }
           case 16: {
-            X = input.ReadInt32();
+            Level = input.ReadInt32();
             break;
           }
-          case 24: {
-            Y = input.ReadInt32();
+          case 26: {
+            CharacterName = input.ReadString();
             break;
           }
           case 32: {
-            SoldierCount = input.ReadInt32();
+            X = input.ReadInt32();
             break;
           }
           case 40: {
-            DeathCount = input.ReadInt32();
+            Y = input.ReadInt32();
             break;
           }
           case 48: {
-            LiveCount = input.ReadInt32();
+            SoldierCount = input.ReadInt32();
             break;
           }
-          case 58: {
+          case 56: {
+            Survived = input.ReadInt32();
+            break;
+          }
+          case 64: {
+            LightWound = input.ReadInt32();
+            break;
+          }
+          case 72: {
+            Wounded = input.ReadInt32();
+            break;
+          }
+          case 80: {
+            HeavyWound = input.ReadInt32();
+            break;
+          }
+          case 90: {
             troopKillCountMap_.AddEntriesFrom(ref input, _map_troopKillCountMap_codec);
+            break;
+          }
+          case 96: {
+            Time = input.ReadInt64();
             break;
           }
         }
@@ -714,7 +1388,7 @@ namespace Mapsvr {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -735,6 +1409,7 @@ namespace Mapsvr {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public BattleResponse(BattleResponse other) : this() {
       resp_ = other.resp_ != null ? other.resp_.Clone() : null;
+      isWin_ = other.isWin_;
       attacker_ = other.attacker_ != null ? other.attacker_.Clone() : null;
       defencer_ = other.defencer_ != null ? other.defencer_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -758,9 +1433,27 @@ namespace Mapsvr {
       }
     }
 
+    /// <summary>Field number for the "is_win" field.</summary>
+    public const int IsWinFieldNumber = 2;
+    private bool isWin_;
+    /// <summary>
+    /// 攻击方是否胜利
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public bool IsWin {
+      get { return isWin_; }
+      set {
+        isWin_ = value;
+      }
+    }
+
     /// <summary>Field number for the "attacker" field.</summary>
-    public const int AttackerFieldNumber = 2;
+    public const int AttackerFieldNumber = 3;
     private global::Mapsvr.FighterInfo attacker_;
+    /// <summary>
+    /// 攻方战报详情
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Mapsvr.FighterInfo Attacker {
@@ -771,8 +1464,11 @@ namespace Mapsvr {
     }
 
     /// <summary>Field number for the "defencer" field.</summary>
-    public const int DefencerFieldNumber = 3;
+    public const int DefencerFieldNumber = 4;
     private global::Mapsvr.FighterInfo defencer_;
+    /// <summary>
+    /// 防方战报详情
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::Mapsvr.FighterInfo Defencer {
@@ -798,6 +1494,7 @@ namespace Mapsvr {
         return true;
       }
       if (!object.Equals(Resp, other.Resp)) return false;
+      if (IsWin != other.IsWin) return false;
       if (!object.Equals(Attacker, other.Attacker)) return false;
       if (!object.Equals(Defencer, other.Defencer)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -808,6 +1505,7 @@ namespace Mapsvr {
     public override int GetHashCode() {
       int hash = 1;
       if (resp_ != null) hash ^= Resp.GetHashCode();
+      if (IsWin != false) hash ^= IsWin.GetHashCode();
       if (attacker_ != null) hash ^= Attacker.GetHashCode();
       if (defencer_ != null) hash ^= Defencer.GetHashCode();
       if (_unknownFields != null) {
@@ -832,12 +1530,16 @@ namespace Mapsvr {
         output.WriteRawTag(10);
         output.WriteMessage(Resp);
       }
+      if (IsWin != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsWin);
+      }
       if (attacker_ != null) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteMessage(Attacker);
       }
       if (defencer_ != null) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteMessage(Defencer);
       }
       if (_unknownFields != null) {
@@ -854,12 +1556,16 @@ namespace Mapsvr {
         output.WriteRawTag(10);
         output.WriteMessage(Resp);
       }
+      if (IsWin != false) {
+        output.WriteRawTag(16);
+        output.WriteBool(IsWin);
+      }
       if (attacker_ != null) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteMessage(Attacker);
       }
       if (defencer_ != null) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteMessage(Defencer);
       }
       if (_unknownFields != null) {
@@ -874,6 +1580,9 @@ namespace Mapsvr {
       int size = 0;
       if (resp_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Resp);
+      }
+      if (IsWin != false) {
+        size += 1 + 1;
       }
       if (attacker_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Attacker);
@@ -898,1080 +1607,6 @@ namespace Mapsvr {
           Resp = new global::PitayaGame.Types.CommonResp();
         }
         Resp.MergeFrom(other.Resp);
-      }
-      if (other.attacker_ != null) {
-        if (attacker_ == null) {
-          Attacker = new global::Mapsvr.FighterInfo();
-        }
-        Attacker.MergeFrom(other.Attacker);
-      }
-      if (other.defencer_ != null) {
-        if (defencer_ == null) {
-          Defencer = new global::Mapsvr.FighterInfo();
-        }
-        Defencer.MergeFrom(other.Defencer);
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (resp_ == null) {
-              Resp = new global::PitayaGame.Types.CommonResp();
-            }
-            input.ReadMessage(Resp);
-            break;
-          }
-          case 18: {
-            if (attacker_ == null) {
-              Attacker = new global::Mapsvr.FighterInfo();
-            }
-            input.ReadMessage(Attacker);
-            break;
-          }
-          case 26: {
-            if (defencer_ == null) {
-              Defencer = new global::Mapsvr.FighterInfo();
-            }
-            input.ReadMessage(Defencer);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            if (resp_ == null) {
-              Resp = new global::PitayaGame.Types.CommonResp();
-            }
-            input.ReadMessage(Resp);
-            break;
-          }
-          case 18: {
-            if (attacker_ == null) {
-              Attacker = new global::Mapsvr.FighterInfo();
-            }
-            input.ReadMessage(Attacker);
-            break;
-          }
-          case 26: {
-            if (defencer_ == null) {
-              Defencer = new global::Mapsvr.FighterInfo();
-            }
-            input.ReadMessage(Defencer);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class TroopLevels : pb::IMessage<TroopLevels>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<TroopLevels> _parser = new pb::MessageParser<TroopLevels>(() => new TroopLevels());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<TroopLevels> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[3]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public TroopLevels() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public TroopLevels(TroopLevels other) : this() {
-      levelCounts_ = other.levelCounts_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public TroopLevels Clone() {
-      return new TroopLevels(this);
-    }
-
-    /// <summary>Field number for the "level_counts" field.</summary>
-    public const int LevelCountsFieldNumber = 1;
-    private static readonly pbc::MapField<int, int>.Codec _map_levelCounts_codec
-        = new pbc::MapField<int, int>.Codec(pb::FieldCodec.ForInt32(8, 0), pb::FieldCodec.ForInt32(16, 0), 10);
-    private readonly pbc::MapField<int, int> levelCounts_ = new pbc::MapField<int, int>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<int, int> LevelCounts {
-      get { return levelCounts_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as TroopLevels);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(TroopLevels other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!LevelCounts.Equals(other.LevelCounts)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= LevelCounts.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      levelCounts_.WriteTo(output, _map_levelCounts_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      levelCounts_.WriteTo(ref output, _map_levelCounts_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      size += levelCounts_.CalculateSize(_map_levelCounts_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(TroopLevels other) {
-      if (other == null) {
-        return;
-      }
-      levelCounts_.MergeFrom(other.levelCounts_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            levelCounts_.AddEntriesFrom(input, _map_levelCounts_codec);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            levelCounts_.AddEntriesFrom(ref input, _map_levelCounts_codec);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class StartMarchRequest : pb::IMessage<StartMarchRequest>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<StartMarchRequest> _parser = new pb::MessageParser<StartMarchRequest>(() => new StartMarchRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<StartMarchRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public StartMarchRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public StartMarchRequest(StartMarchRequest other) : this() {
-      x_ = other.x_;
-      y_ = other.y_;
-      fromX_ = other.fromX_;
-      fromY_ = other.fromY_;
-      troops_ = other.troops_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public StartMarchRequest Clone() {
-      return new StartMarchRequest(this);
-    }
-
-    /// <summary>Field number for the "x" field.</summary>
-    public const int XFieldNumber = 1;
-    private int x_;
-    /// <summary>
-    /// X坐标
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int X {
-      get { return x_; }
-      set {
-        x_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "y" field.</summary>
-    public const int YFieldNumber = 2;
-    private int y_;
-    /// <summary>
-    /// Y坐标
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Y {
-      get { return y_; }
-      set {
-        y_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "from_x" field.</summary>
-    public const int FromXFieldNumber = 3;
-    private int fromX_;
-    /// <summary>
-    ///临时加的出发坐标 未来这个值应该从服务器读取
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int FromX {
-      get { return fromX_; }
-      set {
-        fromX_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "from_y" field.</summary>
-    public const int FromYFieldNumber = 4;
-    private int fromY_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int FromY {
-      get { return fromY_; }
-      set {
-        fromY_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "troops" field.</summary>
-    public const int TroopsFieldNumber = 5;
-    private static readonly pbc::MapField<int, global::Mapsvr.TroopLevels>.Codec _map_troops_codec
-        = new pbc::MapField<int, global::Mapsvr.TroopLevels>.Codec(pb::FieldCodec.ForInt32(8, 0), pb::FieldCodec.ForMessage(18, global::Mapsvr.TroopLevels.Parser), 42);
-    private readonly pbc::MapField<int, global::Mapsvr.TroopLevels> troops_ = new pbc::MapField<int, global::Mapsvr.TroopLevels>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<int, global::Mapsvr.TroopLevels> Troops {
-      get { return troops_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as StartMarchRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(StartMarchRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (X != other.X) return false;
-      if (Y != other.Y) return false;
-      if (FromX != other.FromX) return false;
-      if (FromY != other.FromY) return false;
-      if (!Troops.Equals(other.Troops)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (X != 0) hash ^= X.GetHashCode();
-      if (Y != 0) hash ^= Y.GetHashCode();
-      if (FromX != 0) hash ^= FromX.GetHashCode();
-      if (FromY != 0) hash ^= FromY.GetHashCode();
-      hash ^= Troops.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (X != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(X);
-      }
-      if (Y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Y);
-      }
-      if (FromX != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(FromX);
-      }
-      if (FromY != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(FromY);
-      }
-      troops_.WriteTo(output, _map_troops_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (X != 0) {
-        output.WriteRawTag(8);
-        output.WriteInt32(X);
-      }
-      if (Y != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Y);
-      }
-      if (FromX != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(FromX);
-      }
-      if (FromY != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(FromY);
-      }
-      troops_.WriteTo(ref output, _map_troops_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (X != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
-      }
-      if (Y != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Y);
-      }
-      if (FromX != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FromX);
-      }
-      if (FromY != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FromY);
-      }
-      size += troops_.CalculateSize(_map_troops_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(StartMarchRequest other) {
-      if (other == null) {
-        return;
-      }
-      if (other.X != 0) {
-        X = other.X;
-      }
-      if (other.Y != 0) {
-        Y = other.Y;
-      }
-      if (other.FromX != 0) {
-        FromX = other.FromX;
-      }
-      if (other.FromY != 0) {
-        FromY = other.FromY;
-      }
-      troops_.MergeFrom(other.troops_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            X = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            Y = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            FromX = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            FromY = input.ReadInt32();
-            break;
-          }
-          case 42: {
-            troops_.AddEntriesFrom(input, _map_troops_codec);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            X = input.ReadInt32();
-            break;
-          }
-          case 16: {
-            Y = input.ReadInt32();
-            break;
-          }
-          case 24: {
-            FromX = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            FromY = input.ReadInt32();
-            break;
-          }
-          case 42: {
-            troops_.AddEntriesFrom(ref input, _map_troops_codec);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class StartMarchResponse : pb::IMessage<StartMarchResponse>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<StartMarchResponse> _parser = new pb::MessageParser<StartMarchResponse>(() => new StartMarchResponse());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<StartMarchResponse> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[5]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public StartMarchResponse() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public StartMarchResponse(StartMarchResponse other) : this() {
-      resp_ = other.resp_ != null ? other.resp_.Clone() : null;
-      marchDuration_ = other.marchDuration_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public StartMarchResponse Clone() {
-      return new StartMarchResponse(this);
-    }
-
-    /// <summary>Field number for the "resp" field.</summary>
-    public const int RespFieldNumber = 1;
-    private global::PitayaGame.Types.CommonResp resp_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::PitayaGame.Types.CommonResp Resp {
-      get { return resp_; }
-      set {
-        resp_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "march_duration" field.</summary>
-    public const int MarchDurationFieldNumber = 2;
-    private int marchDuration_;
-    /// <summary>
-    ///行军所需时长（秒）
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int MarchDuration {
-      get { return marchDuration_; }
-      set {
-        marchDuration_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as StartMarchResponse);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(StartMarchResponse other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (!object.Equals(Resp, other.Resp)) return false;
-      if (MarchDuration != other.MarchDuration) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (resp_ != null) hash ^= Resp.GetHashCode();
-      if (MarchDuration != 0) hash ^= MarchDuration.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (resp_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Resp);
-      }
-      if (MarchDuration != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(MarchDuration);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (resp_ != null) {
-        output.WriteRawTag(10);
-        output.WriteMessage(Resp);
-      }
-      if (MarchDuration != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(MarchDuration);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (resp_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Resp);
-      }
-      if (MarchDuration != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MarchDuration);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(StartMarchResponse other) {
-      if (other == null) {
-        return;
-      }
-      if (other.resp_ != null) {
-        if (resp_ == null) {
-          Resp = new global::PitayaGame.Types.CommonResp();
-        }
-        Resp.MergeFrom(other.Resp);
-      }
-      if (other.MarchDuration != 0) {
-        MarchDuration = other.MarchDuration;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            if (resp_ == null) {
-              Resp = new global::PitayaGame.Types.CommonResp();
-            }
-            input.ReadMessage(Resp);
-            break;
-          }
-          case 16: {
-            MarchDuration = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            if (resp_ == null) {
-              Resp = new global::PitayaGame.Types.CommonResp();
-            }
-            input.ReadMessage(Resp);
-            break;
-          }
-          case 16: {
-            MarchDuration = input.ReadInt32();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class MarchBattleNotify : pb::IMessage<MarchBattleNotify>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<MarchBattleNotify> _parser = new pb::MessageParser<MarchBattleNotify>(() => new MarchBattleNotify());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<MarchBattleNotify> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchBattleNotify() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchBattleNotify(MarchBattleNotify other) : this() {
-      isWin_ = other.isWin_;
-      attacker_ = other.attacker_ != null ? other.attacker_.Clone() : null;
-      defencer_ = other.defencer_ != null ? other.defencer_.Clone() : null;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchBattleNotify Clone() {
-      return new MarchBattleNotify(this);
-    }
-
-    /// <summary>Field number for the "is_win" field.</summary>
-    public const int IsWinFieldNumber = 1;
-    private bool isWin_;
-    /// <summary>
-    /// 是否胜利
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool IsWin {
-      get { return isWin_; }
-      set {
-        isWin_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "attacker" field.</summary>
-    public const int AttackerFieldNumber = 2;
-    private global::Mapsvr.FighterInfo attacker_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Mapsvr.FighterInfo Attacker {
-      get { return attacker_; }
-      set {
-        attacker_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "defencer" field.</summary>
-    public const int DefencerFieldNumber = 3;
-    private global::Mapsvr.FighterInfo defencer_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Mapsvr.FighterInfo Defencer {
-      get { return defencer_; }
-      set {
-        defencer_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as MarchBattleNotify);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(MarchBattleNotify other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (IsWin != other.IsWin) return false;
-      if (!object.Equals(Attacker, other.Attacker)) return false;
-      if (!object.Equals(Defencer, other.Defencer)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (IsWin != false) hash ^= IsWin.GetHashCode();
-      if (attacker_ != null) hash ^= Attacker.GetHashCode();
-      if (defencer_ != null) hash ^= Defencer.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (IsWin != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(IsWin);
-      }
-      if (attacker_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Attacker);
-      }
-      if (defencer_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(Defencer);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (IsWin != false) {
-        output.WriteRawTag(8);
-        output.WriteBool(IsWin);
-      }
-      if (attacker_ != null) {
-        output.WriteRawTag(18);
-        output.WriteMessage(Attacker);
-      }
-      if (defencer_ != null) {
-        output.WriteRawTag(26);
-        output.WriteMessage(Defencer);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (IsWin != false) {
-        size += 1 + 1;
-      }
-      if (attacker_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Attacker);
-      }
-      if (defencer_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Defencer);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(MarchBattleNotify other) {
-      if (other == null) {
-        return;
       }
       if (other.IsWin != false) {
         IsWin = other.IsWin;
@@ -2007,18 +1642,25 @@ namespace Mapsvr {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
+          case 10: {
+            if (resp_ == null) {
+              Resp = new global::PitayaGame.Types.CommonResp();
+            }
+            input.ReadMessage(Resp);
+            break;
+          }
+          case 16: {
             IsWin = input.ReadBool();
             break;
           }
-          case 18: {
+          case 26: {
             if (attacker_ == null) {
               Attacker = new global::Mapsvr.FighterInfo();
             }
             input.ReadMessage(Attacker);
             break;
           }
-          case 26: {
+          case 34: {
             if (defencer_ == null) {
               Defencer = new global::Mapsvr.FighterInfo();
             }
@@ -2044,1151 +1686,29 @@ namespace Mapsvr {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
+          case 10: {
+            if (resp_ == null) {
+              Resp = new global::PitayaGame.Types.CommonResp();
+            }
+            input.ReadMessage(Resp);
+            break;
+          }
+          case 16: {
             IsWin = input.ReadBool();
             break;
           }
-          case 18: {
+          case 26: {
             if (attacker_ == null) {
               Attacker = new global::Mapsvr.FighterInfo();
             }
             input.ReadMessage(Attacker);
             break;
           }
-          case 26: {
+          case 34: {
             if (defencer_ == null) {
               Defencer = new global::Mapsvr.FighterInfo();
             }
             input.ReadMessage(Defencer);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  /// <summary>
-  /// 
-  /// </summary>
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class MarchInfo : pb::IMessage<MarchInfo>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<MarchInfo> _parser = new pb::MessageParser<MarchInfo>(() => new MarchInfo());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<MarchInfo> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[7]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchInfo() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchInfo(MarchInfo other) : this() {
-      marchId_ = other.marchId_;
-      playerId_ = other.playerId_;
-      toX_ = other.toX_;
-      toY_ = other.toY_;
-      fromX_ = other.fromX_;
-      fromY_ = other.fromY_;
-      marchDuration_ = other.marchDuration_;
-      startAt_ = other.startAt_;
-      arriveAt_ = other.arriveAt_;
-      marchType_ = other.marchType_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchInfo Clone() {
-      return new MarchInfo(this);
-    }
-
-    /// <summary>Field number for the "march_id" field.</summary>
-    public const int MarchIdFieldNumber = 1;
-    private long marchId_;
-    /// <summary>
-    ///唯一id
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long MarchId {
-      get { return marchId_; }
-      set {
-        marchId_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "player_id" field.</summary>
-    public const int PlayerIdFieldNumber = 2;
-    private string playerId_ = "";
-    /// <summary>
-    ///name 
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string PlayerId {
-      get { return playerId_; }
-      set {
-        playerId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "to_x" field.</summary>
-    public const int ToXFieldNumber = 3;
-    private int toX_;
-    /// <summary>
-    /// X坐标
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int ToX {
-      get { return toX_; }
-      set {
-        toX_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "to_y" field.</summary>
-    public const int ToYFieldNumber = 4;
-    private int toY_;
-    /// <summary>
-    /// Y坐标
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int ToY {
-      get { return toY_; }
-      set {
-        toY_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "from_x" field.</summary>
-    public const int FromXFieldNumber = 5;
-    private int fromX_;
-    /// <summary>
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int FromX {
-      get { return fromX_; }
-      set {
-        fromX_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "from_y" field.</summary>
-    public const int FromYFieldNumber = 6;
-    private int fromY_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int FromY {
-      get { return fromY_; }
-      set {
-        fromY_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "march_duration" field.</summary>
-    public const int MarchDurationFieldNumber = 7;
-    private int marchDuration_;
-    /// <summary>
-    ///行军所需时长（秒）
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int MarchDuration {
-      get { return marchDuration_; }
-      set {
-        marchDuration_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "start_at" field.</summary>
-    public const int StartAtFieldNumber = 8;
-    private long startAt_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long StartAt {
-      get { return startAt_; }
-      set {
-        startAt_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "arrive_at" field.</summary>
-    public const int ArriveAtFieldNumber = 9;
-    private long arriveAt_;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long ArriveAt {
-      get { return arriveAt_; }
-      set {
-        arriveAt_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "march_type" field.</summary>
-    public const int MarchTypeFieldNumber = 10;
-    private global::Mapsvr.MarchType marchType_ = global::Mapsvr.MarchType.Unspecified;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Mapsvr.MarchType MarchType {
-      get { return marchType_; }
-      set {
-        marchType_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as MarchInfo);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(MarchInfo other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (MarchId != other.MarchId) return false;
-      if (PlayerId != other.PlayerId) return false;
-      if (ToX != other.ToX) return false;
-      if (ToY != other.ToY) return false;
-      if (FromX != other.FromX) return false;
-      if (FromY != other.FromY) return false;
-      if (MarchDuration != other.MarchDuration) return false;
-      if (StartAt != other.StartAt) return false;
-      if (ArriveAt != other.ArriveAt) return false;
-      if (MarchType != other.MarchType) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (MarchId != 0L) hash ^= MarchId.GetHashCode();
-      if (PlayerId.Length != 0) hash ^= PlayerId.GetHashCode();
-      if (ToX != 0) hash ^= ToX.GetHashCode();
-      if (ToY != 0) hash ^= ToY.GetHashCode();
-      if (FromX != 0) hash ^= FromX.GetHashCode();
-      if (FromY != 0) hash ^= FromY.GetHashCode();
-      if (MarchDuration != 0) hash ^= MarchDuration.GetHashCode();
-      if (StartAt != 0L) hash ^= StartAt.GetHashCode();
-      if (ArriveAt != 0L) hash ^= ArriveAt.GetHashCode();
-      if (MarchType != global::Mapsvr.MarchType.Unspecified) hash ^= MarchType.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (MarchId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(MarchId);
-      }
-      if (PlayerId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(PlayerId);
-      }
-      if (ToX != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(ToX);
-      }
-      if (ToY != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(ToY);
-      }
-      if (FromX != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(FromX);
-      }
-      if (FromY != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(FromY);
-      }
-      if (MarchDuration != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(MarchDuration);
-      }
-      if (StartAt != 0L) {
-        output.WriteRawTag(64);
-        output.WriteInt64(StartAt);
-      }
-      if (ArriveAt != 0L) {
-        output.WriteRawTag(72);
-        output.WriteInt64(ArriveAt);
-      }
-      if (MarchType != global::Mapsvr.MarchType.Unspecified) {
-        output.WriteRawTag(80);
-        output.WriteEnum((int) MarchType);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MarchId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(MarchId);
-      }
-      if (PlayerId.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(PlayerId);
-      }
-      if (ToX != 0) {
-        output.WriteRawTag(24);
-        output.WriteInt32(ToX);
-      }
-      if (ToY != 0) {
-        output.WriteRawTag(32);
-        output.WriteInt32(ToY);
-      }
-      if (FromX != 0) {
-        output.WriteRawTag(40);
-        output.WriteInt32(FromX);
-      }
-      if (FromY != 0) {
-        output.WriteRawTag(48);
-        output.WriteInt32(FromY);
-      }
-      if (MarchDuration != 0) {
-        output.WriteRawTag(56);
-        output.WriteInt32(MarchDuration);
-      }
-      if (StartAt != 0L) {
-        output.WriteRawTag(64);
-        output.WriteInt64(StartAt);
-      }
-      if (ArriveAt != 0L) {
-        output.WriteRawTag(72);
-        output.WriteInt64(ArriveAt);
-      }
-      if (MarchType != global::Mapsvr.MarchType.Unspecified) {
-        output.WriteRawTag(80);
-        output.WriteEnum((int) MarchType);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (MarchId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(MarchId);
-      }
-      if (PlayerId.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(PlayerId);
-      }
-      if (ToX != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ToX);
-      }
-      if (ToY != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ToY);
-      }
-      if (FromX != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FromX);
-      }
-      if (FromY != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(FromY);
-      }
-      if (MarchDuration != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MarchDuration);
-      }
-      if (StartAt != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(StartAt);
-      }
-      if (ArriveAt != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ArriveAt);
-      }
-      if (MarchType != global::Mapsvr.MarchType.Unspecified) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MarchType);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(MarchInfo other) {
-      if (other == null) {
-        return;
-      }
-      if (other.MarchId != 0L) {
-        MarchId = other.MarchId;
-      }
-      if (other.PlayerId.Length != 0) {
-        PlayerId = other.PlayerId;
-      }
-      if (other.ToX != 0) {
-        ToX = other.ToX;
-      }
-      if (other.ToY != 0) {
-        ToY = other.ToY;
-      }
-      if (other.FromX != 0) {
-        FromX = other.FromX;
-      }
-      if (other.FromY != 0) {
-        FromY = other.FromY;
-      }
-      if (other.MarchDuration != 0) {
-        MarchDuration = other.MarchDuration;
-      }
-      if (other.StartAt != 0L) {
-        StartAt = other.StartAt;
-      }
-      if (other.ArriveAt != 0L) {
-        ArriveAt = other.ArriveAt;
-      }
-      if (other.MarchType != global::Mapsvr.MarchType.Unspecified) {
-        MarchType = other.MarchType;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            MarchId = input.ReadInt64();
-            break;
-          }
-          case 18: {
-            PlayerId = input.ReadString();
-            break;
-          }
-          case 24: {
-            ToX = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            ToY = input.ReadInt32();
-            break;
-          }
-          case 40: {
-            FromX = input.ReadInt32();
-            break;
-          }
-          case 48: {
-            FromY = input.ReadInt32();
-            break;
-          }
-          case 56: {
-            MarchDuration = input.ReadInt32();
-            break;
-          }
-          case 64: {
-            StartAt = input.ReadInt64();
-            break;
-          }
-          case 72: {
-            ArriveAt = input.ReadInt64();
-            break;
-          }
-          case 80: {
-            MarchType = (global::Mapsvr.MarchType) input.ReadEnum();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            MarchId = input.ReadInt64();
-            break;
-          }
-          case 18: {
-            PlayerId = input.ReadString();
-            break;
-          }
-          case 24: {
-            ToX = input.ReadInt32();
-            break;
-          }
-          case 32: {
-            ToY = input.ReadInt32();
-            break;
-          }
-          case 40: {
-            FromX = input.ReadInt32();
-            break;
-          }
-          case 48: {
-            FromY = input.ReadInt32();
-            break;
-          }
-          case 56: {
-            MarchDuration = input.ReadInt32();
-            break;
-          }
-          case 64: {
-            StartAt = input.ReadInt64();
-            break;
-          }
-          case 72: {
-            ArriveAt = input.ReadInt64();
-            break;
-          }
-          case 80: {
-            MarchType = (global::Mapsvr.MarchType) input.ReadEnum();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class MarchAddNotify : pb::IMessage<MarchAddNotify>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<MarchAddNotify> _parser = new pb::MessageParser<MarchAddNotify>(() => new MarchAddNotify());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<MarchAddNotify> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[8]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchAddNotify() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchAddNotify(MarchAddNotify other) : this() {
-      marches_ = other.marches_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchAddNotify Clone() {
-      return new MarchAddNotify(this);
-    }
-
-    /// <summary>Field number for the "marches" field.</summary>
-    public const int MarchesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Mapsvr.MarchInfo> _repeated_marches_codec
-        = pb::FieldCodec.ForMessage(10, global::Mapsvr.MarchInfo.Parser);
-    private readonly pbc::RepeatedField<global::Mapsvr.MarchInfo> marches_ = new pbc::RepeatedField<global::Mapsvr.MarchInfo>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::Mapsvr.MarchInfo> Marches {
-      get { return marches_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as MarchAddNotify);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(MarchAddNotify other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!marches_.Equals(other.marches_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= marches_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      marches_.WriteTo(output, _repeated_marches_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      marches_.WriteTo(ref output, _repeated_marches_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      size += marches_.CalculateSize(_repeated_marches_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(MarchAddNotify other) {
-      if (other == null) {
-        return;
-      }
-      marches_.Add(other.marches_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            marches_.AddEntriesFrom(input, _repeated_marches_codec);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            marches_.AddEntriesFrom(ref input, _repeated_marches_codec);
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class MarchRemoveNotify : pb::IMessage<MarchRemoveNotify>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<MarchRemoveNotify> _parser = new pb::MessageParser<MarchRemoveNotify>(() => new MarchRemoveNotify());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<MarchRemoveNotify> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[9]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchRemoveNotify() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchRemoveNotify(MarchRemoveNotify other) : this() {
-      marchId_ = other.marchId_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public MarchRemoveNotify Clone() {
-      return new MarchRemoveNotify(this);
-    }
-
-    /// <summary>Field number for the "march_id" field.</summary>
-    public const int MarchIdFieldNumber = 1;
-    private long marchId_;
-    /// <summary>
-    ///唯一id
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long MarchId {
-      get { return marchId_; }
-      set {
-        marchId_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as MarchRemoveNotify);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(MarchRemoveNotify other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (MarchId != other.MarchId) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (MarchId != 0L) hash ^= MarchId.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (MarchId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(MarchId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (MarchId != 0L) {
-        output.WriteRawTag(8);
-        output.WriteInt64(MarchId);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (MarchId != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(MarchId);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(MarchRemoveNotify other) {
-      if (other == null) {
-        return;
-      }
-      if (other.MarchId != 0L) {
-        MarchId = other.MarchId;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            MarchId = input.ReadInt64();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            MarchId = input.ReadInt64();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  /// <summary>
-  ///全服所有march 下发 // 这边以后是否要做优化 todo
-  /// </summary>
-  [global::System.Diagnostics.DebuggerDisplayAttribute("{ToString(),nq}")]
-  public sealed partial class AllMarchPush : pb::IMessage<AllMarchPush>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<AllMarchPush> _parser = new pb::MessageParser<AllMarchPush>(() => new AllMarchPush());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<AllMarchPush> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Mapsvr.BigmapbattleReflection.Descriptor.MessageTypes[10]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AllMarchPush() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AllMarchPush(AllMarchPush other) : this() {
-      marches_ = other.marches_.Clone();
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public AllMarchPush Clone() {
-      return new AllMarchPush(this);
-    }
-
-    /// <summary>Field number for the "marches" field.</summary>
-    public const int MarchesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Mapsvr.MarchInfo> _repeated_marches_codec
-        = pb::FieldCodec.ForMessage(10, global::Mapsvr.MarchInfo.Parser);
-    private readonly pbc::RepeatedField<global::Mapsvr.MarchInfo> marches_ = new pbc::RepeatedField<global::Mapsvr.MarchInfo>();
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<global::Mapsvr.MarchInfo> Marches {
-      get { return marches_; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as AllMarchPush);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(AllMarchPush other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if(!marches_.Equals(other.marches_)) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      hash ^= marches_.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      marches_.WriteTo(output, _repeated_marches_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      marches_.WriteTo(ref output, _repeated_marches_codec);
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      size += marches_.CalculateSize(_repeated_marches_codec);
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(AllMarchPush other) {
-      if (other == null) {
-        return;
-      }
-      marches_.Add(other.marches_);
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 10: {
-            marches_.AddEntriesFrom(input, _repeated_marches_codec);
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-      if ((tag & 7) == 4) {
-        // Abort on any end group tag.
-        return;
-      }
-      switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 10: {
-            marches_.AddEntriesFrom(ref input, _repeated_marches_codec);
             break;
           }
         }
