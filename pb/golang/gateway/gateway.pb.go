@@ -80,147 +80,17 @@ func (KickReason) EnumDescriptor() ([]byte, []int) {
 	return file_gateway_gateway_proto_rawDescGZIP(), []int{0}
 }
 
-// 握手请求
-type HandshakeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClientVersion string                 `protobuf:"bytes,1,opt,name=client_version,json=clientVersion,proto3" json:"client_version,omitempty"` // 客户端版本
-	Platform      string                 `protobuf:"bytes,2,opt,name=platform,proto3" json:"platform,omitempty"`                                // 平台：ios/android/pc/web
-	DeviceId      string                 `protobuf:"bytes,3,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`                // 设备ID
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *HandshakeRequest) Reset() {
-	*x = HandshakeRequest{}
-	mi := &file_gateway_gateway_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HandshakeRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HandshakeRequest) ProtoMessage() {}
-
-func (x *HandshakeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HandshakeRequest.ProtoReflect.Descriptor instead.
-func (*HandshakeRequest) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *HandshakeRequest) GetClientVersion() string {
-	if x != nil {
-		return x.ClientVersion
-	}
-	return ""
-}
-
-func (x *HandshakeRequest) GetPlatform() string {
-	if x != nil {
-		return x.Platform
-	}
-	return ""
-}
-
-func (x *HandshakeRequest) GetDeviceId() string {
-	if x != nil {
-		return x.DeviceId
-	}
-	return ""
-}
-
-// 握手响应
-type HandshakeResponse struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Code              int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
-	Message           string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-	ServerTime        int64                  `protobuf:"varint,3,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"`                      // 服务器时间（Unix时间戳）
-	HeartbeatInterval int32                  `protobuf:"varint,4,opt,name=heartbeat_interval,json=heartbeatInterval,proto3" json:"heartbeat_interval,omitempty"` // 心跳间隔（秒）
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *HandshakeResponse) Reset() {
-	*x = HandshakeResponse{}
-	mi := &file_gateway_gateway_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *HandshakeResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HandshakeResponse) ProtoMessage() {}
-
-func (x *HandshakeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HandshakeResponse.ProtoReflect.Descriptor instead.
-func (*HandshakeResponse) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *HandshakeResponse) GetCode() int32 {
-	if x != nil {
-		return x.Code
-	}
-	return 0
-}
-
-func (x *HandshakeResponse) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
-func (x *HandshakeResponse) GetServerTime() int64 {
-	if x != nil {
-		return x.ServerTime
-	}
-	return 0
-}
-
-func (x *HandshakeResponse) GetHeartbeatInterval() int32 {
-	if x != nil {
-		return x.HeartbeatInterval
-	}
-	return 0
-}
-
 // 心跳请求
 type HeartbeatRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClientTime    int64                  `protobuf:"varint,1,opt,name=client_time,json=clientTime,proto3" json:"client_time,omitempty"` // 客户端时间
+	ClientTime    int64                  `protobuf:"varint,1,opt,name=client_time,json=clientTime,proto3" json:"client_time,omitempty"` // 客户端时间（Unix 毫秒时间戳，与 server_time 单位一致）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HeartbeatRequest) Reset() {
 	*x = HeartbeatRequest{}
-	mi := &file_gateway_gateway_proto_msgTypes[2]
+	mi := &file_gateway_gateway_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -232,7 +102,7 @@ func (x *HeartbeatRequest) String() string {
 func (*HeartbeatRequest) ProtoMessage() {}
 
 func (x *HeartbeatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[2]
+	mi := &file_gateway_gateway_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -245,7 +115,7 @@ func (x *HeartbeatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeartbeatRequest.ProtoReflect.Descriptor instead.
 func (*HeartbeatRequest) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{2}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *HeartbeatRequest) GetClientTime() int64 {
@@ -258,14 +128,14 @@ func (x *HeartbeatRequest) GetClientTime() int64 {
 // 心跳响应
 type HeartbeatResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ServerTime    int64                  `protobuf:"varint,1,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` // 服务器时间
+	ServerTime    int64                  `protobuf:"varint,1,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` // 服务器时间（Unix 毫秒时间戳）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *HeartbeatResponse) Reset() {
 	*x = HeartbeatResponse{}
-	mi := &file_gateway_gateway_proto_msgTypes[3]
+	mi := &file_gateway_gateway_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -277,7 +147,7 @@ func (x *HeartbeatResponse) String() string {
 func (*HeartbeatResponse) ProtoMessage() {}
 
 func (x *HeartbeatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[3]
+	mi := &file_gateway_gateway_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -290,7 +160,7 @@ func (x *HeartbeatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeartbeatResponse.ProtoReflect.Descriptor instead.
 func (*HeartbeatResponse) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{3}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *HeartbeatResponse) GetServerTime() int64 {
@@ -311,7 +181,7 @@ type KickNotify struct {
 
 func (x *KickNotify) Reset() {
 	*x = KickNotify{}
-	mi := &file_gateway_gateway_proto_msgTypes[4]
+	mi := &file_gateway_gateway_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -323,7 +193,7 @@ func (x *KickNotify) String() string {
 func (*KickNotify) ProtoMessage() {}
 
 func (x *KickNotify) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[4]
+	mi := &file_gateway_gateway_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -336,7 +206,7 @@ func (x *KickNotify) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use KickNotify.ProtoReflect.Descriptor instead.
 func (*KickNotify) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{4}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *KickNotify) GetReason() int32 {
@@ -364,7 +234,7 @@ type PushNotify struct {
 
 func (x *PushNotify) Reset() {
 	*x = PushNotify{}
-	mi := &file_gateway_gateway_proto_msgTypes[5]
+	mi := &file_gateway_gateway_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -376,7 +246,7 @@ func (x *PushNotify) String() string {
 func (*PushNotify) ProtoMessage() {}
 
 func (x *PushNotify) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[5]
+	mi := &file_gateway_gateway_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +259,7 @@ func (x *PushNotify) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PushNotify.ProtoReflect.Descriptor instead.
 func (*PushNotify) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{5}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PushNotify) GetRoute() string {
@@ -417,7 +287,7 @@ type RouteRequest struct {
 
 func (x *RouteRequest) Reset() {
 	*x = RouteRequest{}
-	mi := &file_gateway_gateway_proto_msgTypes[6]
+	mi := &file_gateway_gateway_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -429,7 +299,7 @@ func (x *RouteRequest) String() string {
 func (*RouteRequest) ProtoMessage() {}
 
 func (x *RouteRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[6]
+	mi := &file_gateway_gateway_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -442,7 +312,7 @@ func (x *RouteRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RouteRequest.ProtoReflect.Descriptor instead.
 func (*RouteRequest) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{6}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *RouteRequest) GetRoute() string {
@@ -471,7 +341,7 @@ type RouteResponse struct {
 
 func (x *RouteResponse) Reset() {
 	*x = RouteResponse{}
-	mi := &file_gateway_gateway_proto_msgTypes[7]
+	mi := &file_gateway_gateway_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -483,7 +353,7 @@ func (x *RouteResponse) String() string {
 func (*RouteResponse) ProtoMessage() {}
 
 func (x *RouteResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[7]
+	mi := &file_gateway_gateway_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -496,7 +366,7 @@ func (x *RouteResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RouteResponse.ProtoReflect.Descriptor instead.
 func (*RouteResponse) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{7}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *RouteResponse) GetCode() int32 {
@@ -531,7 +401,7 @@ type BindSessionRequest struct {
 
 func (x *BindSessionRequest) Reset() {
 	*x = BindSessionRequest{}
-	mi := &file_gateway_gateway_proto_msgTypes[8]
+	mi := &file_gateway_gateway_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -543,7 +413,7 @@ func (x *BindSessionRequest) String() string {
 func (*BindSessionRequest) ProtoMessage() {}
 
 func (x *BindSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[8]
+	mi := &file_gateway_gateway_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -556,7 +426,7 @@ func (x *BindSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BindSessionRequest.ProtoReflect.Descriptor instead.
 func (*BindSessionRequest) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{8}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BindSessionRequest) GetUserId() string {
@@ -584,7 +454,7 @@ type BindSessionResponse struct {
 
 func (x *BindSessionResponse) Reset() {
 	*x = BindSessionResponse{}
-	mi := &file_gateway_gateway_proto_msgTypes[9]
+	mi := &file_gateway_gateway_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -596,7 +466,7 @@ func (x *BindSessionResponse) String() string {
 func (*BindSessionResponse) ProtoMessage() {}
 
 func (x *BindSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[9]
+	mi := &file_gateway_gateway_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -609,7 +479,7 @@ func (x *BindSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BindSessionResponse.ProtoReflect.Descriptor instead.
 func (*BindSessionResponse) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{9}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BindSessionResponse) GetCode() int32 {
@@ -636,7 +506,7 @@ type UnbindSessionRequest struct {
 
 func (x *UnbindSessionRequest) Reset() {
 	*x = UnbindSessionRequest{}
-	mi := &file_gateway_gateway_proto_msgTypes[10]
+	mi := &file_gateway_gateway_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -648,7 +518,7 @@ func (x *UnbindSessionRequest) String() string {
 func (*UnbindSessionRequest) ProtoMessage() {}
 
 func (x *UnbindSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[10]
+	mi := &file_gateway_gateway_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -661,7 +531,7 @@ func (x *UnbindSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnbindSessionRequest.ProtoReflect.Descriptor instead.
 func (*UnbindSessionRequest) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{10}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UnbindSessionRequest) GetUserId() string {
@@ -682,7 +552,7 @@ type UnbindSessionResponse struct {
 
 func (x *UnbindSessionResponse) Reset() {
 	*x = UnbindSessionResponse{}
-	mi := &file_gateway_gateway_proto_msgTypes[11]
+	mi := &file_gateway_gateway_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -694,7 +564,7 @@ func (x *UnbindSessionResponse) String() string {
 func (*UnbindSessionResponse) ProtoMessage() {}
 
 func (x *UnbindSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gateway_gateway_proto_msgTypes[11]
+	mi := &file_gateway_gateway_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +577,7 @@ func (x *UnbindSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnbindSessionResponse.ProtoReflect.Descriptor instead.
 func (*UnbindSessionResponse) Descriptor() ([]byte, []int) {
-	return file_gateway_gateway_proto_rawDescGZIP(), []int{11}
+	return file_gateway_gateway_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UnbindSessionResponse) GetCode() int32 {
@@ -728,17 +598,7 @@ var File_gateway_gateway_proto protoreflect.FileDescriptor
 
 const file_gateway_gateway_proto_rawDesc = "" +
 	"\n" +
-	"\x15gateway/gateway.proto\x12\agateway\"r\n" +
-	"\x10HandshakeRequest\x12%\n" +
-	"\x0eclient_version\x18\x01 \x01(\tR\rclientVersion\x12\x1a\n" +
-	"\bplatform\x18\x02 \x01(\tR\bplatform\x12\x1b\n" +
-	"\tdevice_id\x18\x03 \x01(\tR\bdeviceId\"\x91\x01\n" +
-	"\x11HandshakeResponse\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12\x1f\n" +
-	"\vserver_time\x18\x03 \x01(\x03R\n" +
-	"serverTime\x12-\n" +
-	"\x12heartbeat_interval\x18\x04 \x01(\x05R\x11heartbeatInterval\"3\n" +
+	"\x15gateway/gateway.proto\x12\agateway\"3\n" +
 	"\x10HeartbeatRequest\x12\x1f\n" +
 	"\vclient_time\x18\x01 \x01(\x03R\n" +
 	"clientTime\"4\n" +
@@ -794,21 +654,19 @@ func file_gateway_gateway_proto_rawDescGZIP() []byte {
 }
 
 var file_gateway_gateway_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_gateway_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_gateway_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_gateway_gateway_proto_goTypes = []any{
 	(KickReason)(0),               // 0: gateway.KickReason
-	(*HandshakeRequest)(nil),      // 1: gateway.HandshakeRequest
-	(*HandshakeResponse)(nil),     // 2: gateway.HandshakeResponse
-	(*HeartbeatRequest)(nil),      // 3: gateway.HeartbeatRequest
-	(*HeartbeatResponse)(nil),     // 4: gateway.HeartbeatResponse
-	(*KickNotify)(nil),            // 5: gateway.KickNotify
-	(*PushNotify)(nil),            // 6: gateway.PushNotify
-	(*RouteRequest)(nil),          // 7: gateway.RouteRequest
-	(*RouteResponse)(nil),         // 8: gateway.RouteResponse
-	(*BindSessionRequest)(nil),    // 9: gateway.BindSessionRequest
-	(*BindSessionResponse)(nil),   // 10: gateway.BindSessionResponse
-	(*UnbindSessionRequest)(nil),  // 11: gateway.UnbindSessionRequest
-	(*UnbindSessionResponse)(nil), // 12: gateway.UnbindSessionResponse
+	(*HeartbeatRequest)(nil),      // 1: gateway.HeartbeatRequest
+	(*HeartbeatResponse)(nil),     // 2: gateway.HeartbeatResponse
+	(*KickNotify)(nil),            // 3: gateway.KickNotify
+	(*PushNotify)(nil),            // 4: gateway.PushNotify
+	(*RouteRequest)(nil),          // 5: gateway.RouteRequest
+	(*RouteResponse)(nil),         // 6: gateway.RouteResponse
+	(*BindSessionRequest)(nil),    // 7: gateway.BindSessionRequest
+	(*BindSessionResponse)(nil),   // 8: gateway.BindSessionResponse
+	(*UnbindSessionRequest)(nil),  // 9: gateway.UnbindSessionRequest
+	(*UnbindSessionResponse)(nil), // 10: gateway.UnbindSessionResponse
 }
 var file_gateway_gateway_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -829,7 +687,7 @@ func file_gateway_gateway_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gateway_gateway_proto_rawDesc), len(file_gateway_gateway_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   12,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

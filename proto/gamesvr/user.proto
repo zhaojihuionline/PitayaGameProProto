@@ -29,6 +29,7 @@ message UserBasicInfo {
   int64 stone = 9;        // 石头
   int64 meat = 10;        // 肉
   int32 vip_level = 11;   // VIP等级
+  string character_name = 12; // 角色名称
 }
 
 // 获取用户信息请求
@@ -37,6 +38,18 @@ message GetUserInfoRequest {
 
 // 获取用户信息响应
 message GetUserInfoResponse {
+  types.CommonResp resp = 1;
+  UserBasicInfo user_info = 2;
+}
+
+// 获取用户信息请求 - 服务内部 Remote RPC 专用
+// 由其他服务（如 MapSvr）通过 Remote RPC 调用，必须显式传入 user_id
+message GetUserInfoRemoteRequest {
+  string user_id = 1;
+}
+
+// 获取用户信息响应 - 服务内部 Remote RPC 专用
+message GetUserInfoRemoteResponse {
   types.CommonResp resp = 1;
   UserBasicInfo user_info = 2;
 }

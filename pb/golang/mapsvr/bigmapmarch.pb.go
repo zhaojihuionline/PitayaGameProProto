@@ -516,6 +516,8 @@ type RallyMemberInfo struct {
 	PlayerId      string                 `protobuf:"bytes,1,opt,name=player_id,json=playerId,proto3" json:"player_id,omitempty"`                                                        // 成员玩家 ID
 	Troops        map[int32]*TroopLevels `protobuf:"bytes,2,rep,name=troops,proto3" json:"troops,omitempty" protobuf_key:"varint,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // 该成员派出的兵种
 	HeroIds       []int64                `protobuf:"varint,3,rep,packed,name=hero_ids,json=heroIds,proto3" json:"hero_ids,omitempty"`                                                   // 该成员派出的英雄
+	Arrived       bool                   `protobuf:"varint,4,opt,name=arrived,proto3" json:"arrived,omitempty"`                                                                         // 是否已到达集结点
+	MarchId       int64                  `protobuf:"varint,5,opt,name=march_id,json=marchId,proto3" json:"march_id,omitempty"`                                                          // 集结行军ID（行军中有值，到达后为0）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -571,6 +573,20 @@ func (x *RallyMemberInfo) GetHeroIds() []int64 {
 	return nil
 }
 
+func (x *RallyMemberInfo) GetArrived() bool {
+	if x != nil {
+		return x.Arrived
+	}
+	return false
+}
+
+func (x *RallyMemberInfo) GetMarchId() int64 {
+	if x != nil {
+		return x.MarchId
+	}
+	return 0
+}
+
 // RallyInfo 集结完整信息，用于联盟内广播和玩家进入地图同步
 type RallyInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -585,6 +601,7 @@ type RallyInfo struct {
 	LaunchAt      int64                  `protobuf:"varint,9,opt,name=launch_at,json=launchAt,proto3" json:"launch_at,omitempty"`                              // 预计发起时间戳（秒）= create_at + wait_duration
 	State         RallyState             `protobuf:"varint,10,opt,name=state,proto3,enum=mapsvr.RallyState" json:"state,omitempty"`                            // 当前集结状态
 	Members       []*RallyMemberInfo     `protobuf:"bytes,11,rep,name=members,proto3" json:"members,omitempty"`                                                // 已加入的成员列表
+	RallyPos      *Position              `protobuf:"bytes,12,opt,name=rally_pos,json=rallyPos,proto3" json:"rally_pos,omitempty"`                              // 集结点坐标（发起者主城位置）
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -692,6 +709,13 @@ func (x *RallyInfo) GetState() RallyState {
 func (x *RallyInfo) GetMembers() []*RallyMemberInfo {
 	if x != nil {
 		return x.Members
+	}
+	return nil
+}
+
+func (x *RallyInfo) GetRallyPos() *Position {
+	if x != nil {
+		return x.RallyPos
 	}
 	return nil
 }
@@ -1677,6 +1701,8 @@ type BattleResultNotify struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MarchId       int64                  `protobuf:"varint,1,opt,name=march_id,json=marchId,proto3" json:"march_id,omitempty"` // 触发战斗的行军 ID
 	IsWin         bool                   `protobuf:"varint,2,opt,name=is_win,json=isWin,proto3" json:"is_win,omitempty"`       // 攻击方是否胜利
+	Attacker      *FighterInfo           `protobuf:"bytes,3,opt,name=attacker,proto3" json:"attacker,omitempty"`               // 攻方战报详情
+	Defencer      *FighterInfo           `protobuf:"bytes,4,opt,name=defencer,proto3" json:"defencer,omitempty"`               // 防方战报详情
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1723,6 +1749,20 @@ func (x *BattleResultNotify) GetIsWin() bool {
 		return x.IsWin
 	}
 	return false
+}
+
+func (x *BattleResultNotify) GetAttacker() *FighterInfo {
+	if x != nil {
+		return x.Attacker
+	}
+	return nil
+}
+
+func (x *BattleResultNotify) GetDefencer() *FighterInfo {
+	if x != nil {
+		return x.Defencer
+	}
+	return nil
 }
 
 // GatherResultNotify 采集结果通知
@@ -2000,7 +2040,7 @@ var File_mapsvr_bigmapmarch_proto protoreflect.FileDescriptor
 
 const file_mapsvr_bigmapmarch_proto_rawDesc = "" +
 	"\n" +
-	"\x18mapsvr/bigmapmarch.proto\x12\x06mapsvr\x1a\x18common/types/types.proto\x1a\x13mapsvr/bigmap.proto\"\x96\x01\n" +
+	"\x18mapsvr/bigmapmarch.proto\x12\x06mapsvr\x1a\x18common/types/types.proto\x1a\x13mapsvr/bigmap.proto\x1a\x19mapsvr/bigmapbattle.proto\"\x96\x01\n" +
 	"\vTroopLevels\x12G\n" +
 	"\flevel_counts\x18\x01 \x03(\v2$.mapsvr.TroopLevels.LevelCountsEntryR\vlevelCounts\x1a>\n" +
 	"\x10LevelCountsEntry\x12\x10\n" +
@@ -2026,14 +2066,16 @@ const file_mapsvr_bigmapmarch_proto_rawDesc = "" +
 	"\rexpedition_id\x18\x0e \x01(\x03R\fexpeditionId\x1aN\n" +
 	"\vTroopsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12)\n" +
-	"\x05value\x18\x02 \x01(\v2\x13.mapsvr.TroopLevelsR\x05value:\x028\x01\"\xd6\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x13.mapsvr.TroopLevelsR\x05value:\x028\x01\"\x8b\x02\n" +
 	"\x0fRallyMemberInfo\x12\x1b\n" +
 	"\tplayer_id\x18\x01 \x01(\tR\bplayerId\x12;\n" +
 	"\x06troops\x18\x02 \x03(\v2#.mapsvr.RallyMemberInfo.TroopsEntryR\x06troops\x12\x19\n" +
-	"\bhero_ids\x18\x03 \x03(\x03R\aheroIds\x1aN\n" +
+	"\bhero_ids\x18\x03 \x03(\x03R\aheroIds\x12\x18\n" +
+	"\aarrived\x18\x04 \x01(\bR\aarrived\x12\x19\n" +
+	"\bmarch_id\x18\x05 \x01(\x03R\amarchId\x1aN\n" +
 	"\vTroopsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\x05R\x03key\x12)\n" +
-	"\x05value\x18\x02 \x01(\v2\x13.mapsvr.TroopLevelsR\x05value:\x028\x01\"\xa1\x03\n" +
+	"\x05value\x18\x02 \x01(\v2\x13.mapsvr.TroopLevelsR\x05value:\x028\x01\"\xd0\x03\n" +
 	"\tRallyInfo\x12\x19\n" +
 	"\brally_id\x18\x01 \x01(\x03R\arallyId\x12\x1b\n" +
 	"\tleader_id\x18\x02 \x01(\tR\bleaderId\x12\x1f\n" +
@@ -2049,7 +2091,8 @@ const file_mapsvr_bigmapmarch_proto_rawDesc = "" +
 	"\tlaunch_at\x18\t \x01(\x03R\blaunchAt\x12(\n" +
 	"\x05state\x18\n" +
 	" \x01(\x0e2\x12.mapsvr.RallyStateR\x05state\x121\n" +
-	"\amembers\x18\v \x03(\v2\x17.mapsvr.RallyMemberInfoR\amembers\"\xea\x02\n" +
+	"\amembers\x18\v \x03(\v2\x17.mapsvr.RallyMemberInfoR\amembers\x12-\n" +
+	"\trally_pos\x18\f \x01(\v2\x10.mapsvr.PositionR\brallyPos\"\xea\x02\n" +
 	"\x11StartMarchRequest\x120\n" +
 	"\n" +
 	"march_type\x18\x01 \x01(\x0e2\x11.mapsvr.MarchTypeR\tmarchType\x12'\n" +
@@ -2116,10 +2159,12 @@ const file_mapsvr_bigmapmarch_proto_rawDesc = "" +
 	"\bmarch_id\x18\x01 \x01(\x03R\amarchId\"l\n" +
 	"\x10AllMarchSyncPush\x12+\n" +
 	"\amarches\x18\x01 \x03(\v2\x11.mapsvr.MarchInfoR\amarches\x12+\n" +
-	"\arallies\x18\x02 \x03(\v2\x11.mapsvr.RallyInfoR\arallies\"F\n" +
+	"\arallies\x18\x02 \x03(\v2\x11.mapsvr.RallyInfoR\arallies\"\xa8\x01\n" +
 	"\x12BattleResultNotify\x12\x19\n" +
 	"\bmarch_id\x18\x01 \x01(\x03R\amarchId\x12\x15\n" +
-	"\x06is_win\x18\x02 \x01(\bR\x05isWin\"\xd7\x01\n" +
+	"\x06is_win\x18\x02 \x01(\bR\x05isWin\x12/\n" +
+	"\battacker\x18\x03 \x01(\v2\x13.mapsvr.FighterInfoR\battacker\x12/\n" +
+	"\bdefencer\x18\x04 \x01(\v2\x13.mapsvr.FighterInfoR\bdefencer\"\xd7\x01\n" +
 	"\x12GatherResultNotify\x12\x19\n" +
 	"\bmarch_id\x18\x01 \x01(\x03R\amarchId\x12`\n" +
 	"\x12gathered_resources\x18\x02 \x03(\v21.mapsvr.GatherResultNotify.GatheredResourcesEntryR\x11gatheredResources\x1aD\n" +
@@ -2239,6 +2284,7 @@ var file_mapsvr_bigmapmarch_proto_goTypes = []any{
 	nil,                          // 38: mapsvr.GatherResultNotify.GatheredResourcesEntry
 	(*Position)(nil),             // 39: mapsvr.Position
 	(*types.CommonResp)(nil),     // 40: types.CommonResp
+	(*FighterInfo)(nil),          // 41: mapsvr.FighterInfo
 }
 var file_mapsvr_bigmapmarch_proto_depIdxs = []int32{
 	32, // 0: mapsvr.TroopLevels.level_counts:type_name -> mapsvr.TroopLevels.LevelCountsEntry
@@ -2253,42 +2299,45 @@ var file_mapsvr_bigmapmarch_proto_depIdxs = []int32{
 	3,  // 9: mapsvr.RallyInfo.target_type:type_name -> mapsvr.TargetType
 	4,  // 10: mapsvr.RallyInfo.state:type_name -> mapsvr.RallyState
 	7,  // 11: mapsvr.RallyInfo.members:type_name -> mapsvr.RallyMemberInfo
-	1,  // 12: mapsvr.StartMarchRequest.march_type:type_name -> mapsvr.MarchType
-	39, // 13: mapsvr.StartMarchRequest.to_pos:type_name -> mapsvr.Position
-	3,  // 14: mapsvr.StartMarchRequest.target_type:type_name -> mapsvr.TargetType
-	35, // 15: mapsvr.StartMarchRequest.troops:type_name -> mapsvr.StartMarchRequest.TroopsEntry
-	40, // 16: mapsvr.StartMarchResponse.resp:type_name -> types.CommonResp
-	6,  // 17: mapsvr.StartMarchResponse.march:type_name -> mapsvr.MarchInfo
-	40, // 18: mapsvr.CancelMarchResponse.resp:type_name -> types.CommonResp
-	40, // 19: mapsvr.SpeedUpMarchResponse.resp:type_name -> types.CommonResp
-	39, // 20: mapsvr.CreateRallyRequest.target_pos:type_name -> mapsvr.Position
-	3,  // 21: mapsvr.CreateRallyRequest.target_type:type_name -> mapsvr.TargetType
-	36, // 22: mapsvr.CreateRallyRequest.troops:type_name -> mapsvr.CreateRallyRequest.TroopsEntry
-	40, // 23: mapsvr.CreateRallyResponse.resp:type_name -> types.CommonResp
-	8,  // 24: mapsvr.CreateRallyResponse.rally:type_name -> mapsvr.RallyInfo
-	37, // 25: mapsvr.JoinRallyRequest.troops:type_name -> mapsvr.JoinRallyRequest.TroopsEntry
-	40, // 26: mapsvr.JoinRallyResponse.resp:type_name -> types.CommonResp
-	40, // 27: mapsvr.LaunchRallyResponse.resp:type_name -> types.CommonResp
-	40, // 28: mapsvr.CancelRallyResponse.resp:type_name -> types.CommonResp
-	6,  // 29: mapsvr.MarchCreateNotify.march:type_name -> mapsvr.MarchInfo
-	6,  // 30: mapsvr.MarchStateNotify.march:type_name -> mapsvr.MarchInfo
-	6,  // 31: mapsvr.AllMarchSyncPush.marches:type_name -> mapsvr.MarchInfo
-	8,  // 32: mapsvr.AllMarchSyncPush.rallies:type_name -> mapsvr.RallyInfo
-	38, // 33: mapsvr.GatherResultNotify.gathered_resources:type_name -> mapsvr.GatherResultNotify.GatheredResourcesEntry
-	3,  // 34: mapsvr.ScoutResultNotify.target_type:type_name -> mapsvr.TargetType
-	39, // 35: mapsvr.ScoutResultNotify.target_pos:type_name -> mapsvr.Position
-	8,  // 36: mapsvr.RallyCreateNotify.rally:type_name -> mapsvr.RallyInfo
-	8,  // 37: mapsvr.RallyUpdateNotify.rally:type_name -> mapsvr.RallyInfo
-	5,  // 38: mapsvr.MarchInfo.TroopsEntry.value:type_name -> mapsvr.TroopLevels
-	5,  // 39: mapsvr.RallyMemberInfo.TroopsEntry.value:type_name -> mapsvr.TroopLevels
-	5,  // 40: mapsvr.StartMarchRequest.TroopsEntry.value:type_name -> mapsvr.TroopLevels
-	5,  // 41: mapsvr.CreateRallyRequest.TroopsEntry.value:type_name -> mapsvr.TroopLevels
-	5,  // 42: mapsvr.JoinRallyRequest.TroopsEntry.value:type_name -> mapsvr.TroopLevels
-	43, // [43:43] is the sub-list for method output_type
-	43, // [43:43] is the sub-list for method input_type
-	43, // [43:43] is the sub-list for extension type_name
-	43, // [43:43] is the sub-list for extension extendee
-	0,  // [0:43] is the sub-list for field type_name
+	39, // 12: mapsvr.RallyInfo.rally_pos:type_name -> mapsvr.Position
+	1,  // 13: mapsvr.StartMarchRequest.march_type:type_name -> mapsvr.MarchType
+	39, // 14: mapsvr.StartMarchRequest.to_pos:type_name -> mapsvr.Position
+	3,  // 15: mapsvr.StartMarchRequest.target_type:type_name -> mapsvr.TargetType
+	35, // 16: mapsvr.StartMarchRequest.troops:type_name -> mapsvr.StartMarchRequest.TroopsEntry
+	40, // 17: mapsvr.StartMarchResponse.resp:type_name -> types.CommonResp
+	6,  // 18: mapsvr.StartMarchResponse.march:type_name -> mapsvr.MarchInfo
+	40, // 19: mapsvr.CancelMarchResponse.resp:type_name -> types.CommonResp
+	40, // 20: mapsvr.SpeedUpMarchResponse.resp:type_name -> types.CommonResp
+	39, // 21: mapsvr.CreateRallyRequest.target_pos:type_name -> mapsvr.Position
+	3,  // 22: mapsvr.CreateRallyRequest.target_type:type_name -> mapsvr.TargetType
+	36, // 23: mapsvr.CreateRallyRequest.troops:type_name -> mapsvr.CreateRallyRequest.TroopsEntry
+	40, // 24: mapsvr.CreateRallyResponse.resp:type_name -> types.CommonResp
+	8,  // 25: mapsvr.CreateRallyResponse.rally:type_name -> mapsvr.RallyInfo
+	37, // 26: mapsvr.JoinRallyRequest.troops:type_name -> mapsvr.JoinRallyRequest.TroopsEntry
+	40, // 27: mapsvr.JoinRallyResponse.resp:type_name -> types.CommonResp
+	40, // 28: mapsvr.LaunchRallyResponse.resp:type_name -> types.CommonResp
+	40, // 29: mapsvr.CancelRallyResponse.resp:type_name -> types.CommonResp
+	6,  // 30: mapsvr.MarchCreateNotify.march:type_name -> mapsvr.MarchInfo
+	6,  // 31: mapsvr.MarchStateNotify.march:type_name -> mapsvr.MarchInfo
+	6,  // 32: mapsvr.AllMarchSyncPush.marches:type_name -> mapsvr.MarchInfo
+	8,  // 33: mapsvr.AllMarchSyncPush.rallies:type_name -> mapsvr.RallyInfo
+	41, // 34: mapsvr.BattleResultNotify.attacker:type_name -> mapsvr.FighterInfo
+	41, // 35: mapsvr.BattleResultNotify.defencer:type_name -> mapsvr.FighterInfo
+	38, // 36: mapsvr.GatherResultNotify.gathered_resources:type_name -> mapsvr.GatherResultNotify.GatheredResourcesEntry
+	3,  // 37: mapsvr.ScoutResultNotify.target_type:type_name -> mapsvr.TargetType
+	39, // 38: mapsvr.ScoutResultNotify.target_pos:type_name -> mapsvr.Position
+	8,  // 39: mapsvr.RallyCreateNotify.rally:type_name -> mapsvr.RallyInfo
+	8,  // 40: mapsvr.RallyUpdateNotify.rally:type_name -> mapsvr.RallyInfo
+	5,  // 41: mapsvr.MarchInfo.TroopsEntry.value:type_name -> mapsvr.TroopLevels
+	5,  // 42: mapsvr.RallyMemberInfo.TroopsEntry.value:type_name -> mapsvr.TroopLevels
+	5,  // 43: mapsvr.StartMarchRequest.TroopsEntry.value:type_name -> mapsvr.TroopLevels
+	5,  // 44: mapsvr.CreateRallyRequest.TroopsEntry.value:type_name -> mapsvr.TroopLevels
+	5,  // 45: mapsvr.JoinRallyRequest.TroopsEntry.value:type_name -> mapsvr.TroopLevels
+	46, // [46:46] is the sub-list for method output_type
+	46, // [46:46] is the sub-list for method input_type
+	46, // [46:46] is the sub-list for extension type_name
+	46, // [46:46] is the sub-list for extension extendee
+	0,  // [0:46] is the sub-list for field type_name
 }
 
 func init() { file_mapsvr_bigmapmarch_proto_init() }
@@ -2297,6 +2346,7 @@ func file_mapsvr_bigmapmarch_proto_init() {
 		return
 	}
 	file_mapsvr_bigmap_proto_init()
+	file_mapsvr_bigmapbattle_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

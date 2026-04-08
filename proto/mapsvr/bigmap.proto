@@ -80,6 +80,19 @@ message OwnerID {
   string player_id = 1;
 }
 
+// ResourceAmount 资源点存量组件
+message ResourceAmount {
+  int32 item_id = 1;
+  int64 total = 2;
+  int64 remaining = 3;
+}
+
+// GatherOccupant 采集占用者组件
+message GatherOccupant {
+  int64 march_id = 1;
+  string player_id = 2;
+}
+
 // ------------------- Grid ------------------
 
 message Grid {
