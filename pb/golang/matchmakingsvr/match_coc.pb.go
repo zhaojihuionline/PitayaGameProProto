@@ -346,6 +346,164 @@ func (x *CancelMatchResponse) GetResp() *types.CommonResp {
 	return nil
 }
 
+// 演示用：分页拉取匹配候选列表（假数据，用于联调/展示）
+type GetNextCandidateDemoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          *types.PageReq         `protobuf:"bytes,1,opt,name=page,proto3" json:"page,omitempty"` // 分页：页码从1开始，page_size 为每页条数
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNextCandidateDemoRequest) Reset() {
+	*x = GetNextCandidateDemoRequest{}
+	mi := &file_matchmakingsvr_match_coc_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNextCandidateDemoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNextCandidateDemoRequest) ProtoMessage() {}
+
+func (x *GetNextCandidateDemoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_matchmakingsvr_match_coc_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNextCandidateDemoRequest.ProtoReflect.Descriptor instead.
+func (*GetNextCandidateDemoRequest) Descriptor() ([]byte, []int) {
+	return file_matchmakingsvr_match_coc_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetNextCandidateDemoRequest) GetPage() *types.PageReq {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+// 演示列表单行：用户ID + 角色名（无需完整 CandidateData）
+type CandidateDemoItem struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CharacterName string                 `protobuf:"bytes,2,opt,name=character_name,json=characterName,proto3" json:"character_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CandidateDemoItem) Reset() {
+	*x = CandidateDemoItem{}
+	mi := &file_matchmakingsvr_match_coc_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CandidateDemoItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CandidateDemoItem) ProtoMessage() {}
+
+func (x *CandidateDemoItem) ProtoReflect() protoreflect.Message {
+	mi := &file_matchmakingsvr_match_coc_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CandidateDemoItem.ProtoReflect.Descriptor instead.
+func (*CandidateDemoItem) Descriptor() ([]byte, []int) {
+	return file_matchmakingsvr_match_coc_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CandidateDemoItem) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *CandidateDemoItem) GetCharacterName() string {
+	if x != nil {
+		return x.CharacterName
+	}
+	return ""
+}
+
+type GetNextCandidateDemoResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
+	Page          *types.PageResp        `protobuf:"bytes,2,opt,name=page,proto3" json:"page,omitempty"`             // 分页元数据（total/total_pages 等与请求页码对齐）
+	Candidates    []*CandidateDemoItem   `protobuf:"bytes,3,rep,name=candidates,proto3" json:"candidates,omitempty"` // 本页候选摘要
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetNextCandidateDemoResponse) Reset() {
+	*x = GetNextCandidateDemoResponse{}
+	mi := &file_matchmakingsvr_match_coc_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetNextCandidateDemoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetNextCandidateDemoResponse) ProtoMessage() {}
+
+func (x *GetNextCandidateDemoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_matchmakingsvr_match_coc_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetNextCandidateDemoResponse.ProtoReflect.Descriptor instead.
+func (*GetNextCandidateDemoResponse) Descriptor() ([]byte, []int) {
+	return file_matchmakingsvr_match_coc_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetNextCandidateDemoResponse) GetResp() *types.CommonResp {
+	if x != nil {
+		return x.Resp
+	}
+	return nil
+}
+
+func (x *GetNextCandidateDemoResponse) GetPage() *types.PageResp {
+	if x != nil {
+		return x.Page
+	}
+	return nil
+}
+
+func (x *GetNextCandidateDemoResponse) GetCandidates() []*CandidateDemoItem {
+	if x != nil {
+		return x.Candidates
+	}
+	return nil
+}
+
 var File_matchmakingsvr_match_coc_proto protoreflect.FileDescriptor
 
 const file_matchmakingsvr_match_coc_proto_rawDesc = "" +
@@ -371,7 +529,18 @@ const file_matchmakingsvr_match_coc_proto_rawDesc = "" +
 	"\x0elayout_version\x18\x02 \x01(\x05R\rlayoutVersion\"\x14\n" +
 	"\x12CancelMatchRequest\"<\n" +
 	"\x13CancelMatchResponse\x12%\n" +
-	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04respBcZEpitaya-game/protos/protobuf/pb/golang/matchmakingsvr;matchmakingsvrpb\xaa\x02\x19PitayaGame.MatchMakingSvrb\x06proto3"
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"A\n" +
+	"\x1bGetNextCandidateDemoRequest\x12\"\n" +
+	"\x04page\x18\x01 \x01(\v2\x0e.types.PageReqR\x04page\"S\n" +
+	"\x11CandidateDemoItem\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12%\n" +
+	"\x0echaracter_name\x18\x02 \x01(\tR\rcharacterName\"\xad\x01\n" +
+	"\x1cGetNextCandidateDemoResponse\x12%\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x12#\n" +
+	"\x04page\x18\x02 \x01(\v2\x0f.types.PageRespR\x04page\x12A\n" +
+	"\n" +
+	"candidates\x18\x03 \x03(\v2!.matchmakingsvr.CandidateDemoItemR\n" +
+	"candidatesBcZEpitaya-game/protos/protobuf/pb/golang/matchmakingsvr;matchmakingsvrpb\xaa\x02\x19PitayaGame.MatchMakingSvrb\x06proto3"
 
 var (
 	file_matchmakingsvr_match_coc_proto_rawDescOnce sync.Once
@@ -385,26 +554,35 @@ func file_matchmakingsvr_match_coc_proto_rawDescGZIP() []byte {
 	return file_matchmakingsvr_match_coc_proto_rawDescData
 }
 
-var file_matchmakingsvr_match_coc_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_matchmakingsvr_match_coc_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_matchmakingsvr_match_coc_proto_goTypes = []any{
-	(*GetNextCandidateRequest)(nil),  // 0: matchmakingsvr.GetNextCandidateRequest
-	(*GetNextCandidateResponse)(nil), // 1: matchmakingsvr.GetNextCandidateResponse
-	(*CandidateData)(nil),            // 2: matchmakingsvr.CandidateData
-	(*BaseSnapshotView)(nil),         // 3: matchmakingsvr.BaseSnapshotView
-	(*CancelMatchRequest)(nil),       // 4: matchmakingsvr.CancelMatchRequest
-	(*CancelMatchResponse)(nil),      // 5: matchmakingsvr.CancelMatchResponse
-	(*types.CommonResp)(nil),         // 6: types.CommonResp
+	(*GetNextCandidateRequest)(nil),      // 0: matchmakingsvr.GetNextCandidateRequest
+	(*GetNextCandidateResponse)(nil),     // 1: matchmakingsvr.GetNextCandidateResponse
+	(*CandidateData)(nil),                // 2: matchmakingsvr.CandidateData
+	(*BaseSnapshotView)(nil),             // 3: matchmakingsvr.BaseSnapshotView
+	(*CancelMatchRequest)(nil),           // 4: matchmakingsvr.CancelMatchRequest
+	(*CancelMatchResponse)(nil),          // 5: matchmakingsvr.CancelMatchResponse
+	(*GetNextCandidateDemoRequest)(nil),  // 6: matchmakingsvr.GetNextCandidateDemoRequest
+	(*CandidateDemoItem)(nil),            // 7: matchmakingsvr.CandidateDemoItem
+	(*GetNextCandidateDemoResponse)(nil), // 8: matchmakingsvr.GetNextCandidateDemoResponse
+	(*types.CommonResp)(nil),             // 9: types.CommonResp
+	(*types.PageReq)(nil),                // 10: types.PageReq
+	(*types.PageResp)(nil),               // 11: types.PageResp
 }
 var file_matchmakingsvr_match_coc_proto_depIdxs = []int32{
-	6, // 0: matchmakingsvr.GetNextCandidateResponse.resp:type_name -> types.CommonResp
-	2, // 1: matchmakingsvr.GetNextCandidateResponse.candidate:type_name -> matchmakingsvr.CandidateData
-	3, // 2: matchmakingsvr.CandidateData.base_snapshot:type_name -> matchmakingsvr.BaseSnapshotView
-	6, // 3: matchmakingsvr.CancelMatchResponse.resp:type_name -> types.CommonResp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	9,  // 0: matchmakingsvr.GetNextCandidateResponse.resp:type_name -> types.CommonResp
+	2,  // 1: matchmakingsvr.GetNextCandidateResponse.candidate:type_name -> matchmakingsvr.CandidateData
+	3,  // 2: matchmakingsvr.CandidateData.base_snapshot:type_name -> matchmakingsvr.BaseSnapshotView
+	9,  // 3: matchmakingsvr.CancelMatchResponse.resp:type_name -> types.CommonResp
+	10, // 4: matchmakingsvr.GetNextCandidateDemoRequest.page:type_name -> types.PageReq
+	9,  // 5: matchmakingsvr.GetNextCandidateDemoResponse.resp:type_name -> types.CommonResp
+	11, // 6: matchmakingsvr.GetNextCandidateDemoResponse.page:type_name -> types.PageResp
+	7,  // 7: matchmakingsvr.GetNextCandidateDemoResponse.candidates:type_name -> matchmakingsvr.CandidateDemoItem
+	8,  // [8:8] is the sub-list for method output_type
+	8,  // [8:8] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_matchmakingsvr_match_coc_proto_init() }
@@ -418,7 +596,7 @@ func file_matchmakingsvr_match_coc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_matchmakingsvr_match_coc_proto_rawDesc), len(file_matchmakingsvr_match_coc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
