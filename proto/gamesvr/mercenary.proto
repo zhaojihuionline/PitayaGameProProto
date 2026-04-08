@@ -23,10 +23,15 @@ message MercenaryTimeWork {
   int32 num=53; //数量
 }
 
+message MercenaryTypeNum {
+  int32 num=1; //数量
+  int32 type=2; //类型 0= 正常 1 训练 2 升级 3 伤一级 4 伤二级
+}
+
 //雇佣兵数据
 message MercenaryBaseData {
   int32 mercenary_config_id = 1;        // 配置表ID
-  int32 num=2; //数量
+  MercenaryTypeNum type_num=2; //数量
 }
 
 
@@ -119,8 +124,9 @@ message WorkCancelMercenaryResponse {
 
 // ========== 出征 ==========
 
-message ToWarMercenaryRequest {
-  repeated MercenaryBaseData mercenary=1;
+message ToWarMercenaryRemoteRequest {
+  string user_id=1;//哪个玩家
+  repeated MercenaryBaseData = 2; // 派出的兵种/数量 类型都是0  
 }
 
 message ToWarMercenaryResponse {
@@ -132,6 +138,16 @@ message ToFormalMercenaryRequest {
   int32 mercenary_config_id = 1; //配置表ID
 }
 
+
+//战斗结束还回兵
+message ToHomeMercenaryRemoteRequest {
+  string user_id=1;//哪个玩家
+  repeated MercenaryBaseData=2;   //还回来的兵 类型就好几种
+}
+
+message ToHomeMercenaryRemoteResponse {
+  types.CommonResp resp = 1;
+}
 
 
 // ========== 删除(测试用) ==========
