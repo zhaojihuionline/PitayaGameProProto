@@ -323,6 +323,7 @@ type GetMyBuildingsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
 	Buildings     []*BuildingData        `protobuf:"bytes,2,rep,name=buildings,proto3" json:"buildings,omitempty"`
+	ServerTime    int64                  `protobuf:"varint,30,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` //服务器时间
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -369,6 +370,13 @@ func (x *GetMyBuildingsResponse) GetBuildings() []*BuildingData {
 		return x.Buildings
 	}
 	return nil
+}
+
+func (x *GetMyBuildingsResponse) GetServerTime() int64 {
+	if x != nil {
+		return x.ServerTime
+	}
+	return 0
 }
 
 // 获取指定用户user_id所有建筑请求
@@ -1124,10 +1132,12 @@ const file_gamesvr_builds_proto_rawDesc = "" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x12\x19\n" +
 	"\bbuild_id\x18\x02 \x01(\x03R\abuildId\x121\n" +
 	"\bbuilding\x18\x03 \x01(\v2\x15.gamesvr.BuildingDataR\bbuilding\"\x17\n" +
-	"\x15GetMyBuildingsRequest\"t\n" +
+	"\x15GetMyBuildingsRequest\"\x95\x01\n" +
 	"\x16GetMyBuildingsResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x123\n" +
-	"\tbuildings\x18\x02 \x03(\v2\x15.gamesvr.BuildingDataR\tbuildings\"2\n" +
+	"\tbuildings\x18\x02 \x03(\v2\x15.gamesvr.BuildingDataR\tbuildings\x12\x1f\n" +
+	"\vserver_time\x18\x1e \x01(\x03R\n" +
+	"serverTime\"2\n" +
 	"\x17GetUserBuildingsRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\"\x9d\x01\n" +
 	"\x18ConstructBuildingRequest\x12&\n" +

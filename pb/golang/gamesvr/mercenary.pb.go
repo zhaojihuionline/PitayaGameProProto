@@ -24,7 +24,7 @@ const (
 
 type MercenaryTimeWork struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	WorkType      int32                  `protobuf:"varint,50,opt,name=work_type,json=workType,proto3" json:"work_type,omitempty"`                  //工作类型 1 训练 2 升级
+	WorkType      int32                  `protobuf:"varint,50,opt,name=work_type,json=workType,proto3" json:"work_type,omitempty"`                  //工作类型 1 训练 2 升级  3 治疗
 	WorkBeginTime int64                  `protobuf:"varint,51,opt,name=work_begin_time,json=workBeginTime,proto3" json:"work_begin_time,omitempty"` //开始时间
 	WorkEndTime   int64                  `protobuf:"varint,52,opt,name=work_end_time,json=workEndTime,proto3" json:"work_end_time,omitempty"`       // 完成时间
 	Num           int32                  `protobuf:"varint,53,opt,name=num,proto3" json:"num,omitempty"`                                            //数量
@@ -90,18 +90,70 @@ func (x *MercenaryTimeWork) GetNum() int32 {
 	return 0
 }
 
+type MercenaryTypeNum struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Num           int32                  `protobuf:"varint,1,opt,name=num,proto3" json:"num,omitempty"`   //数量
+	Type          int32                  `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"` //类型 0= 正常 1 训练 2 升级 3 伤一级 4 伤二级
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *MercenaryTypeNum) Reset() {
+	*x = MercenaryTypeNum{}
+	mi := &file_gamesvr_mercenary_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MercenaryTypeNum) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MercenaryTypeNum) ProtoMessage() {}
+
+func (x *MercenaryTypeNum) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_mercenary_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MercenaryTypeNum.ProtoReflect.Descriptor instead.
+func (*MercenaryTypeNum) Descriptor() ([]byte, []int) {
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *MercenaryTypeNum) GetNum() int32 {
+	if x != nil {
+		return x.Num
+	}
+	return 0
+}
+
+func (x *MercenaryTypeNum) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
 // 雇佣兵数据
 type MercenaryBaseData struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	MercenaryConfigId int32                  `protobuf:"varint,1,opt,name=mercenary_config_id,json=mercenaryConfigId,proto3" json:"mercenary_config_id,omitempty"` // 配置表ID
-	Num               int32                  `protobuf:"varint,2,opt,name=num,proto3" json:"num,omitempty"`                                                        //数量
+	TypeNum           *MercenaryTypeNum      `protobuf:"bytes,2,opt,name=type_num,json=typeNum,proto3" json:"type_num,omitempty"`                                  //数量
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
 
 func (x *MercenaryBaseData) Reset() {
 	*x = MercenaryBaseData{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[1]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -113,7 +165,7 @@ func (x *MercenaryBaseData) String() string {
 func (*MercenaryBaseData) ProtoMessage() {}
 
 func (x *MercenaryBaseData) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[1]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -126,7 +178,7 @@ func (x *MercenaryBaseData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MercenaryBaseData.ProtoReflect.Descriptor instead.
 func (*MercenaryBaseData) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{1}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *MercenaryBaseData) GetMercenaryConfigId() int32 {
@@ -136,25 +188,25 @@ func (x *MercenaryBaseData) GetMercenaryConfigId() int32 {
 	return 0
 }
 
-func (x *MercenaryBaseData) GetNum() int32 {
+func (x *MercenaryBaseData) GetTypeNum() *MercenaryTypeNum {
 	if x != nil {
-		return x.Num
+		return x.TypeNum
 	}
-	return 0
+	return nil
 }
 
 // 雇佣兵数据
 type MercenaryData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Info          *MercenaryBaseData     `protobuf:"bytes,1,opt,name=info,proto3" json:"info,omitempty"`                               //基础信息
-	TimeWork      *MercenaryTimeWork     `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3,oneof" json:"time_work,omitempty"` // 训练 升级
+	TimeWork      *MercenaryTimeWork     `protobuf:"bytes,5,opt,name=time_work,json=timeWork,proto3,oneof" json:"time_work,omitempty"` // 训练 升级 治疗
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *MercenaryData) Reset() {
 	*x = MercenaryData{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[2]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -166,7 +218,7 @@ func (x *MercenaryData) String() string {
 func (*MercenaryData) ProtoMessage() {}
 
 func (x *MercenaryData) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[2]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -179,7 +231,7 @@ func (x *MercenaryData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MercenaryData.ProtoReflect.Descriptor instead.
 func (*MercenaryData) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{2}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MercenaryData) GetInfo() *MercenaryBaseData {
@@ -205,7 +257,7 @@ type GetMyMercenaryRequest struct {
 
 func (x *GetMyMercenaryRequest) Reset() {
 	*x = GetMyMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[3]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -217,7 +269,7 @@ func (x *GetMyMercenaryRequest) String() string {
 func (*GetMyMercenaryRequest) ProtoMessage() {}
 
 func (x *GetMyMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[3]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -230,22 +282,22 @@ func (x *GetMyMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*GetMyMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{3}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{4}
 }
 
 // 获取我的所有响应
 type GetMyMercenaryResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
-	ServerTime    int64                  `protobuf:"varint,2,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` //服务器时间
 	Mercenary     []*MercenaryData       `protobuf:"bytes,3,rep,name=mercenary,proto3" json:"mercenary,omitempty"`
+	ServerTime    int64                  `protobuf:"varint,30,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"` //服务器时间
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetMyMercenaryResponse) Reset() {
 	*x = GetMyMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[4]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -257,7 +309,7 @@ func (x *GetMyMercenaryResponse) String() string {
 func (*GetMyMercenaryResponse) ProtoMessage() {}
 
 func (x *GetMyMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[4]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,7 +322,7 @@ func (x *GetMyMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMyMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*GetMyMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{4}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetMyMercenaryResponse) GetResp() *types.CommonResp {
@@ -280,18 +332,18 @@ func (x *GetMyMercenaryResponse) GetResp() *types.CommonResp {
 	return nil
 }
 
-func (x *GetMyMercenaryResponse) GetServerTime() int64 {
-	if x != nil {
-		return x.ServerTime
-	}
-	return 0
-}
-
 func (x *GetMyMercenaryResponse) GetMercenary() []*MercenaryData {
 	if x != nil {
 		return x.Mercenary
 	}
 	return nil
+}
+
+func (x *GetMyMercenaryResponse) GetServerTime() int64 {
+	if x != nil {
+		return x.ServerTime
+	}
+	return 0
 }
 
 // 雇佣兵训练请求
@@ -304,7 +356,7 @@ type TrainingMercenaryRequest struct {
 
 func (x *TrainingMercenaryRequest) Reset() {
 	*x = TrainingMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[5]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -316,7 +368,7 @@ func (x *TrainingMercenaryRequest) String() string {
 func (*TrainingMercenaryRequest) ProtoMessage() {}
 
 func (x *TrainingMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[5]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -329,7 +381,7 @@ func (x *TrainingMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrainingMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*TrainingMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{5}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *TrainingMercenaryRequest) GetMercenary() *MercenaryBaseData {
@@ -349,7 +401,7 @@ type TrainingMercenaryKoRequest struct {
 
 func (x *TrainingMercenaryKoRequest) Reset() {
 	*x = TrainingMercenaryKoRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[6]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -361,7 +413,7 @@ func (x *TrainingMercenaryKoRequest) String() string {
 func (*TrainingMercenaryKoRequest) ProtoMessage() {}
 
 func (x *TrainingMercenaryKoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[6]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -374,7 +426,7 @@ func (x *TrainingMercenaryKoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrainingMercenaryKoRequest.ProtoReflect.Descriptor instead.
 func (*TrainingMercenaryKoRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{6}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *TrainingMercenaryKoRequest) GetMercenary() *MercenaryBaseData {
@@ -395,7 +447,7 @@ type TrainingMercenaryResponse struct {
 
 func (x *TrainingMercenaryResponse) Reset() {
 	*x = TrainingMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[7]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -407,7 +459,7 @@ func (x *TrainingMercenaryResponse) String() string {
 func (*TrainingMercenaryResponse) ProtoMessage() {}
 
 func (x *TrainingMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[7]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -420,7 +472,7 @@ func (x *TrainingMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrainingMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*TrainingMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{7}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *TrainingMercenaryResponse) GetResp() *types.CommonResp {
@@ -447,7 +499,7 @@ type UpgradeMercenaryRequest struct {
 
 func (x *UpgradeMercenaryRequest) Reset() {
 	*x = UpgradeMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[8]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -459,7 +511,7 @@ func (x *UpgradeMercenaryRequest) String() string {
 func (*UpgradeMercenaryRequest) ProtoMessage() {}
 
 func (x *UpgradeMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[8]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -472,7 +524,7 @@ func (x *UpgradeMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpgradeMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*UpgradeMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{8}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpgradeMercenaryRequest) GetMercenary() *MercenaryBaseData {
@@ -492,7 +544,7 @@ type UpgradeMercenaryKoRequest struct {
 
 func (x *UpgradeMercenaryKoRequest) Reset() {
 	*x = UpgradeMercenaryKoRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[9]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -504,7 +556,7 @@ func (x *UpgradeMercenaryKoRequest) String() string {
 func (*UpgradeMercenaryKoRequest) ProtoMessage() {}
 
 func (x *UpgradeMercenaryKoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[9]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -517,7 +569,7 @@ func (x *UpgradeMercenaryKoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpgradeMercenaryKoRequest.ProtoReflect.Descriptor instead.
 func (*UpgradeMercenaryKoRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{9}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpgradeMercenaryKoRequest) GetMercenary() *MercenaryBaseData {
@@ -538,7 +590,7 @@ type UpgradeMercenaryResponse struct {
 
 func (x *UpgradeMercenaryResponse) Reset() {
 	*x = UpgradeMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[10]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -550,7 +602,7 @@ func (x *UpgradeMercenaryResponse) String() string {
 func (*UpgradeMercenaryResponse) ProtoMessage() {}
 
 func (x *UpgradeMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[10]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -563,7 +615,7 @@ func (x *UpgradeMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpgradeMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*UpgradeMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{10}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpgradeMercenaryResponse) GetResp() *types.CommonResp {
@@ -590,7 +642,7 @@ type WorkTurboMercenaryRequest struct {
 
 func (x *WorkTurboMercenaryRequest) Reset() {
 	*x = WorkTurboMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[11]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -602,7 +654,7 @@ func (x *WorkTurboMercenaryRequest) String() string {
 func (*WorkTurboMercenaryRequest) ProtoMessage() {}
 
 func (x *WorkTurboMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[11]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -615,7 +667,7 @@ func (x *WorkTurboMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkTurboMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*WorkTurboMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{11}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *WorkTurboMercenaryRequest) GetMercenaryConfigId() int64 {
@@ -635,7 +687,7 @@ type WorkTurboMercenaryResponse struct {
 
 func (x *WorkTurboMercenaryResponse) Reset() {
 	*x = WorkTurboMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[12]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -647,7 +699,7 @@ func (x *WorkTurboMercenaryResponse) String() string {
 func (*WorkTurboMercenaryResponse) ProtoMessage() {}
 
 func (x *WorkTurboMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[12]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -660,7 +712,7 @@ func (x *WorkTurboMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkTurboMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*WorkTurboMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{12}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *WorkTurboMercenaryResponse) GetResp() *types.CommonResp {
@@ -687,7 +739,7 @@ type WorkKoMercenaryRequest struct {
 
 func (x *WorkKoMercenaryRequest) Reset() {
 	*x = WorkKoMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[13]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -699,7 +751,7 @@ func (x *WorkKoMercenaryRequest) String() string {
 func (*WorkKoMercenaryRequest) ProtoMessage() {}
 
 func (x *WorkKoMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[13]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -712,7 +764,7 @@ func (x *WorkKoMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkKoMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*WorkKoMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{13}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *WorkKoMercenaryRequest) GetMercenaryConfigId() int32 {
@@ -732,7 +784,7 @@ type WorkCancelMercenaryRequest struct {
 
 func (x *WorkCancelMercenaryRequest) Reset() {
 	*x = WorkCancelMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[14]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -744,7 +796,7 @@ func (x *WorkCancelMercenaryRequest) String() string {
 func (*WorkCancelMercenaryRequest) ProtoMessage() {}
 
 func (x *WorkCancelMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[14]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -757,7 +809,7 @@ func (x *WorkCancelMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkCancelMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*WorkCancelMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{14}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *WorkCancelMercenaryRequest) GetMercenaryConfigId() int32 {
@@ -776,7 +828,7 @@ type WorkCancelMercenaryResponse struct {
 
 func (x *WorkCancelMercenaryResponse) Reset() {
 	*x = WorkCancelMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[15]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -788,7 +840,7 @@ func (x *WorkCancelMercenaryResponse) String() string {
 func (*WorkCancelMercenaryResponse) ProtoMessage() {}
 
 func (x *WorkCancelMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[15]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -801,7 +853,7 @@ func (x *WorkCancelMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WorkCancelMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*WorkCancelMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{15}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *WorkCancelMercenaryResponse) GetResp() *types.CommonResp {
@@ -811,28 +863,29 @@ func (x *WorkCancelMercenaryResponse) GetResp() *types.CommonResp {
 	return nil
 }
 
-type ToWarMercenaryRequest struct {
+type ToWarMercenaryRemoteRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Mercenary     []*MercenaryBaseData   `protobuf:"bytes,1,rep,name=mercenary,proto3" json:"mercenary,omitempty"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` //哪个玩家
+	Mercenary     []*MercenaryBaseData   `protobuf:"bytes,2,rep,name=mercenary,proto3" json:"mercenary,omitempty"`         // 派出的兵种/数量 类型都是0
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ToWarMercenaryRequest) Reset() {
-	*x = ToWarMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[16]
+func (x *ToWarMercenaryRemoteRequest) Reset() {
+	*x = ToWarMercenaryRemoteRequest{}
+	mi := &file_gamesvr_mercenary_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ToWarMercenaryRequest) String() string {
+func (x *ToWarMercenaryRemoteRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ToWarMercenaryRequest) ProtoMessage() {}
+func (*ToWarMercenaryRemoteRequest) ProtoMessage() {}
 
-func (x *ToWarMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[16]
+func (x *ToWarMercenaryRemoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_mercenary_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -843,12 +896,19 @@ func (x *ToWarMercenaryRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ToWarMercenaryRequest.ProtoReflect.Descriptor instead.
-func (*ToWarMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{16}
+// Deprecated: Use ToWarMercenaryRemoteRequest.ProtoReflect.Descriptor instead.
+func (*ToWarMercenaryRemoteRequest) Descriptor() ([]byte, []int) {
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{17}
 }
 
-func (x *ToWarMercenaryRequest) GetMercenary() []*MercenaryBaseData {
+func (x *ToWarMercenaryRemoteRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ToWarMercenaryRemoteRequest) GetMercenary() []*MercenaryBaseData {
 	if x != nil {
 		return x.Mercenary
 	}
@@ -864,7 +924,7 @@ type ToWarMercenaryResponse struct {
 
 func (x *ToWarMercenaryResponse) Reset() {
 	*x = ToWarMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[17]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -876,7 +936,7 @@ func (x *ToWarMercenaryResponse) String() string {
 func (*ToWarMercenaryResponse) ProtoMessage() {}
 
 func (x *ToWarMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[17]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -889,7 +949,7 @@ func (x *ToWarMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToWarMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*ToWarMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{17}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *ToWarMercenaryResponse) GetResp() *types.CommonResp {
@@ -909,7 +969,7 @@ type ToFormalMercenaryRequest struct {
 
 func (x *ToFormalMercenaryRequest) Reset() {
 	*x = ToFormalMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -921,7 +981,7 @@ func (x *ToFormalMercenaryRequest) String() string {
 func (*ToFormalMercenaryRequest) ProtoMessage() {}
 
 func (x *ToFormalMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[18]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -934,7 +994,7 @@ func (x *ToFormalMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ToFormalMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*ToFormalMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{18}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ToFormalMercenaryRequest) GetMercenaryConfigId() int32 {
@@ -942,6 +1002,103 @@ func (x *ToFormalMercenaryRequest) GetMercenaryConfigId() int32 {
 		return x.MercenaryConfigId
 	}
 	return 0
+}
+
+// 战斗结束还回兵
+type ToHomeMercenaryRemoteRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` //哪个玩家
+	Mercenary     []*MercenaryBaseData   `protobuf:"bytes,2,rep,name=mercenary,proto3" json:"mercenary,omitempty"`         //还回来的兵 类型就好几种
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToHomeMercenaryRemoteRequest) Reset() {
+	*x = ToHomeMercenaryRemoteRequest{}
+	mi := &file_gamesvr_mercenary_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToHomeMercenaryRemoteRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToHomeMercenaryRemoteRequest) ProtoMessage() {}
+
+func (x *ToHomeMercenaryRemoteRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_mercenary_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToHomeMercenaryRemoteRequest.ProtoReflect.Descriptor instead.
+func (*ToHomeMercenaryRemoteRequest) Descriptor() ([]byte, []int) {
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *ToHomeMercenaryRemoteRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ToHomeMercenaryRemoteRequest) GetMercenary() []*MercenaryBaseData {
+	if x != nil {
+		return x.Mercenary
+	}
+	return nil
+}
+
+type ToHomeMercenaryRemoteResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Resp          *types.CommonResp      `protobuf:"bytes,1,opt,name=resp,proto3" json:"resp,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ToHomeMercenaryRemoteResponse) Reset() {
+	*x = ToHomeMercenaryRemoteResponse{}
+	mi := &file_gamesvr_mercenary_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ToHomeMercenaryRemoteResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ToHomeMercenaryRemoteResponse) ProtoMessage() {}
+
+func (x *ToHomeMercenaryRemoteResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_gamesvr_mercenary_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ToHomeMercenaryRemoteResponse.ProtoReflect.Descriptor instead.
+func (*ToHomeMercenaryRemoteResponse) Descriptor() ([]byte, []int) {
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *ToHomeMercenaryRemoteResponse) GetResp() *types.CommonResp {
+	if x != nil {
+		return x.Resp
+	}
+	return nil
 }
 
 // 删除请求 测试用
@@ -955,7 +1112,7 @@ type DestroyMercenaryRequest struct {
 
 func (x *DestroyMercenaryRequest) Reset() {
 	*x = DestroyMercenaryRequest{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +1124,7 @@ func (x *DestroyMercenaryRequest) String() string {
 func (*DestroyMercenaryRequest) ProtoMessage() {}
 
 func (x *DestroyMercenaryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[19]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +1137,7 @@ func (x *DestroyMercenaryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DestroyMercenaryRequest.ProtoReflect.Descriptor instead.
 func (*DestroyMercenaryRequest) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{19}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *DestroyMercenaryRequest) GetMercenaryConfigId() int32 {
@@ -1007,7 +1164,7 @@ type DestroyMercenaryResponse struct {
 
 func (x *DestroyMercenaryResponse) Reset() {
 	*x = DestroyMercenaryResponse{}
-	mi := &file_gamesvr_mercenary_proto_msgTypes[20]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1019,7 +1176,7 @@ func (x *DestroyMercenaryResponse) String() string {
 func (*DestroyMercenaryResponse) ProtoMessage() {}
 
 func (x *DestroyMercenaryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_gamesvr_mercenary_proto_msgTypes[20]
+	mi := &file_gamesvr_mercenary_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1032,7 +1189,7 @@ func (x *DestroyMercenaryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DestroyMercenaryResponse.ProtoReflect.Descriptor instead.
 func (*DestroyMercenaryResponse) Descriptor() ([]byte, []int) {
-	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{20}
+	return file_gamesvr_mercenary_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DestroyMercenaryResponse) GetResp() *types.CommonResp {
@@ -1051,10 +1208,13 @@ const file_gamesvr_mercenary_proto_rawDesc = "" +
 	"\twork_type\x182 \x01(\x05R\bworkType\x12&\n" +
 	"\x0fwork_begin_time\x183 \x01(\x03R\rworkBeginTime\x12\"\n" +
 	"\rwork_end_time\x184 \x01(\x03R\vworkEndTime\x12\x10\n" +
-	"\x03num\x185 \x01(\x05R\x03num\"U\n" +
+	"\x03num\x185 \x01(\x05R\x03num\"8\n" +
+	"\x10MercenaryTypeNum\x12\x10\n" +
+	"\x03num\x18\x01 \x01(\x05R\x03num\x12\x12\n" +
+	"\x04type\x18\x02 \x01(\x05R\x04type\"y\n" +
 	"\x11MercenaryBaseData\x12.\n" +
-	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\x12\x10\n" +
-	"\x03num\x18\x02 \x01(\x05R\x03num\"\x8b\x01\n" +
+	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\x124\n" +
+	"\btype_num\x18\x02 \x01(\v2\x19.gamesvr.MercenaryTypeNumR\atypeNum\"\x8b\x01\n" +
 	"\rMercenaryData\x12.\n" +
 	"\x04info\x18\x01 \x01(\v2\x1a.gamesvr.MercenaryBaseDataR\x04info\x12<\n" +
 	"\ttime_work\x18\x05 \x01(\v2\x1a.gamesvr.MercenaryTimeWorkH\x00R\btimeWork\x88\x01\x01B\f\n" +
@@ -1062,10 +1222,10 @@ const file_gamesvr_mercenary_proto_rawDesc = "" +
 	"_time_work\"\x17\n" +
 	"\x15GetMyMercenaryRequest\"\x96\x01\n" +
 	"\x16GetMyMercenaryResponse\x12%\n" +
-	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x12\x1f\n" +
-	"\vserver_time\x18\x02 \x01(\x03R\n" +
-	"serverTime\x124\n" +
-	"\tmercenary\x18\x03 \x03(\v2\x16.gamesvr.MercenaryDataR\tmercenary\"T\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\x124\n" +
+	"\tmercenary\x18\x03 \x03(\v2\x16.gamesvr.MercenaryDataR\tmercenary\x12\x1f\n" +
+	"\vserver_time\x18\x1e \x01(\x03R\n" +
+	"serverTime\"T\n" +
 	"\x18TrainingMercenaryRequest\x128\n" +
 	"\tmercenary\x18\x01 \x01(\v2\x1a.gamesvr.MercenaryBaseDataR\tmercenary\"V\n" +
 	"\x1aTrainingMercenaryKoRequest\x128\n" +
@@ -1090,13 +1250,19 @@ const file_gamesvr_mercenary_proto_rawDesc = "" +
 	"\x1aWorkCancelMercenaryRequest\x12.\n" +
 	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\"D\n" +
 	"\x1bWorkCancelMercenaryResponse\x12%\n" +
-	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"Q\n" +
-	"\x15ToWarMercenaryRequest\x128\n" +
-	"\tmercenary\x18\x01 \x03(\v2\x1a.gamesvr.MercenaryBaseDataR\tmercenary\"?\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"p\n" +
+	"\x1bToWarMercenaryRemoteRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x128\n" +
+	"\tmercenary\x18\x02 \x03(\v2\x1a.gamesvr.MercenaryBaseDataR\tmercenary\"?\n" +
 	"\x16ToWarMercenaryResponse\x12%\n" +
 	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"J\n" +
 	"\x18ToFormalMercenaryRequest\x12.\n" +
-	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\"[\n" +
+	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\"q\n" +
+	"\x1cToHomeMercenaryRemoteRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x128\n" +
+	"\tmercenary\x18\x02 \x03(\v2\x1a.gamesvr.MercenaryBaseDataR\tmercenary\"F\n" +
+	"\x1dToHomeMercenaryRemoteResponse\x12%\n" +
+	"\x04resp\x18\x01 \x01(\v2\x11.types.CommonRespR\x04resp\"[\n" +
 	"\x17DestroyMercenaryRequest\x12.\n" +
 	"\x13mercenary_config_id\x18\x01 \x01(\x05R\x11mercenaryConfigId\x12\x10\n" +
 	"\x03num\x18\x02 \x01(\x05R\x03num\"A\n" +
@@ -1115,55 +1281,61 @@ func file_gamesvr_mercenary_proto_rawDescGZIP() []byte {
 	return file_gamesvr_mercenary_proto_rawDescData
 }
 
-var file_gamesvr_mercenary_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_gamesvr_mercenary_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_gamesvr_mercenary_proto_goTypes = []any{
-	(*MercenaryTimeWork)(nil),           // 0: gamesvr.MercenaryTimeWork
-	(*MercenaryBaseData)(nil),           // 1: gamesvr.MercenaryBaseData
-	(*MercenaryData)(nil),               // 2: gamesvr.MercenaryData
-	(*GetMyMercenaryRequest)(nil),       // 3: gamesvr.GetMyMercenaryRequest
-	(*GetMyMercenaryResponse)(nil),      // 4: gamesvr.GetMyMercenaryResponse
-	(*TrainingMercenaryRequest)(nil),    // 5: gamesvr.TrainingMercenaryRequest
-	(*TrainingMercenaryKoRequest)(nil),  // 6: gamesvr.TrainingMercenaryKoRequest
-	(*TrainingMercenaryResponse)(nil),   // 7: gamesvr.TrainingMercenaryResponse
-	(*UpgradeMercenaryRequest)(nil),     // 8: gamesvr.UpgradeMercenaryRequest
-	(*UpgradeMercenaryKoRequest)(nil),   // 9: gamesvr.UpgradeMercenaryKoRequest
-	(*UpgradeMercenaryResponse)(nil),    // 10: gamesvr.UpgradeMercenaryResponse
-	(*WorkTurboMercenaryRequest)(nil),   // 11: gamesvr.WorkTurboMercenaryRequest
-	(*WorkTurboMercenaryResponse)(nil),  // 12: gamesvr.WorkTurboMercenaryResponse
-	(*WorkKoMercenaryRequest)(nil),      // 13: gamesvr.WorkKoMercenaryRequest
-	(*WorkCancelMercenaryRequest)(nil),  // 14: gamesvr.WorkCancelMercenaryRequest
-	(*WorkCancelMercenaryResponse)(nil), // 15: gamesvr.WorkCancelMercenaryResponse
-	(*ToWarMercenaryRequest)(nil),       // 16: gamesvr.ToWarMercenaryRequest
-	(*ToWarMercenaryResponse)(nil),      // 17: gamesvr.ToWarMercenaryResponse
-	(*ToFormalMercenaryRequest)(nil),    // 18: gamesvr.ToFormalMercenaryRequest
-	(*DestroyMercenaryRequest)(nil),     // 19: gamesvr.DestroyMercenaryRequest
-	(*DestroyMercenaryResponse)(nil),    // 20: gamesvr.DestroyMercenaryResponse
-	(*types.CommonResp)(nil),            // 21: types.CommonResp
+	(*MercenaryTimeWork)(nil),             // 0: gamesvr.MercenaryTimeWork
+	(*MercenaryTypeNum)(nil),              // 1: gamesvr.MercenaryTypeNum
+	(*MercenaryBaseData)(nil),             // 2: gamesvr.MercenaryBaseData
+	(*MercenaryData)(nil),                 // 3: gamesvr.MercenaryData
+	(*GetMyMercenaryRequest)(nil),         // 4: gamesvr.GetMyMercenaryRequest
+	(*GetMyMercenaryResponse)(nil),        // 5: gamesvr.GetMyMercenaryResponse
+	(*TrainingMercenaryRequest)(nil),      // 6: gamesvr.TrainingMercenaryRequest
+	(*TrainingMercenaryKoRequest)(nil),    // 7: gamesvr.TrainingMercenaryKoRequest
+	(*TrainingMercenaryResponse)(nil),     // 8: gamesvr.TrainingMercenaryResponse
+	(*UpgradeMercenaryRequest)(nil),       // 9: gamesvr.UpgradeMercenaryRequest
+	(*UpgradeMercenaryKoRequest)(nil),     // 10: gamesvr.UpgradeMercenaryKoRequest
+	(*UpgradeMercenaryResponse)(nil),      // 11: gamesvr.UpgradeMercenaryResponse
+	(*WorkTurboMercenaryRequest)(nil),     // 12: gamesvr.WorkTurboMercenaryRequest
+	(*WorkTurboMercenaryResponse)(nil),    // 13: gamesvr.WorkTurboMercenaryResponse
+	(*WorkKoMercenaryRequest)(nil),        // 14: gamesvr.WorkKoMercenaryRequest
+	(*WorkCancelMercenaryRequest)(nil),    // 15: gamesvr.WorkCancelMercenaryRequest
+	(*WorkCancelMercenaryResponse)(nil),   // 16: gamesvr.WorkCancelMercenaryResponse
+	(*ToWarMercenaryRemoteRequest)(nil),   // 17: gamesvr.ToWarMercenaryRemoteRequest
+	(*ToWarMercenaryResponse)(nil),        // 18: gamesvr.ToWarMercenaryResponse
+	(*ToFormalMercenaryRequest)(nil),      // 19: gamesvr.ToFormalMercenaryRequest
+	(*ToHomeMercenaryRemoteRequest)(nil),  // 20: gamesvr.ToHomeMercenaryRemoteRequest
+	(*ToHomeMercenaryRemoteResponse)(nil), // 21: gamesvr.ToHomeMercenaryRemoteResponse
+	(*DestroyMercenaryRequest)(nil),       // 22: gamesvr.DestroyMercenaryRequest
+	(*DestroyMercenaryResponse)(nil),      // 23: gamesvr.DestroyMercenaryResponse
+	(*types.CommonResp)(nil),              // 24: types.CommonResp
 }
 var file_gamesvr_mercenary_proto_depIdxs = []int32{
-	1,  // 0: gamesvr.MercenaryData.info:type_name -> gamesvr.MercenaryBaseData
-	0,  // 1: gamesvr.MercenaryData.time_work:type_name -> gamesvr.MercenaryTimeWork
-	21, // 2: gamesvr.GetMyMercenaryResponse.resp:type_name -> types.CommonResp
-	2,  // 3: gamesvr.GetMyMercenaryResponse.mercenary:type_name -> gamesvr.MercenaryData
-	1,  // 4: gamesvr.TrainingMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	1,  // 5: gamesvr.TrainingMercenaryKoRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	21, // 6: gamesvr.TrainingMercenaryResponse.resp:type_name -> types.CommonResp
-	2,  // 7: gamesvr.TrainingMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
-	1,  // 8: gamesvr.UpgradeMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	1,  // 9: gamesvr.UpgradeMercenaryKoRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	21, // 10: gamesvr.UpgradeMercenaryResponse.resp:type_name -> types.CommonResp
-	2,  // 11: gamesvr.UpgradeMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
-	21, // 12: gamesvr.WorkTurboMercenaryResponse.resp:type_name -> types.CommonResp
-	2,  // 13: gamesvr.WorkTurboMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
-	21, // 14: gamesvr.WorkCancelMercenaryResponse.resp:type_name -> types.CommonResp
-	1,  // 15: gamesvr.ToWarMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
-	21, // 16: gamesvr.ToWarMercenaryResponse.resp:type_name -> types.CommonResp
-	21, // 17: gamesvr.DestroyMercenaryResponse.resp:type_name -> types.CommonResp
-	18, // [18:18] is the sub-list for method output_type
-	18, // [18:18] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	1,  // 0: gamesvr.MercenaryBaseData.type_num:type_name -> gamesvr.MercenaryTypeNum
+	2,  // 1: gamesvr.MercenaryData.info:type_name -> gamesvr.MercenaryBaseData
+	0,  // 2: gamesvr.MercenaryData.time_work:type_name -> gamesvr.MercenaryTimeWork
+	24, // 3: gamesvr.GetMyMercenaryResponse.resp:type_name -> types.CommonResp
+	3,  // 4: gamesvr.GetMyMercenaryResponse.mercenary:type_name -> gamesvr.MercenaryData
+	2,  // 5: gamesvr.TrainingMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
+	2,  // 6: gamesvr.TrainingMercenaryKoRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
+	24, // 7: gamesvr.TrainingMercenaryResponse.resp:type_name -> types.CommonResp
+	3,  // 8: gamesvr.TrainingMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
+	2,  // 9: gamesvr.UpgradeMercenaryRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
+	2,  // 10: gamesvr.UpgradeMercenaryKoRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
+	24, // 11: gamesvr.UpgradeMercenaryResponse.resp:type_name -> types.CommonResp
+	3,  // 12: gamesvr.UpgradeMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
+	24, // 13: gamesvr.WorkTurboMercenaryResponse.resp:type_name -> types.CommonResp
+	3,  // 14: gamesvr.WorkTurboMercenaryResponse.mercenary_data:type_name -> gamesvr.MercenaryData
+	24, // 15: gamesvr.WorkCancelMercenaryResponse.resp:type_name -> types.CommonResp
+	2,  // 16: gamesvr.ToWarMercenaryRemoteRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
+	24, // 17: gamesvr.ToWarMercenaryResponse.resp:type_name -> types.CommonResp
+	2,  // 18: gamesvr.ToHomeMercenaryRemoteRequest.mercenary:type_name -> gamesvr.MercenaryBaseData
+	24, // 19: gamesvr.ToHomeMercenaryRemoteResponse.resp:type_name -> types.CommonResp
+	24, // 20: gamesvr.DestroyMercenaryResponse.resp:type_name -> types.CommonResp
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_gamesvr_mercenary_proto_init() }
@@ -1171,14 +1343,14 @@ func file_gamesvr_mercenary_proto_init() {
 	if File_gamesvr_mercenary_proto != nil {
 		return
 	}
-	file_gamesvr_mercenary_proto_msgTypes[2].OneofWrappers = []any{}
+	file_gamesvr_mercenary_proto_msgTypes[3].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_gamesvr_mercenary_proto_rawDesc), len(file_gamesvr_mercenary_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   21,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
