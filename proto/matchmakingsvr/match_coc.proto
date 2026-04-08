@@ -45,3 +45,19 @@ message CancelMatchResponse {
   types.CommonResp resp = 1;
 }
 
+// 演示用：分页拉取匹配候选列表（假数据，用于联调/展示）
+message GetNextCandidateDemoRequest {
+  types.PageReq page = 1;  // 分页：页码从1开始，page_size 为每页条数
+}
+
+// 演示列表单行：用户ID + 角色名（无需完整 CandidateData）
+message CandidateDemoItem {
+  string user_id = 1;
+  string character_name = 2;
+}
+
+message GetNextCandidateDemoResponse {
+  types.CommonResp resp = 1;
+  types.PageResp page = 2;                    // 分页元数据（total/total_pages 等与请求页码对齐）
+  repeated CandidateDemoItem candidates = 3;  // 本页候选摘要
+}
