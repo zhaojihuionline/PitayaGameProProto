@@ -78,7 +78,7 @@ message TrainingMercenaryResponse {
 
 // ========== 雇佣兵升级 ==========
 
-// 升级请求
+// 升级（晋升）请求
 message UpgradeMercenaryRequest {
     MercenaryBaseData mercenary=1;
 }
