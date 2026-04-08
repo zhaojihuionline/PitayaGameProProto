@@ -17,7 +17,7 @@ import "common/types/types.proto";
 
 
 message MercenaryTimeWork {
-  int32 work_type = 50;                 //工作类型 1 训练 2 升级
+  int32 work_type = 50;                 //工作类型 1 训练 2 升级  3 治疗
   int64 work_begin_time=51;      //开始时间
   int64 work_end_time = 52;       // 完成时间
   int32 num=53; //数量
@@ -38,7 +38,7 @@ message MercenaryBaseData {
 // 雇佣兵数据
 message MercenaryData {
   MercenaryBaseData info=1; //基础信息
-  optional MercenaryTimeWork time_work = 5;           // 训练 升级
+  optional MercenaryTimeWork time_work = 5;           // 训练 升级 治疗
 }
 
 
